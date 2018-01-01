@@ -18,10 +18,6 @@ public class AlbumService {
 
 	public void init(){
 		albums.add(new Album("walid album", "bla bla"));
-		albums.get(0).addPage(new Page());
-		albums.get(0).addPage(new Page());
-		albums.get(0).addPage(new Page());
-		albums.get(0).addPage(new Page());
 		albums.add(new Album("zac album", "bla bla"));
 		
 	}
