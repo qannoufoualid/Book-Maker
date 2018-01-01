@@ -1,16 +1,38 @@
 package com.ihm18.bookmaker.businessobject;
 
+import java.io.File;
+import java.nio.file.Path;
 import java.time.LocalDateTime;
 
-public class Image {
+public class IHMImage {
 
 	
 	private Long id;
 	private String title;
 	private String description;
 	private LocalDateTime dateCreation;
+	private File file;
 	
-	public Image(String name, String description, LocalDateTime dateCreation) {
+	public File getFile() {
+		return file;
+	}
+
+	public void setFile(File file) {
+		this.file = file;
+	}
+
+	private Page page;
+	
+	
+	public Page getPage() {
+		return page;
+	}
+
+	public void setPage(Page page) {
+		this.page = page;
+	}
+
+	public IHMImage(String name, String description, LocalDateTime dateCreation) {
 		this.id = System.currentTimeMillis();
 		this.title = name;
 		this.description = description;

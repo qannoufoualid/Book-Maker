@@ -7,8 +7,15 @@ public class Page {
 
 	private Long id;
 	private int number;
-	private List<Image> images = new ArrayList<Image>();
+	private List<IHMImage> images = new ArrayList<IHMImage>();
+	private Album album;
 	
+	public Album getAlbum() {
+		return album;
+	}
+	public void setAlbum(Album album) {
+		this.album = album;
+	}
 	public Long getId() {
 		return id;
 	}
@@ -21,11 +28,15 @@ public class Page {
 	public void setNumber(int number) {
 		this.number = number;
 	}
-	public List<Image> getImages() {
+	public List<IHMImage> getImages() {
 		return images;
 	}
-	public void setImages(List<Image> images) {
+	public void setImages(List<IHMImage> images) {
 		this.images = images;
+	}
+	@Override
+	public String toString() {
+		return "Page [id=" + id + ", number=" + number + ", images=" + images + ", album=" + album + "]";
 	}
 	
 	

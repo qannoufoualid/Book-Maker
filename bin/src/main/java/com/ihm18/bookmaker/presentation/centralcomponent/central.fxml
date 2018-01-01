@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+
+<BorderPane maxWidth="-Infinity" prefHeight="700.0"
+	prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="com.ihm18.bookmaker.presentation.centralcomponent.CentralPresenter">
+	<top>
+		<MenuBar BorderPane.alignment="TOP_CENTER">
+			<menus>
+				<Menu mnemonicParsing="false" text="Projet">
+					<items>
+						<MenuItem mnemonicParsing="false" text="Nouvel album" />
+						<MenuItem mnemonicParsing="false" text="Quitter" />
+					</items>
+				</Menu>
+				<Menu mnemonicParsing="false" text="Pages">
+					<items>
+						<MenuItem mnemonicParsing="false" text="Nouvelle page" />
+						<SeparatorMenuItem mnemonicParsing="false" />
+						<MenuItem mnemonicParsing="false" text="Couverture" />
+					</items>
+				</Menu>
+				<Menu mnemonicParsing="false" text="Image">
+					<items>
+						<MenuItem mnemonicParsing="false" text="About" />
+					</items>
+				</Menu>
+				<Menu mnemonicParsing="false" text="Aide">
+					<items>
+						<MenuItem mnemonicParsing="false" text="About" />
+					</items>
+				</Menu>
+			</menus>
+		</MenuBar>
+	</top>
+	<center>
+		<SplitPane dividerPositions="0.251503006012024" prefHeight="160.0"
+			prefWidth="200.0" BorderPane.alignment="CENTER">
+			<items>
+				<AnchorPane fx:id='leftContainer' minHeight="0.0"
+					minWidth="0.0" prefHeight="668.0" prefWidth="269.0"
+					SplitPane.resizableWithParent="false">
+
+				</AnchorPane>
+				<BorderPane fx:id="mainContainer" minHeight="600"
+					minWidth="500" prefHeight="668.0" prefWidth="897.0">
+					<center>
+						
+					</center>
+					<top>
+						<Label fx:id="mainViewTitleLabel" prefHeight="18.0"
+							prefWidth="422.0" BorderPane.alignment="TOP_LEFT" />
+					</top>
+				</BorderPane>
+			</items>
+		</SplitPane>
+	</center>
+</BorderPane>
