@@ -1,0 +1,16 @@
+.main-component{
+	-fx-border-color: black;
+	 -fx-alignment: left ;
+}
+
+.editable-textfield {
+            -fx-background: transparent;
+            -fx-border-top: transparent !important;
+            -fx-border-left: transparent !important;
+            -fx-border-right: transparent !important;
+            -fx-border-bottom: transparent !important;
+            -fx-font-weight: 200;
+            -fx-color: black;
+            -fx-padding-left: 0.0;
+ 			-fx-box-shadow: none !important;
+}

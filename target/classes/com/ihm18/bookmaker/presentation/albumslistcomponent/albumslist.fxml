@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+
+<BorderPane maxWidth="-Infinity" prefHeight="4000" prefWidth="4000" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ihm18.bookmaker.presentation.albumslistcomponent.AlbumsListPresenter">
+	<center>
+		<ListView fx:id="albumsListView" maxHeight="1.7976931348623157E308" onMouseClicked="#displayAlbumDetail" BorderPane.alignment="CENTER" />
+	</center>
+	<top>
+		<Label text="Liste des albums :" BorderPane.alignment="TOP_LEFT" />
+	</top>
+</BorderPane>

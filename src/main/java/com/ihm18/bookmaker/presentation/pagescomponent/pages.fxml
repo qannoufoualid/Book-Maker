@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="978.0" prefWidth="1293.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ihm18.bookmaker.presentation.pagescomponent.PagesPresenter">
+
+	<columnConstraints>
+		<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+		<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+	</columnConstraints>
+	<rowConstraints>
+		<RowConstraints maxHeight="936.0" minHeight="10.0" prefHeight="936.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="466.0" minHeight="10.0" prefHeight="73.0" vgrow="SOMETIMES" />
+	</rowConstraints>
+   <children>
+      <BorderPane prefHeight="200.0" prefWidth="200.0">
+         <right>
+            <ImageView fx:id="leftSideImageView" fitHeight="882.0" fitWidth="620.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+               <image>
+                  <Image url="file:///C:/Users/ASUS/Desktop/image_edit/left-side.png" />
+               </image>
+            </ImageView>
+         </right>
+         <bottom>
+            <Label fx:id="leftPageNumberLabel" BorderPane.alignment="CENTER" />
+         </bottom>
+      </BorderPane>
+      <BorderPane prefHeight="582.0" prefWidth="414.0" GridPane.columnIndex="1">
+         <left>
+            <ImageView fx:id="rightSideImageView" fitHeight="882.0" fitWidth="620.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+               <image>
+                  <Image url="file:///C:/Users/ASUS/Desktop/image_edit/right-side.png" />
+               </image>
+            </ImageView>
+         </left>
+         <bottom>
+            <Label fx:id="rightPageNumberLabel" BorderPane.alignment="CENTER" />
+         </bottom></BorderPane>
+      <Button mnemonicParsing="false" onAction="#addPage" text="Créer page" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+      <Button onAction="#turnLeft" mnemonicParsing="false" text="&lt;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <Button onAction="#turnRight" mnemonicParsing="false" text="&gt;" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+   </children>
+</GridPane>
