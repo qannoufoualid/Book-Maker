@@ -5,13 +5,12 @@
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 
-
-<BorderPane fx:controller="com.ihm18.bookmaker.presentation.imageeditioncomponent.ImageEditionPresenter" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:id="imageEditionContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ihm18.bookmaker.presentation.imageeditioncomponent.ImageEditionPresenter">
    <top>
       <HBox prefHeight="39.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
             <Button mnemonicParsing="false" text="Cadre" />
-            <Button mnemonicParsing="false" text="Luminosité" />
+            <Button mnemonicParsing="false" onAction="#displayBrightnessPalette" text="Luminosité" />
             <Button mnemonicParsing="false" text="Bordure" />
             <Button mnemonicParsing="false" text="Taille" />
          </children>
@@ -20,4 +19,7 @@
    <center>
       <ImageView fx:id="imageView" fitHeight="335.0" fitWidth="417.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
    </center>
+   <right>
+      
+   </right>
 </BorderPane>

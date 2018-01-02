@@ -48,8 +48,6 @@ public class CentralPresenter implements Initializable {
         WelcomeView welcomeView = new WelcomeView();
         centralModel.setMainView(welcomeView.getView(), WelcomeView.TITLE);
         
-        
-        
     }
 
     public void launch() {
