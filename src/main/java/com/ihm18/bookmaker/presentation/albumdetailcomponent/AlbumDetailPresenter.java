@@ -96,7 +96,6 @@ public class AlbumDetailPresenter implements Initializable {
 	
 	public void activateApplyChangesButton(ObservableValue<? extends String> observable,
 			String oldValue, String newValue) {
-			System.out.println("changed");
 	}
 	
 	public void applyChanges(ActionEvent event){

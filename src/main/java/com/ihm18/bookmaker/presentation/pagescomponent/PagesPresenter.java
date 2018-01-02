@@ -124,7 +124,6 @@ public class PagesPresenter implements Initializable {
 		leftGridPane.setOnDragOver(new EventHandler<DragEvent>() {
 			public void handle(DragEvent event) {
 				event.acceptTransferModes(TransferMode.ANY);
-				System.out.println("here");
 
 				event.consume();
 			}
@@ -132,7 +131,6 @@ public class PagesPresenter implements Initializable {
 
 		leftGridPane.setOnDragDropped(new EventHandler<DragEvent>() {
 			public void handle(DragEvent event) {
-				System.out.println("dropped");
 				Dragboard db = event.getDragboard();
 				final boolean isAccepted = db.hasFiles()
 						&& (db.getFiles().get(0).getName().toLowerCase().endsWith(".png")
@@ -140,7 +138,6 @@ public class PagesPresenter implements Initializable {
 								|| db.getFiles().get(0).getName().toLowerCase().endsWith(".jpg"));
 
 				if (isAccepted) {
-					System.out.println("accepted");
 					File imageFile = db.getFiles().get(0);
 					acceptImageAtSide(true, imageFile);
 
@@ -155,7 +152,6 @@ public class PagesPresenter implements Initializable {
 		rightGridPane.setOnDragOver(new EventHandler<DragEvent>() {
 			public void handle(DragEvent event) {
 				event.acceptTransferModes(TransferMode.ANY);
-				System.out.println("here");
 
 				event.consume();
 			}
@@ -163,7 +159,6 @@ public class PagesPresenter implements Initializable {
 
 		rightGridPane.setOnDragDropped(new EventHandler<DragEvent>() {
 			public void handle(DragEvent event) {
-				System.out.println("dropped");
 				Dragboard db = event.getDragboard();
 				final boolean isAccepted = db.hasFiles()
 						&& (db.getFiles().get(0).getName().toLowerCase().endsWith(".png")
@@ -171,7 +166,6 @@ public class PagesPresenter implements Initializable {
 								|| db.getFiles().get(0).getName().toLowerCase().endsWith(".jpg"));
 
 				if (isAccepted) {
-					System.out.println("accepted");
 					File imageFile = db.getFiles().get(0);
 					acceptImageAtSide(false, imageFile);
 
@@ -213,7 +207,6 @@ public class PagesPresenter implements Initializable {
 	 * @throws IOException
 	 */
 	public void fillViewWithPage(int pageNumber) {
-		System.out.println("fill");
 
 		if (pageNumber%2 != 0) {
 			Page page = album.getPages().get(pageNumber - 1);
