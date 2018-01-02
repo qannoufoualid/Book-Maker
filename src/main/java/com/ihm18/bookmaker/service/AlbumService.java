@@ -19,7 +19,6 @@ public class AlbumService {
 	public void init(){
 		albums.add(new Album("walid album", "bla bla"));
 		albums.add(new Album("zac album", "bla bla"));
-		
 	}
 	
 	
@@ -82,14 +81,5 @@ public class AlbumService {
 			a.setDescription(description);
 		}
 	}
-	
-	
-
-//	public List<String> findAllNamesOfAlbums(){
-//		List<String> albumsNames = new ArrayList<>();
-//		for(Album a : albums)
-//			albumsNames.add(a.getName());
-//		return albumsNames;
-//	}
 
 }
