@@ -10,7 +10,6 @@ import java.util.ResourceBundle;
 
 import javax.inject.Inject;
 
-import com.guigarage.incubator.imageviewer.data.Album;
 import com.ihm18.bookmaker.presentation.albumslistcomponent.AlbumsListModel;
 import com.ihm18.bookmaker.presentation.centralcomponent.CentralModel;
 import com.ihm18.bookmaker.presentation.pagescomponent.PagesView;
@@ -26,7 +25,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
-import javafx.stage.StageStyle;
 
 /**
  *
