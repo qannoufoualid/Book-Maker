@@ -9,5 +9,6 @@ import com.airhacks.afterburner.views.FXMLView;
  */
 public class ImageEditionView extends FXMLView {
 	
+	public static final String TITLE = "Edition de l'image {{imageTitle}}";
 	
 }

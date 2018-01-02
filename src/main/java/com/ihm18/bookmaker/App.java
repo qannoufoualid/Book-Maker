@@ -1,15 +1,11 @@
 package com.ihm18.bookmaker;
 
 
-import com.airhacks.afterburner.injection.Injector;
-import com.ihm18.bookmaker.presentation.centralcomponent.CentralView;
-
-import java.time.LocalDate;
-import java.time.Month;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.inject.Inject;
+import com.airhacks.afterburner.injection.Injector;
+import com.ihm18.bookmaker.presentation.centralcomponent.CentralView;
 
 import javafx.application.Application;
 import javafx.geometry.Rectangle2D;

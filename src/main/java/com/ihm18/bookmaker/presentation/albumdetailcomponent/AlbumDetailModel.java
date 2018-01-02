@@ -1,5 +1,8 @@
 package com.ihm18.bookmaker.presentation.albumdetailcomponent;
 
+import java.io.File;
+import java.net.URL;
+
 import com.ihm18.bookmaker.businessobject.Album;
 
 import javafx.beans.property.ObjectProperty;
@@ -44,7 +47,6 @@ public class AlbumDetailModel {
 		albumDescription.set(album.getDescription());
 		this.album = album;
 	}
-    
     
     
 }

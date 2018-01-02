@@ -17,9 +17,6 @@ import javax.inject.Inject;
  */
 public class EmptyPresenter implements Initializable {
 
-	@FXML
-	private GridPane pagesContainer;
-
 
     public void launch() {
     }
@@ -27,7 +24,7 @@ public class EmptyPresenter implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
-		System.out.println(pagesContainer);
+	
 	}
 
 }

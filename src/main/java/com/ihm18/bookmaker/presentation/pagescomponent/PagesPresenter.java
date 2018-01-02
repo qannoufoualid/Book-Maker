@@ -14,6 +14,9 @@ import com.ihm18.bookmaker.businessobject.Album;
 import com.ihm18.bookmaker.businessobject.IHMImage;
 import com.ihm18.bookmaker.businessobject.Page;
 import com.ihm18.bookmaker.presentation.albumdetailcomponent.AlbumDetailModel;
+import com.ihm18.bookmaker.presentation.centralcomponent.CentralModel;
+import com.ihm18.bookmaker.presentation.imageeditioncomponent.ImageEditionModel;
+import com.ihm18.bookmaker.presentation.imageeditioncomponent.ImageEditionView;
 import com.ihm18.bookmaker.presentation.utility.SoundPlayer;
 import com.ihm18.bookmaker.presentation.utility.Utility;
 import com.ihm18.bookmaker.service.ImageService;
@@ -41,7 +44,11 @@ public class PagesPresenter implements Initializable {
 
 	@Inject
 	private AlbumDetailModel albumDetailModel;
-
+	@Inject
+	private CentralModel centralModel;
+	@Inject
+	private ImageEditionModel imageEditionModel;
+	
 	@Inject
 	private Utility utility;
 	@Inject
@@ -297,15 +304,33 @@ public class PagesPresenter implements Initializable {
 		updateBackground();
 	}
 
-	
 	public void displayImage(MouseEvent event){
 		if(event.getButton().equals(MouseButton.PRIMARY)){
             if(event.getClickCount() == 2){
+            	ImageView imageView = (ImageView)event.getSource();
+            	IHMImage image = getDoubleClickedImage(imageView);
+            	imageEditionModel.setImage(image);
+            	ImageEditionView imageEditionView = new ImageEditionView();
             	
+            	centralModel.setMainView(imageEditionView.getView(), utility.replace(ImageEditionView.TITLE, "imageTitle", "TODO"));
                
             }
         }
 		 
+	}
+
+	private IHMImage getDoubleClickedImage(ImageView imageView) {
+		for(int i = 0; i < leftImageViews.length; i++){
+			if(leftImageViews[i]==imageView){
+				return album.getPages().get(activePageNumber-1).getImages().get(i);
+			}
+		}
+		for(int i = 0; i < rightImageViews.length; i++){
+			if(rightImageViews[i]==imageView){
+				return album.getPages().get(activePageNumber).getImages().get(i);
+			}
+		}
+		return null;
 	}
 	
 }
