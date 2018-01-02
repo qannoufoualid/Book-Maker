@@ -102,7 +102,7 @@ public class AlbumDetailPresenter implements Initializable {
 	public void applyChanges(ActionEvent event){
 		
 		albumService.edit(albumDetailModel.getAlbum().getId(), albumNameTextField.getText(), AlbumDescriptionTextArea.getText());
-		showInformationAlert("Modification faite avec succés");
+		utility.showInformationAlert(Alert.AlertType.INFORMATION, "Modification faite avec succés");
 		albumsListModel.albumsProperty().clear();
 		albumsListModel.albumsProperty().set(FXCollections.observableArrayList(albumService.getAlbums()));
 		
@@ -112,13 +112,4 @@ public class AlbumDetailPresenter implements Initializable {
 		return albumService.findLastImageIdOfAlbum(imagesDirectory, albumId);
 	}
 
-	
-	public void showInformationAlert(String information){
-		Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.initStyle(StageStyle.UTILITY);
-        alert.setHeaderText(information);
-        alert.setTitle("Information");
-
-        alert.showAndWait();
-	}
 }

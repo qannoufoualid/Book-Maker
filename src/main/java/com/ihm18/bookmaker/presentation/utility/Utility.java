@@ -7,7 +7,10 @@ import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
+import javafx.stage.StageStyle;
 
 /**
  *
@@ -29,5 +32,15 @@ public class Utility {
 		InputStream is = this.getClass().getClassLoader().getResourceAsStream("images/"+name);
 		return new Image(is);
 	}
+	
+	public void showInformationAlert(AlertType type, String information){
+		Alert alert = new Alert(type);
+        alert.initStyle(StageStyle.UTILITY);
+        alert.setHeaderText(information);
+        alert.setTitle("Information");
+
+        alert.showAndWait();
+	}
+	
 
 }
