@@ -41,4 +41,8 @@ public class WelcomePresenter implements Initializable {
 		centralModel.setMainView(albumFormView.getView(), AlbumFormView.TITLE);
 	}
 
+	public void exitApplication(ActionEvent event){
+		System.exit(0);
+	}
+	
 }
