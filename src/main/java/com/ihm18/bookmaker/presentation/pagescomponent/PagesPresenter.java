@@ -28,6 +28,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.GridPane;
 
@@ -295,4 +297,15 @@ public class PagesPresenter implements Initializable {
 		updateBackground();
 	}
 
+	
+	public void displayImage(MouseEvent event){
+		if(event.getButton().equals(MouseButton.PRIMARY)){
+            if(event.getClickCount() == 2){
+            	
+               
+            }
+        }
+		 
+	}
+	
 }
