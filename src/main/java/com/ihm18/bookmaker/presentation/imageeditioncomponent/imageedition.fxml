@@ -20,6 +20,5 @@
       <ImageView fx:id="imageView" fitHeight="335.0" fitWidth="417.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
    </center>
    <right>
-      
    </right>
 </BorderPane>
