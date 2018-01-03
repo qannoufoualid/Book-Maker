@@ -15,6 +15,7 @@ import com.ihm18.bookmaker.businessobject.IHMImage;
 import com.ihm18.bookmaker.businessobject.Page;
 import com.ihm18.bookmaker.presentation.albumdetailcomponent.AlbumDetailModel;
 import com.ihm18.bookmaker.presentation.centralcomponent.CentralModel;
+import com.ihm18.bookmaker.presentation.customcontrols.TitledImage;
 import com.ihm18.bookmaker.presentation.imageeditioncomponent.ImageEditionModel;
 import com.ihm18.bookmaker.presentation.imageeditioncomponent.ImageEditionView;
 import com.ihm18.bookmaker.presentation.utility.SoundPlayer;
@@ -34,6 +35,8 @@ import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 
 /**
@@ -48,13 +51,13 @@ public class PagesPresenter implements Initializable {
 	private CentralModel centralModel;
 	@Inject
 	private ImageEditionModel imageEditionModel;
-	
+
 	@Inject
 	private Utility utility;
 	@Inject
 	private SoundPlayer soundPlayer;
 	@Inject
-	ImageService imageService;
+	private ImageService imageService;
 
 	private Album album;
 
@@ -69,34 +72,9 @@ public class PagesPresenter implements Initializable {
 	@FXML
 	private Label rightPageNumberLabel;
 	@FXML
-	private GridPane leftGridPane;
+	private AnchorPane leftAnchorPane;
 	@FXML
-	private GridPane rightGridPane;
-
-	@FXML
-	private ImageView imageView_l_0_0;
-	@FXML
-	private ImageView imageView_l_0_1;
-	@FXML
-	private ImageView imageView_l_1_0;
-	@FXML
-	private ImageView imageView_l_1_1;
-	@FXML
-	private ImageView imageView_l_2_0;
-	@FXML
-	private ImageView imageView_l_2_1;
-	@FXML
-	private ImageView imageView_r_0_0;
-	@FXML
-	private ImageView imageView_r_0_1;
-	@FXML
-	private ImageView imageView_r_1_0;
-	@FXML
-	private ImageView imageView_r_1_1;
-	@FXML
-	private ImageView imageView_r_2_0;
-	@FXML
-	private ImageView imageView_r_2_1;
+	private AnchorPane rightAnchorPane;
 
 	private ImageView[] leftImageViews;
 	private ImageView[] rightImageViews;
@@ -111,10 +89,8 @@ public class PagesPresenter implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
-		leftImageViews = new ImageView[] { imageView_l_0_0, imageView_l_0_1, imageView_l_1_0, imageView_l_1_1,
-				imageView_l_2_0, imageView_l_2_1 };
-		rightImageViews = new ImageView[] { imageView_r_0_0, imageView_r_0_1, imageView_r_1_0, imageView_r_1_1,
-				imageView_r_2_0, imageView_r_2_1 };
+		leftImageViews = new ImageView[] {};
+		rightImageViews = new ImageView[] {};
 		album = albumDetailModel.getAlbum();
 		pagesNumber = album.getPages().size();
 		activePageNumber = (pagesNumber > 0) ? activePageNumber = 1 : 0;
@@ -130,7 +106,7 @@ public class PagesPresenter implements Initializable {
 	}
 
 	private void initDragEventsOnLeftSide() {
-		leftGridPane.setOnDragOver(new EventHandler<DragEvent>() {
+		leftAnchorPane.setOnDragOver(new EventHandler<DragEvent>() {
 			public void handle(DragEvent event) {
 				event.acceptTransferModes(TransferMode.ANY);
 
@@ -138,7 +114,7 @@ public class PagesPresenter implements Initializable {
 			}
 		});
 
-		leftGridPane.setOnDragDropped(new EventHandler<DragEvent>() {
+		leftAnchorPane.setOnDragDropped(new EventHandler<DragEvent>() {
 			public void handle(DragEvent event) {
 				Dragboard db = event.getDragboard();
 				final boolean isAccepted = db.hasFiles()
@@ -149,7 +125,7 @@ public class PagesPresenter implements Initializable {
 				if (isAccepted) {
 					File imageFile = db.getFiles().get(0);
 					acceptImageAtSide(true, imageFile);
-
+					updateBackground();
 				} else {
 					event.consume();
 				}
@@ -158,7 +134,7 @@ public class PagesPresenter implements Initializable {
 	}
 
 	private void initDragEventsOnRightSide() {
-		rightGridPane.setOnDragOver(new EventHandler<DragEvent>() {
+		rightAnchorPane.setOnDragOver(new EventHandler<DragEvent>() {
 			public void handle(DragEvent event) {
 				event.acceptTransferModes(TransferMode.ANY);
 
@@ -166,7 +142,7 @@ public class PagesPresenter implements Initializable {
 			}
 		});
 
-		rightGridPane.setOnDragDropped(new EventHandler<DragEvent>() {
+		rightAnchorPane.setOnDragDropped(new EventHandler<DragEvent>() {
 			public void handle(DragEvent event) {
 				Dragboard db = event.getDragboard();
 				final boolean isAccepted = db.hasFiles()
@@ -177,7 +153,7 @@ public class PagesPresenter implements Initializable {
 				if (isAccepted) {
 					File imageFile = db.getFiles().get(0);
 					acceptImageAtSide(false, imageFile);
-
+					updateBackground();
 				} else {
 					event.consume();
 				}
@@ -189,13 +165,36 @@ public class PagesPresenter implements Initializable {
 		IHMImage image = new IHMImage(imageFile.getName(), "", LocalDateTime.now());
 		image.setFile(imageFile);
 		Page page = album.getPages().get((isLeft) ? activePageNumber - 1 : activePageNumber);
-		if(page.getImages().size() < 6){
-			page.getImages().add(image);
-			image.setPage(page);
-			updateBackground();
-		}else{
-			utility.showInformationAlert(Alert.AlertType.ERROR, "Page pleine");
+		page.getImages().add(image);
+		image.setPage(page);
+		
+		TitledImage titledImage = createTitledImage(image);
+		if(isLeft)
+			leftAnchorPane.getChildren().add(titledImage);
+		else
+			rightAnchorPane.getChildren().add(titledImage);
+	}
+
+	private TitledImage createTitledImage(IHMImage image) {
+		TitledImage titledImage = new TitledImage(leftAnchorPane);
+		titledImage.setFitHeight(150);
+		titledImage.setFitWidth(150);
+		Image img;
+		try {
+			img = new Image(FileUtils.openInputStream(image.getFile()));
+			titledImage.setImage(img);
+			titledImage.setText(image.getTitle());
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
+		titledImage.getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent event) {
+				displayImage(event, image);
+			}
+		});
+		return titledImage;
 		
 	}
 
@@ -203,7 +202,6 @@ public class PagesPresenter implements Initializable {
 		attachPage();
 		activePageNumber = (pagesNumber % 2 == 0) ? pagesNumber - 1 : pagesNumber;
 		updateBackground();
-
 	}
 
 	/**
@@ -217,34 +215,41 @@ public class PagesPresenter implements Initializable {
 	 */
 	public void fillViewWithPage(int pageNumber) {
 
-		if (pageNumber%2 != 0) {
+		if (pageNumber % 2 != 0) {
+			clearPane(leftAnchorPane);
 			Page page = album.getPages().get(pageNumber - 1);
 			for (int i = 0; i < page.getImages().size(); i++) {
 				IHMImage ihmImage = page.getImages().get(i);
 				Image image;
 				try {
 					image = new Image(FileUtils.openInputStream(ihmImage.getFile()));
-					leftImageViews[i].setImage(image);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-
+				
+				TitledImage titledImage = createTitledImage(ihmImage);
+				leftAnchorPane.getChildren().add(titledImage);
 			}
-		}
-		else {
-			Page page = album.getPages().get(pageNumber-1);
+		} else {
+			clearPane(rightAnchorPane);
+			Page page = album.getPages().get(pageNumber - 1);
 			for (int i = 0; i < page.getImages().size(); i++) {
 				IHMImage ihmImage = page.getImages().get(i);
 				Image image;
 				try {
 					image = new Image(FileUtils.openInputStream(ihmImage.getFile()));
-					rightImageViews[i].setImage(image);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
+				TitledImage titledImage = createTitledImage(ihmImage);
+				rightAnchorPane.getChildren().add(titledImage);
 			}
 		}
 
+	}
+
+	private void clearPane(AnchorPane pane) {
+		pane.getChildren().clear();
 	}
 
 	private void attachPage() {
@@ -275,62 +280,78 @@ public class PagesPresenter implements Initializable {
 			leftPageNumberLabel.setText(String.valueOf(activePageNumber));
 			rightPageNumberLabel.setText(String.valueOf(activePageNumber + 1));
 			fillViewWithPage(activePageNumber);
-			fillViewWithPage(activePageNumber+1);
+			fillViewWithPage(activePageNumber + 1);
 		}
 	}
 
 	private void resetBackground() {
+		clearPane(rightAnchorPane);
+		clearPane(leftAnchorPane);
 		Image image = utility.getFXImage("left-side.png");
 		leftSideImageView.setImage(image);
 		image = utility.getFXImage("right-side.png");
 		rightSideImageView.setImage(image);
-		for(ImageView imageView : leftImageViews) imageView.setImage(null);
-		for(ImageView imageView : rightImageViews) imageView.setImage(null);
+		for (ImageView imageView : leftImageViews)
+			imageView.setImage(null);
+		for (ImageView imageView : rightImageViews)
+			imageView.setImage(null);
 	}
 
 	public void turnLeft(ActionEvent event) {
 		if (activePageNumber - 2 >= 1) {
 			activePageNumber = activePageNumber - 2;
 			soundPlayer.playSound("page-flip");
+			updateBackground();
 		}
-		updateBackground();
+		
 	}
 
 	public void turnRight(ActionEvent event) {
 		if (activePageNumber + 2 <= pagesNumber) {
 			soundPlayer.playSound("page-flip");
 			activePageNumber = activePageNumber + 2;
+			updateBackground();
 		}
-		updateBackground();
+		
 	}
 
-	public void displayImage(MouseEvent event){
-		if(event.getButton().equals(MouseButton.PRIMARY)){
-            if(event.getClickCount() == 2){
-            	ImageView imageView = (ImageView)event.getSource();
-            	IHMImage image = getDoubleClickedImage(imageView);
-            	imageEditionModel.setImage(image);
-            	ImageEditionView imageEditionView = new ImageEditionView();
-            	
-            	centralModel.setMainView(imageEditionView.getView(), utility.replace(ImageEditionView.TITLE, "imageTitle", "TODO"));
-               
-            }
-        }
-		 
+	public void displayImage(MouseEvent event, IHMImage image) {
+		if (event.getButton().equals(MouseButton.PRIMARY)) {
+			if (event.getClickCount() == 2) {
+				imageEditionModel.setImage(image);
+				ImageEditionView imageEditionView = new ImageEditionView();
+
+				centralModel.setMainView(imageEditionView.getView(),
+						utility.replace(ImageEditionView.TITLE, "imageTitle", "TODO"));
+
+			}
+		}
 	}
 
 	private IHMImage getDoubleClickedImage(ImageView imageView) {
-		for(int i = 0; i < leftImageViews.length; i++){
-			if(leftImageViews[i]==imageView){
-				return album.getPages().get(activePageNumber-1).getImages().get(i);
+		for (int i = 0; i < leftImageViews.length; i++) {
+			if (leftImageViews[i] == imageView) {
+				return album.getPages().get(activePageNumber - 1).getImages().get(i);
 			}
 		}
-		for(int i = 0; i < rightImageViews.length; i++){
-			if(rightImageViews[i]==imageView){
+		for (int i = 0; i < rightImageViews.length; i++) {
+			if (rightImageViews[i] == imageView) {
 				return album.getPages().get(activePageNumber).getImages().get(i);
 			}
 		}
 		return null;
 	}
-	
+
+	public void trackMouse(MouseEvent event) {
+		ImageView imageView = (ImageView) event.getSource();
+		double x = imageView.getX();
+		double y = imageView.getY();
+		double width = imageView.getFitWidth();
+		double height = imageView.getFitHeight();
+
+		double clickedX = event.getX();
+		double clickedY = event.getX();
+
+		System.out.println("track");
+	}
 }

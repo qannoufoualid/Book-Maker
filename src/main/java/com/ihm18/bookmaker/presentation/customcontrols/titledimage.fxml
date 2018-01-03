@@ -24,10 +24,16 @@
 <?import javafx.scene.layout.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Button?>
 
 <fx:root type="javafx.scene.layout.VBox" xmlns:fx="http://javafx.com/fxml">
 	<ImageView fx:id="imageView" fitHeight="882.0"
 		fitWidth="620.0" pickOnBounds="true" preserveRatio="true">
 	</ImageView>
-	<TextField fx:id="textField" />
+	<HBox >
+		<TextField fx:id="textField" />
+		<Button text="valider"/>
+	</HBox>
+	
 </fx:root>
