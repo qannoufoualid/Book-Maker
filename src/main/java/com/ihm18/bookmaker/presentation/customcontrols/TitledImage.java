@@ -16,28 +16,79 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
+/**
+ * Control personnalisé contenant une imageView + champ de texte + un bouton
+ * 
+ * @author qannoufoualid
+ *
+ */
 public class TitledImage extends AnchorPane {
 
-	protected static final double DIFF_RESIZE_CONSTANT = 20;
+	/**
+	 * constante qui represente combien la souri doit etre loin des bordures
+	 * pour commencer l'élargissement/diminusion de la taille de l'image
+	 */
+	public static final double DIFF_RESIZE_CONSTANT = 20;
+
+	/**
+	 * L'imageView du control.
+	 */
 	@FXML
 	private ImageView imageView;
+	/**
+	 * Le champ de text du control.
+	 */
 	@FXML
 	private TextField textField;
-	Pane parent;
-	double x = 0;
-	double y = 0;
+	/**
+	 * Le panneau pére du composant.
+	 */
+	private Pane parent;
+	/**
+	 * quanité de x deplacée
+	 */
+	private double mouvedx = 0;
+	/**
+	 * quanité de y deplacée
+	 */
+	private double mouvedy = 0;
 
-	double mousex = 0;
-	double mousey = 0;
-	protected boolean widenToRight = false;
-	protected boolean widenToBottom = false;
+	/**
+	 * Position courante de la souris sur l'axe X
+	 */
+	private double mousex = 0;
+	/**
+	 * Position courante de la souris sur l'axe Y
+	 */
+	private double mousey = 0;
+	/**
+	 * Si il faut faire un elargissement/diminition sur l'axe X.
+	 */
+	private boolean widenToRight = false;
+	/**
+	 * Si il faut faire un elargissement/diminition sur l'axe Y.
+	 */
+	private boolean widenToBottom = false;
+	/**
+	 * largeur initiale de l'imageView.
+	 */
 	private double initialImageViewWidth;
+	/**
+	 * hauteur initiale de l'imageView.
+	 */
 	private double initialImageViewHeight;
 
+	/**
+	 * Constructeur sans des paramétres.
+	 */
 	public TitledImage() {
 		this(null);
 	}
 
+	/**
+	 * Créer un object TitledImage avec reference sur son pére.
+	 * @param parent
+	 */
 	public TitledImage(Pane parent) {
 		this.parent = parent;
 		double initialParentWidth = parent.widthProperty().get();
@@ -66,8 +117,8 @@ public class TitledImage extends AnchorPane {
 				double relativeMouseY = event.getY();
 
 				// get the x and y position measure from Left-Top
-				x = getLayoutX();
-				y = getLayoutY();
+				mouvedx = getLayoutX();
+				mouvedy = getLayoutY();
 
 				widenToRight = false;
 				widenToBottom = false;
@@ -89,8 +140,8 @@ public class TitledImage extends AnchorPane {
 			public void handle(MouseEvent event) {
 
 				// Get the exact moved X and Y
-				x += event.getSceneX() - mousex;
-				y += event.getSceneY() - mousey;
+				mouvedx += event.getSceneX() - mousex;
+				mouvedy += event.getSceneY() - mousey;
 
 				double dx = event.getSceneX() - mousex;
 				double dy = event.getSceneY() - mousey;
@@ -98,13 +149,13 @@ public class TitledImage extends AnchorPane {
 				if (!widenToRight && !widenToBottom) {
 
 					// set the positon of Node after calculation
-					if (parent != null && (parent.getLayoutX() < x
-							&& parent.getLayoutX() + initialParentWidth - widthProperty().get() > x)) {
-						setLayoutX(x);
+					if (parent != null && (parent.getLayoutX() < mouvedx
+							&& parent.getLayoutX() + initialParentWidth - widthProperty().get() > mouvedx)) {
+						setLayoutX(mouvedx);
 					}
-					if (parent != null && (parent.getLayoutY() < y
-							&& parent.getLayoutY() + initialParentHeight - heightProperty().get() > y)) {
-						setLayoutY(y);
+					if (parent != null && (parent.getLayoutY() < mouvedy
+							&& parent.getLayoutY() + initialParentHeight - heightProperty().get() > mouvedy)) {
+						setLayoutY(mouvedy);
 					}
 
 					// again set current Mouse x AND y position
@@ -114,7 +165,7 @@ public class TitledImage extends AnchorPane {
 				} else {
 					// System.out.println(initialImageViewHeight+",
 					// "+initialImageViewWidth);
-					System.out.println(x + "," + y);
+					System.out.println(mouvedx + "," + mouvedy);
 					// System.out.println(initialImageViewWidth+x);
 					double newWidth = initialImageViewWidth + dx;
 					double newHeight = initialImageViewHeight + dy;
@@ -147,10 +198,9 @@ public class TitledImage extends AnchorPane {
 				double relativeMouseY = event.getY();
 				if (getFitWidth() > relativeMouseX && getFitWidth() - DIFF_RESIZE_CONSTANT < relativeMouseX) {
 					TitledImage.this.getParent().getScene().setCursor(Cursor.E_RESIZE);
-				}
-				else if (getFitHeight() > relativeMouseY && getFitHeight() - DIFF_RESIZE_CONSTANT < relativeMouseY) {
+				} else if (getFitHeight() > relativeMouseY && getFitHeight() - DIFF_RESIZE_CONSTANT < relativeMouseY) {
 					TitledImage.this.getParent().getScene().setCursor(Cursor.S_RESIZE);
-				}	
+				}
 			}
 		});
 
@@ -163,32 +213,59 @@ public class TitledImage extends AnchorPane {
 		});
 	}
 
+	/**
+	 * récuperer la proprieté text du champ de text.
+	 * @return
+	 */
 	public String getText() {
 		return textProperty().get();
 	}
 
+	/**
+	 * Spécifier la proprieté text du champ de text.
+	 * @param value
+	 */
 	public void setText(String value) {
 		textProperty().set(value);
 	}
 
+	/**
+	 * Spécifier la proprieté text du champ de text.
+	 * @param value
+	 */
 	public StringProperty textProperty() {
 		return textField.textProperty();
 	}
 
+	/**
+	 * Récupére la proprieté image de l'imageView
+	 * @return
+	 */
 	public ObjectProperty<Image> imageProperty() {
 		return imageView.imageProperty();
 	}
-
+	/**
+	 * Spécifier la proprieté image de l'imageView.
+	 * @param value
+	 */
 	public void setImage(Image image) {
 		imageProperty().set(image);
 		initialImageViewWidth = imageView.getFitWidth();
 		initialImageViewHeight = imageView.getFitHeight();
 	}
 
+	/**
+	 * Récupére l'image de l'imageView
+	 * @return
+	 */
 	public Image getImage() {
 		return this.imageProperty().get();
 	}
 
+	/**
+	 *  récuperer la fitHeightProperty.
+	 * @return
+	 */
 	public DoubleProperty fitHeightProperty() {
 		return imageView.fitHeightProperty();
 	}
@@ -201,6 +278,10 @@ public class TitledImage extends AnchorPane {
 		return this.fitHeightProperty().get();
 	}
 
+	/**
+	 *  récuperer la fitWidthProperty.
+	 * @return
+	 */
 	public DoubleProperty fitWidthProperty() {
 		return imageView.fitWidthProperty();
 	}
@@ -213,6 +294,10 @@ public class TitledImage extends AnchorPane {
 		return this.fitWidthProperty().get();
 	}
 
+	/**
+	 * getter de l'imageView
+	 * @return
+	 */
 	public ImageView getImageView() {
 		return imageView;
 	}

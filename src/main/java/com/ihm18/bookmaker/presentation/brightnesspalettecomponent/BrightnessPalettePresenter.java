@@ -22,24 +22,40 @@ import javax.inject.Inject;
 import com.ihm18.bookmaker.presentation.editionactionscomponent.EditionActionsModel;
 
 /**
+ * Le presentateur du composant responsable sur la luminosité + saturation + sepia
+ * @author qannoufoualid
  *
- * @author oualidqannouf
  */
 public class BrightnessPalettePresenter implements Initializable {
 
 
+	/**
+	 * Le modéle du composant des actions des éditions des images.
+	 */
 	@Inject
 	private EditionActionsModel editionActionsModel;
+	/**
+	 * fx:id=brightnessSlider
+	 */
 	@FXML
 	private Slider brightnessSlider;
+	/**
+	 * fx:id=saturationSlider
+	 */
 	@FXML
 	private Slider saturationSlider;
+	/**
+	 * fx:id=sepiaSlider
+	 */
 	@FXML
 	private Slider sepiaSlider;
 	
 	public void launch() {
 	}
 
+	/**
+	 * Permet d'initialiser le composant.
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		brightnessSlider.valueProperty().addListener(new ChangeListener<Number>() {
@@ -62,6 +78,9 @@ public class BrightnessPalettePresenter implements Initializable {
             });
 	}
 
+	/**
+	 * Changer les effets de l'image.
+	 */
 	private void setImageEffect() {
 		ColorAdjust colorAdjust = new ColorAdjust();
         colorAdjust.setBrightness((1 - brightnessSlider.valueProperty().get()) * -1);

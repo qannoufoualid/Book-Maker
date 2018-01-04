@@ -13,7 +13,7 @@ import javafx.scene.image.Image;
 import javafx.stage.StageStyle;
 
 /**
- *
+ * Classe qui contient un ensemble de méthode utile pour tous les composants.
  * @author oualidqannouf
  */
 public class Utility {

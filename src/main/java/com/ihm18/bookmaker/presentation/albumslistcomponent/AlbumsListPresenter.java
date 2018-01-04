@@ -19,31 +19,50 @@ import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 
 /**
+ * Le presentateur du composant responsable sur l'affichage des albums.
+ * @author qannoufoualid
  *
- * @author oualidqannouf
  */
 public class AlbumsListPresenter implements Initializable {
 
+	/**
+	 * le modéle du composant central.
+	 */
 	@Inject
 	private CentralModel centralModel;
 
+	/**
+	 * le modéle de composant d'affichage d'un album.
+	 */
 	@Inject
 	private AlbumDetailModel albumDetailModel;
-	
+	/**
+	 * Le modéle des listes des albums.
+	 */
+	@Inject
+	private AlbumsListModel albumsListModel;
+	/**
+	 * Le service de l'album.
+	 */
     @Inject
     private AlbumService albumService;
 	
+    /**
+     * fx:id=albumsListView
+     */
 	@FXML
 	private ListView<Album> albumsListView;
-	
-	@Inject
-	private AlbumsListModel albumsListModel;
-
+	/**
+	 * L'album selectionné
+	 */
 	private Album selectedAlbum;
 	
     public void launch() {
     }
 
+    /**
+     * Permet d'initialiser le composant.
+     */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
@@ -68,6 +87,10 @@ public class AlbumsListPresenter implements Initializable {
 
 	}
 	
+	/**
+	 * Permet d'afficher le detail de l'album.
+	 * @param event
+	 */
 	public void displayAlbumDetail(MouseEvent event){
 		selectedAlbum = albumsListView.getSelectionModel().getSelectedItem();
 		

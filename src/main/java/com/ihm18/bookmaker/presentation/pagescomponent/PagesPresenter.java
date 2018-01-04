@@ -37,66 +37,123 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 
 /**
- *
+ * Le presentateur du composant PagesComponent.
  * @author oualidqannouf
  */
 public class PagesPresenter implements Initializable {
 
+	/**
+	 * Le modéle du composant albumDetailComponent.
+	 */
 	@Inject
 	private AlbumDetailModel albumDetailModel;
 
+	/**
+	 * Le modéle du composant PagesComponent
+	 */
 	@Inject
 	private PagesModel pagesModel;
+	/**
+	 * Le modele du composant EditionActions.
+	 */
 	@Inject
 	private EditionActionsModel editionActionsModel;
 	
-	
+	/**
+	 * une reference sur la class utility.
+	 */
 	@Inject
 	private Utility utility;
+	
+	/**
+	 * une reference sur le soundPlayer
+	 */
 	@Inject
 	private SoundPlayer soundPlayer;
 
-	private Album album;
-
+	/**
+	 * fx:id=pagesContainer
+	 */
 	@FXML
 	private BorderPane pagesContainer;
+	/**
+	 * fx:id=leftSideImageView
+	 */
 	@FXML
 	private ImageView leftSideImageView;
+	/**
+	 * fx:id=rightSideImageView
+	 */
 	@FXML
 	private ImageView rightSideImageView;
+	/**
+	 * fx:id=leftPageNumberLabel
+	 */
 	@FXML
 	private Label leftPageNumberLabel;
+	/**
+	 * fx:id=rightPageNumberLabel
+	 */
 	@FXML
 	private Label rightPageNumberLabel;
+	/**
+	 * fx:id=leftAnchorPane
+	 */
 	@FXML
 	private AnchorPane leftAnchorPane;
+	/**
+	 * fx:id=rightAnchorPane
+	 */
 	@FXML
 	private AnchorPane rightAnchorPane;
 
+	/**
+	 * Liste des images view de la page à gauche.
+	 */
 	private ImageView[] leftImageViews;
+
+	/**
+	 * Liste des images view de la page à droite.
+	 */
 	private ImageView[] rightImageViews;
 
+	/**
+	 * L'album selectionné.
+	 */
+	private Album album;
+	/**
+	 * La page courante
+	 */
 	private int activePageNumber = 0;
-	private IHMImage activeImage;
-	
+	/**
+	 * Le nombre de page.
+	 */
 	private int pagesNumber;
+	/**
+	 * Si une image a été cliquée
+	 */
 	protected boolean imageClicked = false;;
 
-	public void launch() {
-	}
+	/**
+	 * Executé au lancement du composant
+	 */
+	public void launch() {}
 
+	/**
+	 * Executé aprés le lancement du composant.
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
 		pagesContainer.topProperty().set(new EditionActionsView().getView());
-		pagesContainer.rightProperty().bind(pagesModel.paletteView());
+		pagesContainer.rightProperty().bind(pagesModel.paletteViewProperty());
 		
 		leftImageViews = new ImageView[] {};
 		rightImageViews = new ImageView[] {};
 		album = albumDetailModel.getAlbum();
 		pagesNumber = album.getPages().size();
 		activePageNumber = (pagesNumber > 0) ? activePageNumber = 1 : 0;
-		updateBackground();
+		updateBackgroundAndPages();
 
 		initDragEvents();
 
@@ -112,11 +169,17 @@ public class PagesPresenter implements Initializable {
 		
 	}
 
+	/**
+	 * Inititialiser les evenements du drag.
+	 */
 	private void initDragEvents() {
 		initDragEventsOnLeftSide();
 		initDragEventsOnRightSide();
 	}
 
+	/**
+	 * Initialiser les evenements sur la page gauche
+	 */
 	private void initDragEventsOnLeftSide() {
 		leftAnchorPane.setOnDragOver(new EventHandler<DragEvent>() {
 			public void handle(DragEvent event) {
@@ -137,7 +200,7 @@ public class PagesPresenter implements Initializable {
 				if (isAccepted) {
 					File imageFile = db.getFiles().get(0);
 					acceptImageAtSide(true, imageFile);
-					updateBackground();
+					updateBackgroundAndPages();
 				} else {
 					event.consume();
 				}
@@ -145,6 +208,9 @@ public class PagesPresenter implements Initializable {
 		});
 	}
 
+	/**
+	 * Initialiser les evenements sur la partie droite.
+	 */
 	private void initDragEventsOnRightSide() {
 		rightAnchorPane.setOnDragOver(new EventHandler<DragEvent>() {
 			public void handle(DragEvent event) {
@@ -165,7 +231,7 @@ public class PagesPresenter implements Initializable {
 				if (isAccepted) {
 					File imageFile = db.getFiles().get(0);
 					acceptImageAtSide(false, imageFile);
-					updateBackground();
+					updateBackgroundAndPages();
 				} else {
 					event.consume();
 				}
@@ -173,6 +239,11 @@ public class PagesPresenter implements Initializable {
 		});
 	}
 
+	/**
+	 * permet de créer une image.
+	 * @param isLeft si l'image doit etre créée sur la page gauche ou pas.
+	 * @param imageFile le fichier de l'image.
+	 */
 	public void acceptImageAtSide(boolean isLeft, File imageFile) {
 		IHMImage image = new IHMImage(imageFile.getName(), "", LocalDateTime.now());
 		image.setFile(imageFile);
@@ -187,6 +258,11 @@ public class PagesPresenter implements Initializable {
 			rightAnchorPane.getChildren().add(titledImage);
 	}
 
+	/**
+	 * Permet de créer une image avec un titre.
+	 * @param image
+	 * @return
+	 */
 	private TitledImage createTitledImage(IHMImage image) {
 		TitledImage titledImage = new TitledImage(leftAnchorPane);
 		titledImage.setFitHeight(150);
@@ -204,7 +280,6 @@ public class PagesPresenter implements Initializable {
 			public void handle(MouseEvent event) {
 				System.out.println("image clicked");
 				imageClicked = true;
-				activeImage = image;
 				editionActionsModel.setImageView(titledImage.getImageView());
 				pagesModel.imageClickedProperty().setValue(false);
 			}
@@ -213,10 +288,14 @@ public class PagesPresenter implements Initializable {
 		
 	}
 
+	/**
+	 * Permet d'ajouter une page.
+	 * @param event
+	 */
 	public void addPage(ActionEvent event) {
 		attachPage();
 		activePageNumber = (pagesNumber % 2 == 0) ? pagesNumber - 1 : pagesNumber;
-		updateBackground();
+		updateBackgroundAndPages();
 	}
 
 	/**
@@ -263,10 +342,17 @@ public class PagesPresenter implements Initializable {
 
 	}
 
+	/**
+	 * Permet de vider un paneau.
+	 * @param pane
+	 */
 	private void clearPane(AnchorPane pane) {
 		pane.getChildren().clear();
 	}
 
+	/**
+	 * Permet d'attacher une nouvelle page à l'album.
+	 */
 	private void attachPage() {
 
 		Page page = new Page();
@@ -275,7 +361,10 @@ public class PagesPresenter implements Initializable {
 		album.addPage(page);
 	}
 
-	private void updateBackground() {
+	/**
+	 * Permet de mettre à jours les arrieres plans des 2 pages.
+	 */
+	private void updateBackgroundAndPages() {
 
 		resetBackground();
 
@@ -299,6 +388,9 @@ public class PagesPresenter implements Initializable {
 		}
 	}
 
+	/**
+	 * Permet d'initialiser l'arriere-plan des deux pages. 
+	 */
 	private void resetBackground() {
 		clearPane(rightAnchorPane);
 		clearPane(leftAnchorPane);
@@ -312,49 +404,29 @@ public class PagesPresenter implements Initializable {
 			imageView.setImage(null);
 	}
 
+	/**
+	 * Permet de naviguer à gauche.
+	 * @param event
+	 */
 	public void turnLeft(ActionEvent event) {
 		if (activePageNumber - 2 >= 1) {
 			activePageNumber = activePageNumber - 2;
 			soundPlayer.playSound("page-flip");
-			updateBackground();
+			updateBackgroundAndPages();
 		}
 		
 	}
-
+	
+	/**
+	 * Permet de naviguer à droite.
+	 * @param event
+	 */
 	public void turnRight(ActionEvent event) {
 		if (activePageNumber + 2 <= pagesNumber) {
 			soundPlayer.playSound("page-flip");
 			activePageNumber = activePageNumber + 2;
-			updateBackground();
+			updateBackgroundAndPages();
 		}
 		
-	}
-
-
-	private IHMImage getDoubleClickedImage(ImageView imageView) {
-		for (int i = 0; i < leftImageViews.length; i++) {
-			if (leftImageViews[i] == imageView) {
-				return album.getPages().get(activePageNumber - 1).getImages().get(i);
-			}
-		}
-		for (int i = 0; i < rightImageViews.length; i++) {
-			if (rightImageViews[i] == imageView) {
-				return album.getPages().get(activePageNumber).getImages().get(i);
-			}
-		}
-		return null;
-	}
-
-	public void trackMouse(MouseEvent event) {
-		ImageView imageView = (ImageView) event.getSource();
-		double x = imageView.getX();
-		double y = imageView.getY();
-		double width = imageView.getFitWidth();
-		double height = imageView.getFitHeight();
-
-		double clickedX = event.getX();
-		double clickedY = event.getX();
-
-		System.out.println("track");
 	}
 }

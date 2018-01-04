@@ -20,7 +20,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 
 /**
- *
+ * Le presentateur du composant central.
  * @author oualidqannouf
  */
 public class CentralPresenter implements Initializable {
