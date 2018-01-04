@@ -2,9 +2,6 @@ package com.ihm18.bookmaker.presentation.customcontrols;
 
 import java.io.IOException;
 
-import com.ihm18.bookmaker.DragResizer;
-import com.ihm18.bookmaker.businessobject.IHMImage;
-
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.StringProperty;
@@ -12,15 +9,12 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 
 public class TitledImage extends AnchorPane {
 
@@ -167,7 +161,6 @@ public class TitledImage extends AnchorPane {
 				TitledImage.this.getParent().getScene().setCursor(Cursor.DEFAULT);
 			}
 		});
-
 	}
 
 	public String getText() {
