@@ -6,15 +6,20 @@
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
 	minWidth="-Infinity" prefHeight="284.0" prefWidth="133.0"
-	xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ihm18.bookmaker.presentation.brightnesspalettecomponent.BrightnessPalettePresenter">
+	xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="com.ihm18.bookmaker.presentation.brightnesspalettecomponent.BrightnessPalettePresenter">
 	<children>
 		<Label text="Luminosité" />
 		<Slider fx:id="brightnessSlider" blockIncrement="0.1"
 			majorTickUnit="0.25" max="2.0" maxWidth="1.7976931348623157E308"
 			minorTickCount="0" showTickMarks="true" value="1.0" HBox.hgrow="ALWAYS" />
-		<Label text="Contraste" />
-		<Slider fx:id="contrastSlider" />
 		<Label text="Saturation" />
-		<Slider fx:id="saturationSlider" />
+		<Slider fx:id="saturationSlider" blockIncrement="0.1"
+			majorTickUnit="0.25" max="2.0" maxWidth="1.7976931348623157E308"
+			minorTickCount="0" showTickMarks="true" value="1.0" HBox.hgrow="ALWAYS" />
+		<Label text="Sepia" />
+		<Slider fx:id="sepiaSlider" blockIncrement="0.1" majorTickUnit="0.25"
+			max="2.0" maxWidth="1.7976931348623157E308" minorTickCount="0"
+			showTickMarks="true" value="1.0" HBox.hgrow="ALWAYS" />
 	</children>
 </VBox>
