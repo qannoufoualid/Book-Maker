@@ -6,3 +6,7 @@
 .root {    
     -fx-font: 14px "Helvetica";
 }
+
+.box{
+	-fx-border-color: black;
+}
