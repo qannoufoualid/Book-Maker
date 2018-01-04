@@ -14,30 +14,27 @@ import com.ihm18.bookmaker.businessobject.Album;
 import com.ihm18.bookmaker.businessobject.IHMImage;
 import com.ihm18.bookmaker.businessobject.Page;
 import com.ihm18.bookmaker.presentation.albumdetailcomponent.AlbumDetailModel;
+import com.ihm18.bookmaker.presentation.brightnesspalettecomponent.BrightnessModel;
 import com.ihm18.bookmaker.presentation.centralcomponent.CentralModel;
 import com.ihm18.bookmaker.presentation.customcontrols.TitledImage;
-import com.ihm18.bookmaker.presentation.imageeditioncomponent.ImageEditionModel;
-import com.ihm18.bookmaker.presentation.imageeditioncomponent.ImageEditionView;
+import com.ihm18.bookmaker.presentation.editionactionscomponent.EditionActionsModel;
+import com.ihm18.bookmaker.presentation.editionactionscomponent.EditionActionsView;
 import com.ihm18.bookmaker.presentation.utility.SoundPlayer;
 import com.ihm18.bookmaker.presentation.utility.Utility;
-import com.ihm18.bookmaker.service.ImageService;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
-import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.BorderPane;
 
 /**
  *
@@ -47,22 +44,22 @@ public class PagesPresenter implements Initializable {
 
 	@Inject
 	private AlbumDetailModel albumDetailModel;
-	@Inject
-	private CentralModel centralModel;
-	@Inject
-	private ImageEditionModel imageEditionModel;
 
+	@Inject
+	private PagesModel pagesModel;
+	@Inject
+	private EditionActionsModel editionActionsModel;
+	
+	
 	@Inject
 	private Utility utility;
 	@Inject
 	private SoundPlayer soundPlayer;
-	@Inject
-	private ImageService imageService;
 
 	private Album album;
 
 	@FXML
-	private GridPane pagesContainer;
+	private BorderPane pagesContainer;
 	@FXML
 	private ImageView leftSideImageView;
 	@FXML
@@ -80,8 +77,10 @@ public class PagesPresenter implements Initializable {
 	private ImageView[] rightImageViews;
 
 	private int activePageNumber = 0;
-
+	private IHMImage activeImage;
+	
 	private int pagesNumber;
+	protected boolean imageClicked = false;;
 
 	public void launch() {
 	}
@@ -89,6 +88,9 @@ public class PagesPresenter implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
+		pagesContainer.topProperty().set(new EditionActionsView().getView());
+		pagesContainer.rightProperty().bind(pagesModel.paletteView());
+		
 		leftImageViews = new ImageView[] {};
 		rightImageViews = new ImageView[] {};
 		album = albumDetailModel.getAlbum();
@@ -98,6 +100,16 @@ public class PagesPresenter implements Initializable {
 
 		initDragEvents();
 
+		
+		leftAnchorPane.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				if(!imageClicked)
+					pagesModel.imageClickedProperty().setValue(true);
+				imageClicked = false;
+			}
+		});
+		
 	}
 
 	private void initDragEvents() {
@@ -188,10 +200,13 @@ public class PagesPresenter implements Initializable {
 			e.printStackTrace();
 		}
 		titledImage.getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
-
 			@Override
 			public void handle(MouseEvent event) {
-				displayImage(event, image);
+				System.out.println("image clicked");
+				imageClicked = true;
+				activeImage = image;
+				editionActionsModel.setImageView(titledImage.getImageView());
+				pagesModel.imageClickedProperty().setValue(false);
 			}
 		});
 		return titledImage;
@@ -315,18 +330,6 @@ public class PagesPresenter implements Initializable {
 		
 	}
 
-	public void displayImage(MouseEvent event, IHMImage image) {
-		if (event.getButton().equals(MouseButton.PRIMARY)) {
-			if (event.getClickCount() == 2) {
-				imageEditionModel.setImage(image);
-				ImageEditionView imageEditionView = new ImageEditionView();
-
-				centralModel.setMainView(imageEditionView.getView(),
-						utility.replace(ImageEditionView.TITLE, "imageTitle", "TODO"));
-
-			}
-		}
-	}
 
 	private IHMImage getDoubleClickedImage(ImageView imageView) {
 		for (int i = 0; i < leftImageViews.length; i++) {

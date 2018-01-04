@@ -1,4 +1,4 @@
-package com.ihm18.bookmaker.presentation.brighnesspalettecomponent;
+package com.ihm18.bookmaker.presentation.brightnesspalettecomponent;
 
 
 import com.airhacks.afterburner.views.FXMLView;

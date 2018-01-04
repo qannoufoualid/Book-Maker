@@ -138,10 +138,11 @@ public class TitledImage extends AnchorPane {
 			}
 		});
 		// Event Listener for Mouseover
-		imageView.onMouseEnteredProperty().set(new EventHandler<MouseEvent>() {
+		imageView.onMouseMovedProperty().set(new EventHandler<MouseEvent>() {
 
 			@Override
 			public void handle(MouseEvent event) {
+				TitledImage.this.getParent().getScene().setCursor(Cursor.DEFAULT);
 				double relativeMouseX = event.getX();
 				double relativeMouseY = event.getY();
 				if (getFitWidth() > relativeMouseX && getFitWidth() - DIFF_RESIZE_CONSTANT < relativeMouseX) {
@@ -149,8 +150,7 @@ public class TitledImage extends AnchorPane {
 				}
 				else if (getFitHeight() > relativeMouseY && getFitHeight() - DIFF_RESIZE_CONSTANT < relativeMouseY) {
 					TitledImage.this.getParent().getScene().setCursor(Cursor.S_RESIZE);
-				}else
-					TitledImage.this.getParent().getScene().setCursor(Cursor.DEFAULT);
+				}	
 			}
 		});
 
