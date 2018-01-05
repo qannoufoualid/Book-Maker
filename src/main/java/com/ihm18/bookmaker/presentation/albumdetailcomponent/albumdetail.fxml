@@ -5,13 +5,13 @@
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 
-<AnchorPane maxWidth="-Infinity" prefHeight="705.0" prefWidth="767.0" styleClass="albumdetail-component" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ihm18.bookmaker.presentation.albumdetailcomponent.AlbumDetailPresenter">
+<AnchorPane prefHeight="845.0" prefWidth="1077.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ihm18.bookmaker.presentation.albumdetailcomponent.AlbumDetailPresenter">
    <children>
       <TextField fx:id="albumNameTextField" layoutX="84.0" layoutY="33.0" prefHeight="28.0" prefWidth="411.0" />
       <TextArea fx:id="AlbumDescriptionTextArea" layoutX="84.0" layoutY="79.0" prefHeight="200.0" prefWidth="411.0" />
       <TextField fx:id="albumCreationDateTextField" editable="false" layoutX="84.0" layoutY="323.0" prefHeight="28.0" prefWidth="411.0" />
-      <Button layoutX="390.0" layoutY="384.0" mnemonicParsing="false" onAction="#displayPages" prefHeight="28.0" prefWidth="126.0" text="Afficher l'album" />
-      <Button layoutX="84.0" layoutY="384.0" mnemonicParsing="false" onAction="#applyChanges" prefHeight="28.0" prefWidth="111.0" text="Appliquer" />
-      <Button layoutX="231.0" layoutY="384.0" mnemonicParsing="false" onAction="#addImages" text="Ajouter des images" />
+      <Button styleClass="btn-primary" layoutX="390.0" layoutY="384.0" mnemonicParsing="false" onAction="#displayPages" prefHeight="28.0" prefWidth="126.0" text="Afficher l'album" />
+      <Button styleClass="btn-success" layoutX="84.0" layoutY="384.0" mnemonicParsing="false" onAction="#applyChanges" prefHeight="28.0" prefWidth="111.0" text="Appliquer" />
+      <Button styleClass="btn" layoutX="231.0" layoutY="384.0" mnemonicParsing="false" onAction="#addImages" text="Ajouter des images" />
    </children>
 </AnchorPane>

@@ -126,7 +126,7 @@ public class AlbumDetailPresenter implements Initializable {
 	
 	/**
 	 * Permet d'afficher les pages d'un album.
-	 * @param event
+	 * @param event l'ActionEvent
 	 */
 	public void displayPages(ActionEvent event){
 		PagesView pagesView = new PagesView();
@@ -135,7 +135,7 @@ public class AlbumDetailPresenter implements Initializable {
 	
 	/**
 	 * Permet d'activer le bouton des l'édition de l'album.
-	 * @param observable
+	 * @param observable 
 	 * @param oldValue
 	 * @param newValue
 	 */

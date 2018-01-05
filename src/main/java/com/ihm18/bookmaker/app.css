@@ -4,8 +4,11 @@
 }
 
 .root {    
-    -fx-font: 14px "Helvetica";
-}
+	-fx-background-image: url("../../../images/bg.jpg");
+	-fx-background-position: center center;
+    -fx-font: 14px "Arial";
+	}
+
 
 .box{
 	-fx-border-color: black;

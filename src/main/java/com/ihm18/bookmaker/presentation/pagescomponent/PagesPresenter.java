@@ -14,8 +14,6 @@ import com.ihm18.bookmaker.businessobject.Album;
 import com.ihm18.bookmaker.businessobject.IHMImage;
 import com.ihm18.bookmaker.businessobject.Page;
 import com.ihm18.bookmaker.presentation.albumdetailcomponent.AlbumDetailModel;
-import com.ihm18.bookmaker.presentation.brightnesspalettecomponent.BrightnessModel;
-import com.ihm18.bookmaker.presentation.centralcomponent.CentralModel;
 import com.ihm18.bookmaker.presentation.customcontrols.TitledImage;
 import com.ihm18.bookmaker.presentation.editionactionscomponent.EditionActionsModel;
 import com.ihm18.bookmaker.presentation.editionactionscomponent.EditionActionsView;
@@ -26,6 +24,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -145,7 +144,10 @@ public class PagesPresenter implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
-		pagesContainer.topProperty().set(new EditionActionsView().getView());
+		Node editionActionsView = new EditionActionsView().getView();
+		
+		pagesContainer.topProperty().set(editionActionsView);
+		
 		pagesContainer.rightProperty().bind(pagesModel.paletteViewProperty());
 		
 		leftImageViews = new ImageView[] {};
@@ -278,14 +280,20 @@ public class PagesPresenter implements Initializable {
 		titledImage.getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				System.out.println("image clicked");
+				imageClicked = true;
+				editionActionsModel.setImageView(titledImage.getImageView());
+				pagesModel.imageClickedProperty().setValue(false);
+			}
+		});
+		titledImage.getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
 				imageClicked = true;
 				editionActionsModel.setImageView(titledImage.getImageView());
 				pagesModel.imageClickedProperty().setValue(false);
 			}
 		});
 		return titledImage;
-		
 	}
 
 	/**

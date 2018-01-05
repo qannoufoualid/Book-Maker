@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.scene.layout.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
 
 <BorderPane maxWidth="-Infinity" prefHeight="700.0"
 	prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
@@ -40,7 +42,7 @@
 		<SplitPane dividerPositions="0.251503006012024" prefHeight="160.0"
 			prefWidth="200.0" BorderPane.alignment="CENTER">
 			<items>
-				<AnchorPane fx:id='leftContainer' minHeight="0.0"
+				<AnchorPane fx:id="leftContainer" minHeight="0.0"
 					minWidth="0.0" prefHeight="668.0" prefWidth="269.0"
 					SplitPane.resizableWithParent="false">
 
@@ -48,14 +50,23 @@
 				<BorderPane fx:id="mainContainer" minHeight="600"
 					minWidth="500" prefHeight="668.0" prefWidth="897.0">
 					<center>
-						
+
 					</center>
 					<top>
-						<Label fx:id="mainViewTitleLabel" prefHeight="18.0"
-							prefWidth="422.0" BorderPane.alignment="TOP_LEFT" />
+						<AnchorPane styleClass="transaprent-panel">
+							<children>
+								<Label fx:id="mainViewTitleLabel" styleClass="btn btn-warning"
+									alignment="TOP_LEFT" prefHeight="36.0" prefWidth="740.0"
+									BorderPane.alignment="TOP_LEFT">
+									
+								</Label>
+							</children>
+						</AnchorPane>
 					</top>
 				</BorderPane>
 			</items>
 		</SplitPane>
 	</center>
+	<bottom>
+	</bottom>
 </BorderPane>

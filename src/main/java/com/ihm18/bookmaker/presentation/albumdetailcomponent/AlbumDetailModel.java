@@ -34,14 +34,14 @@ public class AlbumDetailModel {
     }
     /**
      * getter du nom de l'album
-     * @return
+     * @return le nom de l'album
      */
     public final String albumName() {
         return albumName.get();
     }
     /**
      * setter du nom de l'album.
-     * @param albumName
+     * @param albumName nom de l'album
      */
     public final void setAlbumName(String albumName) {
         this.albumName.set(albumName);
@@ -49,14 +49,14 @@ public class AlbumDetailModel {
     
     /**
      * getter de la proprieté albumDescriptionProperty
-     * @return
+     * @return  la proprieté albumDescriptionProperty
      */
     public ObjectProperty<String> albumDescriptionProperty() {
         return albumDescription ;
     }
     /**
      * getter de la description de l'album.
-     * @return
+     * @return la description de l'album.
      */
     public final String getAlbumDescription() {
         return albumDescription.get();
@@ -64,7 +64,7 @@ public class AlbumDetailModel {
     
     /**
      * setter de la description de l'album.
-     * @param albumDescription
+     * @param albumDescription la description de l'album.
      */
     public final void setAlbumDescription(String albumDescription) {
         this.albumDescription.set(albumDescription);
@@ -72,7 +72,7 @@ public class AlbumDetailModel {
 
     /**
      * getter de l'album.
-     * @return
+     * @return l'album.
      */
 	public Album getAlbum() {
 		return album;
@@ -80,7 +80,7 @@ public class AlbumDetailModel {
 	
 	/**
 	 * setter de l'album.
-	 * @param album
+	 * @param album l'album
 	 */
 	public void setAlbum(Album album) {
 		albumName.set(album.getName());

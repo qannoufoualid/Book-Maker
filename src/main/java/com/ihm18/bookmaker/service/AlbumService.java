@@ -6,7 +6,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import com.ihm18.bookmaker.businessobject.Album;
-import com.ihm18.bookmaker.presentation.dao.AlbumDao;
+import com.ihm18.bookmaker.dao.AlbumDao;
 
 /**
  * 

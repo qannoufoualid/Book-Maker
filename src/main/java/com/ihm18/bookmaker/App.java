@@ -10,13 +10,17 @@ import com.ihm18.bookmaker.presentation.centralcomponent.CentralView;
 import javafx.application.Application;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 /**
- *
+ *Cette classe est le point de depart de l'application
  * @author oualidqannouf
- * Cette class est le point de depart de l'application
  */
 public class App extends Application {
 
@@ -48,6 +52,7 @@ public class App extends Application {
         stage.setTitle("Book Maker");
         final String uri = getClass().getResource("app.css").toExternalForm();
         scene.getStylesheets().add(uri);
+        scene.getStylesheets().add("bootstrapfx.css");
         stage.setScene(scene);
         stage.show();
     }

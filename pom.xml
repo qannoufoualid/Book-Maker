@@ -35,6 +35,13 @@
 			<version>8.40.12</version>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/org.kordamp.bootstrapfx/bootstrapfx-core -->
+		<dependency>
+			<groupId>org.kordamp.bootstrapfx</groupId>
+			<artifactId>bootstrapfx-core</artifactId>
+			<version>0.2.1</version>
+		</dependency>
+
 	</dependencies>
 	<build>
 		<defaultGoal>clean package</defaultGoal>
@@ -110,4 +117,5 @@
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
+	<description>Application JavaFx pour la création des albums photos dans lesquels vous pouvez importer des photos et les éditer.</description>
 </project>

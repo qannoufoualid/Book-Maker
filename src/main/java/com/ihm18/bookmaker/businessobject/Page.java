@@ -3,6 +3,11 @@ package com.ihm18.bookmaker.businessobject;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * L'entité Page
+ * @author qannoufoualid
+ *
+ */
 public class Page {
 
 	/**

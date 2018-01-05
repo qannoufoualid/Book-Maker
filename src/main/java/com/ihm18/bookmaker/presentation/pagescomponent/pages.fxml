@@ -7,59 +7,65 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.GridPane?>
 
-<BorderPane fx:id="pagesContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="978.0" prefWidth="1293.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ihm18.bookmaker.presentation.pagescomponent.PagesPresenter">
-<center>
-<GridPane >
-<columnConstraints>
-		<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-		<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-	</columnConstraints>
-	<rowConstraints>
-		<RowConstraints maxHeight="936.0" minHeight="10.0" prefHeight="936.0" vgrow="SOMETIMES" />
-		<RowConstraints maxHeight="466.0" minHeight="10.0" prefHeight="73.0" vgrow="SOMETIMES" />
-	</rowConstraints>
-	<children>
-		<BorderPane prefHeight="200.0" prefWidth="200.0">
-			<bottom>
-				<Label fx:id="leftPageNumberLabel" BorderPane.alignment="CENTER" />
-			</bottom>
-			<right>
-				<StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-					<children>
-						<ImageView fx:id="leftSideImageView" fitHeight="882.0" fitWidth="620.0" pickOnBounds="true" preserveRatio="true">
-							<image>
-								<Image url="images/left-side.png" />
-							</image>
-						</ImageView>
-						<AnchorPane fx:id="leftAnchorPane" >		
-						</AnchorPane>
-					</children>
-				</StackPane>
-			</right>
-		</BorderPane>
-		<BorderPane prefHeight="582.0" prefWidth="414.0" GridPane.columnIndex="1">
-			<bottom>
-				<Label fx:id="rightPageNumberLabel" BorderPane.alignment="CENTER" />
-			</bottom>
-			<left>
-				<StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-					<children>
-						<ImageView fx:id="rightSideImageView" fitHeight="882.0" fitWidth="620.0" pickOnBounds="true" preserveRatio="true">
-							<image>
-								<Image url="images/right-side.png" />
-							</image>
-						</ImageView>
-						<AnchorPane fx:id="rightAnchorPane" >		
-						</AnchorPane>
-					</children>
-				</StackPane>
-			</left>
-		</BorderPane>
-		<Button mnemonicParsing="false" onAction="#addPage" text="Créer page" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
-		<Button mnemonicParsing="false" onAction="#turnLeft" text="&lt;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-		<Button mnemonicParsing="false" onAction="#turnRight" text="&gt;" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-	</children>
-</GridPane>
-</center>
-	
+<BorderPane fx:id="pagesContainer" maxHeight="-Infinity"
+	maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+	styleClass="box" prefHeight="900" prefWidth="1015"
+	xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="com.ihm18.bookmaker.presentation.pagescomponent.PagesPresenter">
+	<center>
+		<GridPane styleClass="box">
+
+			<children>
+				<BorderPane 
+					styleClass="box">
+					<bottom>
+						<Label fx:id="leftPageNumberLabel" BorderPane.alignment="CENTER" />
+					</bottom>
+					<right>
+						<StackPane 
+							BorderPane.alignment="CENTER">
+							<children>
+								<ImageView fx:id="leftSideImageView" pickOnBounds="true" preserveRatio="true">
+									<image>
+										<Image url="images/left-side.png" />
+									</image>
+								</ImageView>
+								<AnchorPane fx:id="leftAnchorPane">
+								</AnchorPane>
+							</children>
+						</StackPane>
+					</right>
+				</BorderPane>
+				<BorderPane
+					GridPane.columnIndex="1" styleClass="box">
+					<bottom>
+						<Label fx:id="rightPageNumberLabel" BorderPane.alignment="CENTER" />
+					</bottom>
+					<left>
+						<StackPane
+							BorderPane.alignment="CENTER">
+							<children>
+								<ImageView fx:id="rightSideImageView" pickOnBounds="true" preserveRatio="true">
+									<image>
+										<Image url="images/right-side.png" />
+									</image>
+								</ImageView>
+								<AnchorPane fx:id="rightAnchorPane">
+								</AnchorPane>
+							</children>
+						</StackPane>
+					</left>
+				</BorderPane>
+				<Button mnemonicParsing="false" onAction="#addPage" text="Créer page"
+					GridPane.columnIndex="1" GridPane.halignment="RIGHT"
+					GridPane.rowIndex="1" />
+				<Button mnemonicParsing="false" onAction="#turnLeft" text="&lt;"
+					GridPane.columnIndex="1" GridPane.rowIndex="1" />
+				<Button mnemonicParsing="false" onAction="#turnRight" text="&gt;"
+					GridPane.columnIndex="1" GridPane.halignment="CENTER"
+					GridPane.rowIndex="1" />
+			</children>
+		</GridPane>
+	</center>
+
 </BorderPane>
