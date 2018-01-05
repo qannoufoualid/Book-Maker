@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 
 import javax.inject.Inject;
 
+import javafx.beans.property.SimpleObjectProperty;
 import org.apache.commons.io.FileUtils;
 
 import com.ihm18.bookmaker.businessobject.Album;
@@ -35,6 +36,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+
 
 /**
  * Le presentateur du composant PagesComponent.
@@ -76,6 +78,7 @@ public class PagesPresenter implements Initializable {
 	 */
 	@FXML
 	private BorderPane pagesContainer;
+
 	/**
 	 * fx:id=leftSideImageView
 	 */
@@ -106,6 +109,12 @@ public class PagesPresenter implements Initializable {
 	 */
 	@FXML
 	private AnchorPane rightAnchorPane;
+
+	/**
+	 * fx:id=editPane
+	 */
+	@FXML
+	private BorderPane editPane;
 
 	/**
 	 * Liste des images view de la page à gauche.
@@ -145,8 +154,8 @@ public class PagesPresenter implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
-		pagesContainer.topProperty().set(new EditionActionsView().getView());
-		pagesContainer.rightProperty().bind(pagesModel.paletteViewProperty());
+		editPane.topProperty().set(new EditionActionsView().getView());
+		editPane.rightProperty().bind(pagesModel.paletteViewProperty());
 		
 		leftImageViews = new ImageView[] {};
 		rightImageViews = new ImageView[] {};
@@ -226,6 +235,7 @@ public class PagesPresenter implements Initializable {
 				final boolean isAccepted = db.hasFiles()
 						&& (db.getFiles().get(0).getName().toLowerCase().endsWith(".png")
 								|| db.getFiles().get(0).getName().toLowerCase().endsWith(".jpeg")
+								|| db.getFiles().get(0).getName().toLowerCase().endsWith(".jpeg")
 								|| db.getFiles().get(0).getName().toLowerCase().endsWith(".jpg"));
 
 				if (isAccepted) {
@@ -300,9 +310,7 @@ public class PagesPresenter implements Initializable {
 
 	/**
 	 * Cette fonction permet d'actualiser les images d'une page.
-	 * 
-	 * @param isLeftView
-	 *            true s'il s'agit de la vue à gauche(page à gauche)
+	 *
 	 * @param pageNumber
 	 *            la page de l'album
 	 * @throws IOException
@@ -422,6 +430,10 @@ public class PagesPresenter implements Initializable {
 	 * @param event
 	 */
 	public void turnRight(ActionEvent event) {
+		if (pagesNumber==0 || ((activePageNumber%2==1)&&((activePageNumber + 1 == pagesNumber)||(activePageNumber == pagesNumber)))){
+			addPage(event);
+		}
+
 		if (activePageNumber + 2 <= pagesNumber) {
 			soundPlayer.playSound("page-flip");
 			activePageNumber = activePageNumber + 2;

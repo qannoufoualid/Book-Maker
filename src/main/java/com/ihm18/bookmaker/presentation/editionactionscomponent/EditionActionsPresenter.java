@@ -40,14 +40,6 @@ public class EditionActionsPresenter implements Initializable {
 	 */
 	@FXML
 	private Button brightnessButton;
-	/**
-	 * Bouton des bordures.
-	 */
-	@FXML
-	private Button borderButton;
-	
-    public void launch() {
-    }
 
     /**
      * Initialiser le composant.
@@ -55,10 +47,8 @@ public class EditionActionsPresenter implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
-		cadreButton.disableProperty().bind(pagesModel.imageClickedProperty());
-		brightnessButton.disableProperty().bind(pagesModel.imageClickedProperty());
-		borderButton.disableProperty().bind(pagesModel.imageClickedProperty());
-		
+		//cadreButton.disableProperty().bind(pagesModel.imageClickedProperty());
+		//brightnessButton.disableProperty().bind(pagesModel.imageClickedProperty());
 	}
 	
 	/**
