@@ -13,9 +13,6 @@
     <GridPane>
       <children>
         <BorderPane prefHeight="200.0" prefWidth="200.0">
-          <bottom>
-            <Label fx:id="leftPageNumberLabel" BorderPane.alignment="CENTER" />
-          </bottom>
           <right>
             <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
               <children>
@@ -25,18 +22,16 @@
                   </image>
                 </ImageView>
                 <AnchorPane fx:id="leftAnchorPane" />
+                <Label fx:id="leftPageNumberLabel" StackPane.alignment="BOTTOM_CENTER">
+                  <StackPane.margin>
+                    <Insets bottom="30.0" fx:id="x3" />
+                  </StackPane.margin>
+                </Label>
               </children>
             </StackPane>
           </right>
         </BorderPane>
         <BorderPane prefHeight="582.0" prefWidth="414.0" GridPane.columnIndex="1">
-          <bottom>
-            <Label fx:id="rightPageNumberLabel" BorderPane.alignment="CENTER">
-              <BorderPane.margin>
-                <Insets fx:id="x2" />
-              </BorderPane.margin>
-            </Label>
-          </bottom>
           <left>
             <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
               <children>
@@ -46,17 +41,21 @@
                   </image>
                 </ImageView>
                 <AnchorPane fx:id="rightAnchorPane" />
+                <Label fx:id="rightPageNumberLabel" StackPane.alignment="BOTTOM_CENTER" StackPane.margin="$x3" />
               </children>
             </StackPane>
           </left>
           <right>
-            <BorderPane fx:id="editPane" prefHeight="145.0" prefWidth="200.0" BorderPane.margin="$x2">
+            <BorderPane fx:id="editPane" prefHeight="145.0" prefWidth="200.0">
               <center>
                 <VBox fx:id="editBox" prefHeight="200.0" prefWidth="100.0" />
               </center>
               <padding>
                 <Insets left="10.0" top="10.0" />
               </padding>
+              <BorderPane.margin>
+                <Insets fx:id="x2" />
+              </BorderPane.margin>
             </BorderPane>
           </right>
         </BorderPane>
