@@ -50,7 +50,10 @@
             </StackPane>
           </left>
           <right>
-            <BorderPane fx:id="editPane" prefHeight="200.0" prefWidth="200.0" BorderPane.margin="$x2">
+            <BorderPane fx:id="editPane" prefHeight="145.0" prefWidth="200.0" BorderPane.margin="$x2">
+              <center>
+                <VBox fx:id="editBox" prefHeight="200.0" prefWidth="100.0" />
+              </center>
               <padding>
                 <Insets left="10.0" top="10.0" />
               </padding>

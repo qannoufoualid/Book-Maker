@@ -9,6 +9,7 @@ import java.util.ResourceBundle;
 import javax.inject.Inject;
 
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.scene.layout.Pane;
 import org.apache.commons.io.FileUtils;
 
 import com.ihm18.bookmaker.businessobject.Album;
@@ -155,7 +156,12 @@ public class PagesPresenter implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 
 		editPane.topProperty().set(new EditionActionsView().getView());
-		editPane.rightProperty().bind(pagesModel.paletteViewProperty());
+
+		pagesModel.setEditPane(editPane);
+		//editPane.leftProperty().bind(pagesModel.borderViewProperty());
+		//editPane.leftProperty().unbind();
+		//editPane.bottomProperty().bind(pagesModel.paletteViewProperty());
+
 		
 		leftImageViews = new ImageView[] {};
 		rightImageViews = new ImageView[] {};

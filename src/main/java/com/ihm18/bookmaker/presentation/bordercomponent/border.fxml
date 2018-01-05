@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="TOP_CENTER" disable="false" fillWidth="true" minHeight="21.0" minWidth="96.9998779296875" prefHeight="284.0" prefWidth="133.0" spacing="3.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.ihm18.bookmaker.presentation.bordercomponent.BorderPresenter">
+  <children>
+    <Separator prefWidth="200.0" />
+    <CheckBox alignment="CENTER" mnemonicParsing="false" prefWidth="133.0" text="Cadre" wrapText="false">
+      <VBox.margin>
+        <Insets />
+      </VBox.margin>
+    </CheckBox>
+    <Separator prefWidth="200.0" />
+    <Label text="Style" />
+    <ChoiceBox>
+      <items>
+        <FXCollections fx:factory="observableArrayList">
+          <String fx:value="Trait" />
+          <String fx:value="Double" />
+          <String fx:value="Pointillé" />
+        </FXCollections>
+      </items>
+    </ChoiceBox>
+    <Label text="Couleur" />
+    <ColorPicker />
+  </children>
+</VBox>

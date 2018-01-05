@@ -7,7 +7,7 @@
 
 <HBox fx:id="editionActionsContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.ihm18.bookmaker.presentation.editionactionscomponent.EditionActionsPresenter">
   <children>
-    <Button fx:id="cadreButton" disable="true" mnemonicParsing="false" text="Cadre" />
+    <Button fx:id="cadreButton" disable="true" mnemonicParsing="false" onAction="#displayBorder" text="Cadre" />
     <Button fx:id="brightnessButton" disable="true" mnemonicParsing="false" onAction="#displayBrightnessPalette" text="Luminosité" />
   </children>
 </HBox>
