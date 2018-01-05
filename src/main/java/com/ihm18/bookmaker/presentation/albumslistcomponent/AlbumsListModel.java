@@ -18,7 +18,7 @@ public class AlbumsListModel {
 
 	/**
 	 * getter de la properité albumsProperty
-	 * @return
+	 * @return albumsProperty
 	 */
 	public ListProperty<Album> albumsProperty() {
 		return albumsProperty;
@@ -26,7 +26,7 @@ public class AlbumsListModel {
 
 	/**
 	 * setter de la properité albumsProperty
-	 * @return
+	 * @param albumsProperty albumsProperty
 	 */
 	public void setAlbumsProperty(ListProperty<Album> albumsProperty) {
 		this.albumsProperty = albumsProperty;

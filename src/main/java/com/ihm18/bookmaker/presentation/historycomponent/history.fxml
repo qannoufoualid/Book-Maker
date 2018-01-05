@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+
+<AnchorPane maxWidth="-Infinity" prefHeight="28.0" prefWidth="55.0" styleClass="pages-component" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ihm18.bookmaker.presentation.historycomponent.HistoryPresenter">
+   <children>
+      <Button fx:id="goBackButton" disable="true" mnemonicParsing="false" onAction="#getPreviousMainView" text="Revenir en arrière" />
+   </children>
+</AnchorPane>

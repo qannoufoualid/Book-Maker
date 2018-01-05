@@ -2,17 +2,22 @@ package com.ihm18.bookmaker.presentation.centralcomponent;
 
 
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import javax.inject.Inject;
 
 import com.ihm18.bookmaker.businessobject.Album;
 import com.ihm18.bookmaker.presentation.albumslistcomponent.AlbumsListView;
+import com.ihm18.bookmaker.presentation.historycomponent.HistoryModel;
+import com.ihm18.bookmaker.presentation.historycomponent.HistoryView;
 import com.ihm18.bookmaker.presentation.welcomecomponent.WelcomeView;
 import com.ihm18.bookmaker.service.AlbumService;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -30,7 +35,7 @@ public class CentralPresenter implements Initializable {
 	
     @Inject
     private CentralModel centralModel ;
-    
+
    
     @FXML
     private AnchorPane leftContainer;
@@ -44,10 +49,11 @@ public class CentralPresenter implements Initializable {
 		leftContainer.getChildren().add(new AlbumsListView().getView());
 		
     	mainContainer.centerProperty().bind(centralModel.mainViewProperty());
+    	mainContainer.bottomProperty().bind(centralModel.bottomViewProperty());
     	mainViewTitleLabel.textProperty().bind(centralModel.mainViewTitleProperty());
         WelcomeView welcomeView = new WelcomeView();
         centralModel.setMainView(welcomeView.getView(), WelcomeView.TITLE);
-        
+        centralModel.setBottomView(new HistoryView().getView());
     }
 
     public void launch() {

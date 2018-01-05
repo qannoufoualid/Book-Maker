@@ -89,7 +89,7 @@ public class AlbumsListPresenter implements Initializable {
 	
 	/**
 	 * Permet d'afficher le detail de l'album.
-	 * @param event
+	 * @param event le MouseEvent
 	 */
 	public void displayAlbumDetail(MouseEvent event){
 		selectedAlbum = albumsListView.getSelectionModel().getSelectedItem();

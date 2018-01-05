@@ -1,5 +1,11 @@
 package com.ihm18.bookmaker.presentation.centralcomponent;
 
+import javax.inject.Inject;
+
+import com.ihm18.bookmaker.presentation.historycomponent.HistoryModel;
+import com.ihm18.bookmaker.presentation.historycomponent.HistoryPresenter;
+import com.ihm18.bookmaker.presentation.welcomecomponent.WelcomeView;
+
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.Node;
@@ -11,10 +17,16 @@ import javafx.scene.Node;
  */
 public class CentralModel {
 
+	@Inject 
+	private HistoryModel historyModel;
 	/**
 	 * La vue affichée dans le centre.
 	 */
     private final ObjectProperty<Node> mainView = new SimpleObjectProperty<Node>(this, "mainView", null);
+    /**
+	 * La vue affichée dans le bas.
+	 */
+    private final ObjectProperty<Node> bottomView = new SimpleObjectProperty<Node>(this, "bottomView", null);
     /**
      * Le titre de la vue affichée dans le centre.
      */
@@ -22,7 +34,7 @@ public class CentralModel {
     
     /**
      * Getter de la proprieté mainViewProperty
-     * @return
+     * @return mainViewProperty
      */
     public ObjectProperty<Node> mainViewProperty() {
         return mainView ;
@@ -30,7 +42,7 @@ public class CentralModel {
     
     /**
      * Getter de la proprieté mainViewTitleProperty
-     * @return
+     * @return mainViewTitleProperty
      */
     public ObjectProperty<String> mainViewTitleProperty() {
         return mainViewTitle ;
@@ -38,7 +50,7 @@ public class CentralModel {
     
     /**
     * Getter du titre de la mainView
-    * @return
+    * @return getMainViewTitle
     */
     public final String getMainViewTitle() {
         return mainViewTitle.get();
@@ -46,12 +58,29 @@ public class CentralModel {
     
     /**
      * Setter de la mainView avec son titre.
-     * @param mainView
-     * @param mainViewTitle
+     * @param mainView la mainView 
+     * @param mainViewTitle le titre
      */
     public final void setMainView(Node mainView, String mainViewTitle) {
         this.mainView.set(mainView);
-        this.mainViewTitle.set(mainViewTitle);
+        this.mainViewTitle.set("> "+mainViewTitle);
+        historyModel.add(mainView, mainViewTitle);
+    }
+    
+    /**
+     * Getter de la proprieté bottomViewProperty
+     * @return bottomViewProperty bottomViewProperty
+     */
+    public ObjectProperty<Node> bottomViewProperty() {
+        return bottomView ;
+    }
+    
+    /**
+     * Getter de la proprieté bottomViewProperty
+     * @return bottomViewProperty bottomViewProperty
+     */
+    public void setBottomView(Node bottomView) {
+        this.bottomViewProperty().set(bottomView);
     }
     
 }

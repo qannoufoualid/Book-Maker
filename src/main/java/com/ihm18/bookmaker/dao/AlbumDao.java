@@ -1,4 +1,4 @@
-package com.ihm18.bookmaker.presentation.dao;
+package com.ihm18.bookmaker.dao;
 
 import java.util.ArrayList;
 import java.util.List;

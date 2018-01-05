@@ -4,6 +4,11 @@ import java.io.File;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
 
+/**
+ * L'entité IHMImage
+ * @author qannoufoualid
+ *
+ */
 public class IHMImage {
 
 	

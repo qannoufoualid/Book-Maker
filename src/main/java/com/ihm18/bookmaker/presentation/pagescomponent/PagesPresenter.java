@@ -8,8 +8,6 @@ import java.util.ResourceBundle;
 
 import javax.inject.Inject;
 
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.scene.layout.Pane;
 import org.apache.commons.io.FileUtils;
 
 import com.ihm18.bookmaker.businessobject.Album;
@@ -37,7 +35,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-
 
 /**
  * Le presentateur du composant PagesComponent.
@@ -79,7 +76,6 @@ public class PagesPresenter implements Initializable {
 	 */
 	@FXML
 	private BorderPane pagesContainer;
-
 	/**
 	 * fx:id=leftSideImageView
 	 */
@@ -158,11 +154,7 @@ public class PagesPresenter implements Initializable {
 		editPane.topProperty().set(new EditionActionsView().getView());
 
 		pagesModel.setEditPane(editPane);
-		//editPane.leftProperty().bind(pagesModel.borderViewProperty());
-		//editPane.leftProperty().unbind();
-		//editPane.bottomProperty().bind(pagesModel.paletteViewProperty());
 
-		
 		leftImageViews = new ImageView[] {};
 		rightImageViews = new ImageView[] {};
 		album = albumDetailModel.getAlbum();
@@ -241,7 +233,6 @@ public class PagesPresenter implements Initializable {
 				final boolean isAccepted = db.hasFiles()
 						&& (db.getFiles().get(0).getName().toLowerCase().endsWith(".png")
 								|| db.getFiles().get(0).getName().toLowerCase().endsWith(".jpeg")
-								|| db.getFiles().get(0).getName().toLowerCase().endsWith(".jpeg")
 								|| db.getFiles().get(0).getName().toLowerCase().endsWith(".jpg"));
 
 				if (isAccepted) {
@@ -294,7 +285,14 @@ public class PagesPresenter implements Initializable {
 		titledImage.getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				System.out.println("image clicked");
+				imageClicked = true;
+				editionActionsModel.setImageView(titledImage.getImageView());
+				pagesModel.imageClickedProperty().setValue(false);
+			}
+		});
+		titledImage.getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
 				imageClicked = true;
 				editionActionsModel.setImageView(titledImage.getImageView());
 				pagesModel.imageClickedProperty().setValue(false);
@@ -316,6 +314,7 @@ public class PagesPresenter implements Initializable {
 
 	/**
 	 * Cette fonction permet d'actualiser les images d'une page.
+	 * 
 	 *
 	 * @param pageNumber
 	 *            la page de l'album

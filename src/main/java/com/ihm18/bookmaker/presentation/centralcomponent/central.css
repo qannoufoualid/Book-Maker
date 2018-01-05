@@ -2,3 +2,10 @@
  .central-component{
 	-fx-border-color: red;
 }
+
+.transaprent-panel{
+	-fx-border-color: transparent;
+}
+ #mainViewTitleLabel{
+	 -fx-font: 20px Avenir;
+}
