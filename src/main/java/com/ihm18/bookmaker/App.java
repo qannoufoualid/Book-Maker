@@ -16,9 +16,13 @@ import javafx.stage.Stage;
 /**
  *
  * @author oualidqannouf
+ * Cette class est le point de depart de l'application
  */
 public class App extends Application {
 
+	/**
+	 * Le point d'entrée de toute les applicatons JavaFx
+	 */
     @Override
     public void start(Stage stage) throws Exception {
     	
@@ -48,6 +52,9 @@ public class App extends Application {
         stage.show();
     }
 
+    /**
+     * Method qui s'execute après la fin de l'application.
+     */
     @Override
     public void stop() throws Exception {
         Injector.forgetAll();

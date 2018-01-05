@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+
+<HBox fx:id="editionActionsContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ihm18.bookmaker.presentation.editionactionscomponent.EditionActionsPresenter">
+   <children>
+   
+   	<Button fx:id="cadreButton" disable="true" mnemonicParsing="false" text="Cadre" />
+   	<Button fx:id="brightnessButton"  disable="true" mnemonicParsing="false" onAction="#displayBrightnessPalette" text="Luminosité" />
+   	<Button fx:id="borderButton"  disable="true" mnemonicParsing="false" text="Bordure" />
+   </children>
+</HBox>

@@ -1,0 +1,15 @@
+com.ihm18.bookmaker
+com.ihm18.bookmaker.businessobject
+com.ihm18.bookmaker.dao
+com.ihm18.bookmaker.presentation.albumdetailcomponent
+com.ihm18.bookmaker.presentation.albumformcomponent
+com.ihm18.bookmaker.presentation.albumslistcomponent
+com.ihm18.bookmaker.presentation.brightnesspalettecomponent
+com.ihm18.bookmaker.presentation.centralcomponent
+com.ihm18.bookmaker.presentation.customcontrols
+com.ihm18.bookmaker.presentation.editionactionscomponent
+com.ihm18.bookmaker.presentation.emptycomponent
+com.ihm18.bookmaker.presentation.pagescomponent
+com.ihm18.bookmaker.presentation.utility
+com.ihm18.bookmaker.presentation.welcomecomponent
+com.ihm18.bookmaker.service

@@ -1,47 +1,87 @@
 package com.ihm18.bookmaker.presentation.albumdetailcomponent;
 
-import java.io.File;
-import java.net.URL;
-
 import com.ihm18.bookmaker.businessobject.Album;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
+/**
+ * Modéle du composant responsable sur l'affichage du detail d'un album.
+ * @author qannoufoualid
+ *
+ */
 public class AlbumDetailModel {
 
+	/**
+	 * proprieté du nom de l'album.
+	 */
     private final ObjectProperty<String> albumName = new SimpleObjectProperty<String>(this, "albumName", null);
+    /**
+     * Proprieté de la description de l'album.
+     */
     private final ObjectProperty<String> albumDescription = new SimpleObjectProperty<String>(this, "albumDescription", null);
+    /**
+     * L'album à affiché.
+     */
     private Album album;
     
+    /**
+     * getter de la proprieté albumNameProperty
+     * @return
+     */
     public ObjectProperty<String> albumNameProperty() {
         return albumName ;
     }
-    
+    /**
+     * getter du nom de l'album
+     * @return
+     */
     public final String albumName() {
         return albumName.get();
     }
-    
+    /**
+     * setter du nom de l'album.
+     * @param albumName
+     */
     public final void setAlbumName(String albumName) {
         this.albumName.set(albumName);
     }
     
+    /**
+     * getter de la proprieté albumDescriptionProperty
+     * @return
+     */
     public ObjectProperty<String> albumDescriptionProperty() {
         return albumDescription ;
     }
-    
+    /**
+     * getter de la description de l'album.
+     * @return
+     */
     public final String getAlbumDescription() {
         return albumDescription.get();
     }
     
+    /**
+     * setter de la description de l'album.
+     * @param albumDescription
+     */
     public final void setAlbumDescription(String albumDescription) {
         this.albumDescription.set(albumDescription);
     }
 
+    /**
+     * getter de l'album.
+     * @return
+     */
 	public Album getAlbum() {
 		return album;
 	}
-
+	
+	/**
+	 * setter de l'album.
+	 * @param album
+	 */
 	public void setAlbum(Album album) {
 		albumName.set(album.getName());
 		albumDescription.set(album.getDescription());

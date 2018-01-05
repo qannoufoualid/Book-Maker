@@ -26,42 +26,74 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 
+
 /**
+ * presentateur du composant responsable sur l'affichage du detail d'un album.
+ * @author qannoufoualid
  *
- * @author oualidqannouf
  */
 public class AlbumDetailPresenter implements Initializable {
 
+	/**
+	 * fx:id='albumNameTextField' champ de texte de nom de l'album
+	 */
 	@FXML
 	private TextField albumNameTextField;
+	/**
+	 * fx:id=AlbumDescriptionTextArea  texte area de la description de l'album
+	 */
 	@FXML
 	private TextArea AlbumDescriptionTextArea;
+	/**
+	 * fx:id=albumCreationDateTextField champ de texte de la date de création de l'album
+	 */
 	@FXML
 	private TextField albumCreationDateTextField;
 	
-	
+	/**
+	 * Modéle de detail de l'album.
+	 */
 	@Inject
 	private AlbumDetailModel albumDetailModel;
 	
+	/**
+	 * Modéle du composant central.
+	 */
 	@Inject
 	private CentralModel centralModel;
 	
-	@Inject
-	private AlbumService albumService;
-	
-	@Inject
-    private String imagesDirectory;
-	
-	@Inject
-	private Utility utility;
-	
+	/**
+	 * Modéle du composant affichant la liste des albums.
+	 */
 	@Inject
 	private AlbumsListModel albumsListModel;
 	
+	/**
+	 * Le service des albums.
+	 */
+	@Inject
+	private AlbumService albumService;
+	
+	/**
+	 * Le réportoire où mettre les images.
+	 */
+	@Inject
+    private String imagesDirectory;
+	
+	/**
+	 * La classe utilitaire.
+	 */
+	@Inject
+	private Utility utility;
+	
+
     public void launch() {
     	
     }
 
+    /**
+     * Permet d'initialiser le composant.
+     */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
@@ -70,6 +102,11 @@ public class AlbumDetailPresenter implements Initializable {
 		albumCreationDateTextField.setText(utility.convertToFrenshDate(albumDetailModel.getAlbum().getDateCreation()));
 	}	
 	
+	/**
+	 * Permet d'ajouter une liste des images.
+	 * @param event
+	 * @throws IOException
+	 */
 	public void addImages(ActionEvent event) throws IOException{
 		FileChooser chooser = new FileChooser();
 	    chooser.setTitle("Open File");
@@ -87,15 +124,29 @@ public class AlbumDetailPresenter implements Initializable {
 		}
 	}
 	
+	/**
+	 * Permet d'afficher les pages d'un album.
+	 * @param event
+	 */
 	public void displayPages(ActionEvent event){
 		PagesView pagesView = new PagesView();
 		centralModel.setMainView(pagesView.getView(), utility.replace(PagesView.TITLE, "albumName", albumDetailModel.getAlbum().getName()));
 	}
 	
+	/**
+	 * Permet d'activer le bouton des l'édition de l'album.
+	 * @param observable
+	 * @param oldValue
+	 * @param newValue
+	 */
 	public void activateApplyChangesButton(ObservableValue<? extends String> observable,
 			String oldValue, String newValue) {
 	}
 	
+	/**
+	 * Appliquer les changements sur l'album.
+	 * @param event
+	 */
 	public void applyChanges(ActionEvent event){
 		
 		albumService.edit(albumDetailModel.getAlbum().getId(), albumNameTextField.getText(), AlbumDescriptionTextArea.getText());
@@ -105,6 +156,11 @@ public class AlbumDetailPresenter implements Initializable {
 		
 	}
 	
+	/**
+	 * Retrouver le dernier id des images de l'album.
+	 * @param albumId
+	 * @return
+	 */
 	public long findLastImageIdOfAlbum(Long albumId){
 		return albumService.findLastImageIdOfAlbum(imagesDirectory, albumId);
 	}

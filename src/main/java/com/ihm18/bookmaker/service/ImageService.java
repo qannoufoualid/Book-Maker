@@ -1,6 +1,5 @@
 package com.ihm18.bookmaker.service;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +8,7 @@ import com.ihm18.bookmaker.businessobject.IHMImage;
 /**
  * 
  * @author oualidqannouf
- *
+ * le service des images.
  */
 public class ImageService {
 
