@@ -326,7 +326,7 @@ public class PagesPresenter implements Initializable {
 				clickedImage = titledImage;
 				isImageClicked = true;
 				selectedIHMImage = image;
-				editionActionsModel.setImageView(titledImage.getImageView());
+				editionActionsModel.setTitledImage(titledImage);
 				pagesModel.imageClickedProperty().setValue(false);
 			}
 		});

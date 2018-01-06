@@ -1,6 +1,6 @@
 package com.ihm18.bookmaker.presentation.editionactionscomponent;
 
-import javafx.scene.image.ImageView;
+import com.ihm18.bookmaker.presentation.customcontrols.TitledImage;
 
 /**
  * modéle du composant des éditions des images.
@@ -12,22 +12,18 @@ public class EditionActionsModel {
 	/**
 	 * L'imageView à éditer
 	 */
-	private  ImageView imageView;
+	private  TitledImage titledImage;
 
-	/**
-	 * getter de l'imageView
-	 * @return
-	 */
-	public ImageView getImageView() {
-		return imageView;
+	public TitledImage getTitledImage() {
+		return titledImage;
 	}
 
-	/**
-	 * Setter de l'imageView
-	 * @param imageView
-	 */
-	public void setImageView(ImageView imageView) {
-		this.imageView = imageView;
+	public void setTitledImage(TitledImage titledImage) {
+		this.titledImage = titledImage;
 	}
+
+
+	
+	
 	
 }
