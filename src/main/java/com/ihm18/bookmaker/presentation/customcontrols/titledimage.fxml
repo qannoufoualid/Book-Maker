@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <!-- ### # #%L # book maker # %% # Copyright (C) 2013 - 2014 QANNOUF OUALID 
 	# %% # Licensed under the Apache License, Version 2.0 (the "License"); # 
 	you may not use this file except in compliance with the License. # You may 
@@ -8,6 +9,7 @@
 	WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. # See the 
 	License for the specific language governing permissions and # limitations 
 	under the License. # #L% ### -->
+
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import java.lang.*?>
@@ -15,15 +17,16 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.Button?>
 
-<fx:root type="javafx.scene.layout.AnchorPane" xmlns:fx="http://javafx.com/fxml">
+<fx:root type="javafx.scene.layout.AnchorPane" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
 	<children>
 		<ImageView fx:id="imageView">
 		</ImageView>
 	</children>
 	<children>
 		<HBox>
-			<TextField fx:id="textField" />
-			<Button text="valider" />
+   <children>
+   			<TextField fx:id="textField" prefHeight="28.0" prefWidth="200.0" styleClass="best" />
+   </children>
 		</HBox>
 	</children>
 

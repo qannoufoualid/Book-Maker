@@ -9,23 +9,22 @@
 
 <BorderPane fx:id="pagesContainer" maxHeight="-Infinity"
 	maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-	styleClass="box" prefHeight="900" prefWidth="1015"
-	xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+	prefHeight="900" prefWidth="1015" xmlns="http://javafx.com/javafx/8"
+	xmlns:fx="http://javafx.com/fxml/1"
 	fx:controller="com.ihm18.bookmaker.presentation.pagescomponent.PagesPresenter">
 	<center>
-		<GridPane styleClass="box">
+		<GridPane>
 
 			<children>
-				<BorderPane 
-					styleClass="box">
+				<BorderPane>
 					<bottom>
 						<Label fx:id="leftPageNumberLabel" BorderPane.alignment="CENTER" />
 					</bottom>
 					<right>
-						<StackPane 
-							BorderPane.alignment="CENTER">
+						<StackPane BorderPane.alignment="CENTER">
 							<children>
-								<ImageView fx:id="leftSideImageView" pickOnBounds="true" preserveRatio="true">
+								<ImageView fx:id="leftSideImageView" pickOnBounds="true"
+									preserveRatio="true">
 									<image>
 										<Image url="images/left-side.png" />
 									</image>
@@ -36,16 +35,15 @@
 						</StackPane>
 					</right>
 				</BorderPane>
-				<BorderPane
-					GridPane.columnIndex="1" styleClass="box">
+				<BorderPane GridPane.columnIndex="1">
 					<bottom>
 						<Label fx:id="rightPageNumberLabel" BorderPane.alignment="CENTER" />
 					</bottom>
 					<left>
-						<StackPane
-							BorderPane.alignment="CENTER">
+						<StackPane BorderPane.alignment="CENTER">
 							<children>
-								<ImageView fx:id="rightSideImageView" pickOnBounds="true" preserveRatio="true">
+								<ImageView fx:id="rightSideImageView" pickOnBounds="true"
+									preserveRatio="true">
 									<image>
 										<Image url="images/right-side.png" />
 									</image>
@@ -56,14 +54,17 @@
 						</StackPane>
 					</left>
 				</BorderPane>
-				<Button mnemonicParsing="false" onAction="#addPage" text="Créer page"
-					GridPane.columnIndex="1" GridPane.halignment="RIGHT"
-					GridPane.rowIndex="1" />
-				<Button mnemonicParsing="false" onAction="#turnLeft" text="&lt;"
-					GridPane.columnIndex="1" GridPane.rowIndex="1" />
-				<Button mnemonicParsing="false" onAction="#turnRight" text="&gt;"
-					GridPane.columnIndex="1" GridPane.halignment="CENTER"
-					GridPane.rowIndex="1" />
+				<Button styleClass="btn-success" mnemonicParsing="false"
+					onAction="#addPage" text="Créer page" GridPane.columnIndex="1"
+					GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+				<HBox GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.halignment="CENTER">
+					<Button styleClass="btn-primary" mnemonicParsing="false"
+						onAction="#turnLeft" text="&lt;" />
+					<Button styleClass="btn-primary" mnemonicParsing="false"
+						onAction="#turnRight" text="&gt;" />
+				</HBox>
+
+
 			</children>
 		</GridPane>
 	</center>

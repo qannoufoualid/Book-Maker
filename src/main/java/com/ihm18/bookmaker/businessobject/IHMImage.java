@@ -39,6 +39,18 @@ public class IHMImage {
 	private Page page;
 	
 	/**
+	 * coordonnée sur l'axe X
+	 */
+	private double x;
+	/**
+	 * coordonnée sur l'axe Y
+	 */
+	private double y;
+	
+	private double width;
+	private double height;
+	
+	/**
 	 * getter de fichier de l'image
 	 * @return
 	 */
@@ -142,15 +154,68 @@ public class IHMImage {
 		this.dateCreation = dateCreation;
 	}
 
+	
+	
+	/**
+	 * getter de x
+	 * @return x x
+	 */
+	public double getX() {
+		return x;
+	}
+
+	/**
+	 * setter de x
+	 * @param x
+	 */
+	public void setX(double x) {
+		this.x = x;
+	}
+
+	/**
+	 * getter de y
+	 * @return y
+	 */
+	public double getY() {
+		return y;
+	}
+
+	/**
+	 * setter de y
+	 * @param y y
+	 */
+	public void setY(double y) {
+		this.y = y;
+	}
+
+	
+	
+	public double getWidth() {
+		return width;
+	}
+
+	public void setWidth(double width) {
+		this.width = width;
+	}
+
+	public double getHeight() {
+		return height;
+	}
+
+	public void setHeight(double height) {
+		this.height = height;
+	}
+
 	/**
 	 * pour afficher l'image dans la console.
 	 */
 	@Override
 	public String toString() {
-		return "Image  [id=" + id + ", title=" + title + ", description=" + description + ", dateCreation=" + dateCreation
-				+ "]";
+		return "IHMImage [id=" + id + ", title=" + title + ", description=" + description + ", dateCreation="
+				+ dateCreation + ", file=" + file + ", page=" + page + ", x=" + x + ", y=" + y + "]";
 	}
-	
+
+
 	
 	
 	

@@ -5,6 +5,8 @@ import java.io.IOException;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.StringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -77,7 +79,8 @@ public class TitledImage extends AnchorPane {
 	 * hauteur initiale de l'imageView.
 	 */
 	private double initialImageViewHeight;
-
+	
+	
 	/**
 	 * Constructeur sans des paramétres.
 	 */
@@ -104,7 +107,7 @@ public class TitledImage extends AnchorPane {
 		} catch (IOException exception) {
 			throw new RuntimeException(exception);
 		}
-
+		
 		// EventListener for MousePressed
 		imageView.onMousePressedProperty().set(new EventHandler<MouseEvent>() {
 
@@ -128,9 +131,7 @@ public class TitledImage extends AnchorPane {
 				if (getFitHeight() > relativeMouseY && getFitHeight() - DIFF_RESIZE_CONSTANT < relativeMouseY) {
 					widenToBottom = true;
 				}
-
 			}
-
 		});
 
 		// Event Listener for MouseDragged
@@ -139,6 +140,9 @@ public class TitledImage extends AnchorPane {
 			@Override
 			public void handle(MouseEvent event) {
 
+				
+				textField.setPrefWidth(imageView.getFitWidth());
+				
 				// Get the exact moved X and Y
 				mouvedx += event.getSceneX() - mousex;
 				mouvedy += event.getSceneY() - mousey;
@@ -163,10 +167,6 @@ public class TitledImage extends AnchorPane {
 					mousey = event.getSceneY();
 
 				} else {
-					// System.out.println(initialImageViewHeight+",
-					// "+initialImageViewWidth);
-					System.out.println(mouvedx + "," + mouvedy);
-					// System.out.println(initialImageViewWidth+x);
 					double newWidth = initialImageViewWidth + dx;
 					double newHeight = initialImageViewHeight + dy;
 
@@ -182,6 +182,7 @@ public class TitledImage extends AnchorPane {
 
 			@Override
 			public void handle(MouseEvent event) {
+				textField.setPrefWidth(imageView.getFitWidth());
 				if (widenToRight || widenToBottom) {
 					initialImageViewWidth = imageView.getFitWidth();
 					initialImageViewHeight = imageView.getFitHeight();
@@ -271,6 +272,7 @@ public class TitledImage extends AnchorPane {
 	}
 
 	public void setFitHeight(double height) {
+		initialImageViewHeight = height;
 		fitHeightProperty().set(height);
 	}
 
@@ -287,6 +289,8 @@ public class TitledImage extends AnchorPane {
 	}
 
 	public void setFitWidth(double width) {
+		initialImageViewWidth = width;
+		textField.setPrefWidth(width);
 		fitWidthProperty().set(width);
 	}
 
@@ -301,5 +305,17 @@ public class TitledImage extends AnchorPane {
 	public ImageView getImageView() {
 		return imageView;
 	}
+
+	public TextField getTextField() {
+		return textField;
+	}
+
+	public void setTextField(TextField textField) {
+		this.textField = textField;
+	}
+	
+	
+	
+	
 
 }
