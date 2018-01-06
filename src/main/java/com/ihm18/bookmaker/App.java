@@ -30,13 +30,8 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws Exception {
     	
-    	Screen screen = Screen.getPrimary();
-    	Rectangle2D bounds = screen.getVisualBounds();
-
-    	stage.setX(bounds.getMinX());
-    	stage.setY(bounds.getMinY());
-    	stage.setWidth(bounds.getWidth());
-    	stage.setHeight(bounds.getHeight());
+    	stage.setWidth(1450);
+    	stage.setHeight(1050);
     	
         Map<Object, Object> customProperties = new HashMap<>();
         customProperties.put("imagesDirectory", "images/");

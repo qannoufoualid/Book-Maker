@@ -16,6 +16,8 @@ import com.ihm18.bookmaker.businessobject.Album;
 import com.ihm18.bookmaker.businessobject.IHMImage;
 import com.ihm18.bookmaker.businessobject.Page;
 import com.ihm18.bookmaker.presentation.albumdetailcomponent.AlbumDetailModel;
+import com.ihm18.bookmaker.presentation.brightnesspalettecomponent.BrightnessModel;
+import com.ihm18.bookmaker.presentation.centralcomponent.CentralModel;
 import com.ihm18.bookmaker.presentation.customcontrols.TitledImage;
 import com.ihm18.bookmaker.presentation.editionactionscomponent.EditionActionsModel;
 import com.ihm18.bookmaker.presentation.editionactionscomponent.EditionActionsView;
@@ -110,6 +112,12 @@ public class PagesPresenter implements Initializable {
 	private AnchorPane rightAnchorPane;
 
 	/**
+	 * fx:id=editPane
+	 */
+	@FXML
+	private BorderPane editPane;
+
+	/**
 	 * Liste des images view de la page à gauche.
 	 */
 	private List<TitledImage> leftImageViews;
@@ -162,12 +170,10 @@ public class PagesPresenter implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
-		Node editionActionsView = new EditionActionsView().getView();
-		
-		pagesContainer.topProperty().set(editionActionsView);
-		
-		pagesContainer.rightProperty().bind(pagesModel.paletteViewProperty());
-		
+		editPane.topProperty().set(new EditionActionsView().getView());
+		//pagesContainer.rightProperty().bind(pagesModel.paletteViewProperty());
+		pagesModel.setEditPane(editPane);
+
 		leftImageViews = new ArrayList<>();
 		rightImageViews = new ArrayList<>();
 		album = albumDetailModel.getAlbum();
@@ -332,6 +338,7 @@ public class PagesPresenter implements Initializable {
 			clickedImage.getTextField().getStyleClass().add("bad");
 		});
 		return titledImage;
+		
 	}
 
 	/**
@@ -348,8 +355,7 @@ public class PagesPresenter implements Initializable {
 	/**
 	 * Cette fonction permet d'actualiser les images d'une page.
 	 * 
-	 * @param isLeftView
-	 *            true s'il s'agit de la vue à gauche(page à gauche)
+	 *
 	 * @param pageNumber
 	 *            la page de l'album
 	 * @throws IOException
@@ -482,6 +488,10 @@ public class PagesPresenter implements Initializable {
 	 * @param event
 	 */
 	public void turnRight(ActionEvent event) {
+		if (pagesNumber==0 || ((activePageNumber%2==1)&&((activePageNumber + 1 == pagesNumber)||(activePageNumber == pagesNumber)))){
+			addPage(event);
+		}
+
 		if (activePageNumber + 2 <= pagesNumber) {
 			saveImagesCoordinations();
 			soundPlayer.playSound("page-flip");

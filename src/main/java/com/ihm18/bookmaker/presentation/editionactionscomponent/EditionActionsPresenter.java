@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 
 import javax.inject.Inject;
 
+import com.ihm18.bookmaker.presentation.bordercomponent.BorderView;
 import org.apache.commons.io.FileUtils;
 
 import javafx.event.ActionEvent;
@@ -40,14 +41,8 @@ public class EditionActionsPresenter implements Initializable {
 	 */
 	@FXML
 	private Button brightnessButton;
-	/**
-	 * Bouton des bordures.
-	 */
-	@FXML
-	private Button borderButton;
-	
-    public void launch() {
-    }
+
+
 
     /**
      * Initialiser le composant.
@@ -57,8 +52,6 @@ public class EditionActionsPresenter implements Initializable {
 		
 		cadreButton.disableProperty().bind(pagesModel.imageClickedProperty());
 		brightnessButton.disableProperty().bind(pagesModel.imageClickedProperty());
-		borderButton.disableProperty().bind(pagesModel.imageClickedProperty());
-		
 	}
 	
 	/**
@@ -66,7 +59,22 @@ public class EditionActionsPresenter implements Initializable {
 	 * @param event
 	 */
 	public void displayBrightnessPalette(ActionEvent event){
+		pagesModel.getEditPane().bottomProperty().unbind();
+		pagesModel.borderViewProperty().set(null);
 		BrightnessPaletteView brightnessPaletteView = new BrightnessPaletteView();
 		pagesModel.paletteViewProperty().set(brightnessPaletteView.getView());
+		pagesModel.getEditPane().leftProperty().bind(pagesModel.paletteViewProperty());
+	}
+
+	/**
+	 * Affiche le menu des cadres
+	 * @param event
+	 */
+	public void displayBorder(ActionEvent event){
+		pagesModel.getEditPane().bottomProperty().unbind();
+		pagesModel.paletteViewProperty().set(null);
+		BorderView borderView = new BorderView();
+		pagesModel.borderViewProperty().set(borderView.getView());
+		pagesModel.getEditPane().leftProperty().bind(pagesModel.borderViewProperty());
 	}
 }

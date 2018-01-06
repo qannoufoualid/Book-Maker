@@ -6,7 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<BorderPane maxWidth="-Infinity" prefHeight="700.0"
+<BorderPane maxWidth="1200" prefHeight="700.0" minHeight="950"
 	prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
 	fx:controller="com.ihm18.bookmaker.presentation.centralcomponent.CentralPresenter">
 	<top>
