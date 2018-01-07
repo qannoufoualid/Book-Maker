@@ -75,9 +75,8 @@ public class PagesPresenter implements Initializable {
 	private SoundPlayer soundPlayer;
 
 	/**
-	 * une reference sur le borderModel
+	 * un borderModel pour changer les paramètre d'une image
 	 */
-	@Inject
 	private BorderModel borderModel;
 
 	/**

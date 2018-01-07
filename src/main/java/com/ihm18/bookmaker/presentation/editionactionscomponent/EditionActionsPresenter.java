@@ -27,6 +27,13 @@ import com.ihm18.bookmaker.presentation.pagescomponent.PagesModel;;
 public class EditionActionsPresenter implements Initializable {
 
 	/**
+	 * Le modéle du composant des actions des éditions des images.
+	 */
+	@Inject
+	private EditionActionsModel editionActionsModel;
+
+
+	/**
 	 * Le modéle
 	 */
 	@Inject
