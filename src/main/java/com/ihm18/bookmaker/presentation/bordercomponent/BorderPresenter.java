@@ -78,16 +78,16 @@ public class BorderPresenter implements Initializable {
 
 		    editionActionsModel.getTitledImage().setBorderStyle("-fx-border-style: solid; ");
             editionActionsModel.getTitledImage().setBorderSize("-fx-border-width: 5px; ");
-            editionActionsModel.getTitledImage().setBorderColor("-fx-border-color: green; ");
+            editionActionsModel.getTitledImage().setBorderColor("-fx-border-color: black; ");
+            colorPicker.setDisable(false);
+            selectStyle.setDisable(false);
             editionActionsModel.getTitledImage().drawBorder();
 
-			//StackPane pane = new StackPane(editionActionsModel.getImageView());
-			//pane.setStyle("-fx-border-color: red; -fx-border-width:4; -fx-border-style:solid");
-
-			//PseudoClass imageViewBorder = PseudoClass.getPseudoClass("border");
 
 		}
 		else{
+			colorPicker.setDisable(true);
+			selectStyle.setDisable(true);
 			editionActionsModel.getTitledImage().clearBorder();
 		}
 	}

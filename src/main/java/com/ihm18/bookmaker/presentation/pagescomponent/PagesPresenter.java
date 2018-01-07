@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 
 import javax.inject.Inject;
 
+import javafx.scene.input.*;
 import org.apache.commons.io.FileUtils;
 
 import com.ihm18.bookmaker.businessobject.Album;
@@ -33,10 +34,6 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.DragEvent;
-import javafx.scene.input.Dragboard;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 
@@ -183,26 +180,49 @@ public class PagesPresenter implements Initializable {
 
 		initDragEvents();
 
-		leftAnchorPane.setOnMouseClicked(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				if(!isImageClicked)
-					pagesModel.imageClickedProperty().setValue(true);
-				if(titledImageTextChanged){
-					if(!clickedImage.getText().equals(selectedIHMImage.getTitle())){
-						selectedIHMImage.setTitle(clickedImage.getText());
-						clickedImage.getTextField().getStyleClass().removeAll("bad","med","good","best");
-						clickedImage.getTextField().getStyleClass().add("best");
-						utility.showInformationAlert(AlertType.INFORMATION, "Titre modifié avec succés");
-					}
-					selectedIHMImage=null;
-					clickedImage = null;
-				}
-				isImageClicked = false;
-			}
-		});
-
 	}
+
+	/**
+	 * Permet de gérer le clic souris sur l'une ou l'autre des pages (validation des titres)
+	 * @param event
+	 */
+	public void cliqueMouse(MouseEvent event) {
+		if(!isImageClicked)
+			pagesModel.imageClickedProperty().setValue(true);
+		if(titledImageTextChanged){
+			changeTitre();
+		}
+		isImageClicked = false;
+	}
+
+	/**
+	 * Permet de valider un titre avec la touche entrée
+	 * @param event
+	 */
+	public void enterVal(KeyEvent event){
+		if(event.getCode() == KeyCode.ENTER && titledImageTextChanged){
+			changeTitre();
+		}
+	}
+
+	/**
+	 * Valider changement de titre
+	 */
+	public void changeTitre(){
+		if(!clickedImage.getText().equals(selectedIHMImage.getTitle())){
+			selectedIHMImage.setTitle(clickedImage.getText());
+			clickedImage.getTextField().getStyleClass().removeAll("bad","med","good","best");
+			clickedImage.getTextField().getStyleClass().add("best");
+			utility.showInformationAlert(AlertType.INFORMATION, "Titre modifié avec succés");
+		}
+		selectedIHMImage = null;
+		clickedImage = null;
+		titledImageTextChanged = false;
+	}
+
+
+
+
 
 	/**
 	 * Inititialiser les evenements du drag.
@@ -316,7 +336,6 @@ public class PagesPresenter implements Initializable {
 			img = new Image(FileUtils.openInputStream(image.getFile()));
 			titledImage.setImage(img);
 			titledImage.setText(image.getTitle());
-			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

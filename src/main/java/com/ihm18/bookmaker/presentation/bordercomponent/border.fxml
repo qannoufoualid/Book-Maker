@@ -18,7 +18,7 @@
     </CheckBox>
     <Separator prefWidth="200.0" />
     <Label text="Style" />
-    <ChoiceBox fx:id="selectStyle">
+    <ChoiceBox fx:id="selectStyle" disable="true">
       <items>
         <FXCollections fx:factory="observableArrayList">
           <String fx:value="Trait" />
@@ -28,6 +28,6 @@
       </items>
     </ChoiceBox>
     <Label text="Couleur" />
-    <ColorPicker fx:id="colorPicker" onAction="#changeColorBorder" />
+    <ColorPicker fx:id="colorPicker" disable="true" onAction="#changeColorBorder" promptText="" />
   </children>
 </VBox>

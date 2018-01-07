@@ -77,4 +77,13 @@ public class EditionActionsPresenter implements Initializable {
 		pagesModel.borderViewProperty().set(borderView.getView());
 		pagesModel.getEditPane().leftProperty().bind(pagesModel.borderViewProperty());
 	}
+
+	/**
+	 * Ferme les sous menus
+	 */
+	public void displayMenu(){
+		pagesModel.getEditPane().bottomProperty().unbind();
+		pagesModel.borderViewProperty().set(null);
+		pagesModel.paletteViewProperty().set(null);
+	}
 }

@@ -355,7 +355,6 @@ public class TitledImage extends AnchorPane {
 	}
 
 	public void drawBorder(){
-		//this.parent.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 		this.getStyleClass().clear();
 		this.setStyle(this.borderStyle + this.borderSize + this.borderColor);
 	}
