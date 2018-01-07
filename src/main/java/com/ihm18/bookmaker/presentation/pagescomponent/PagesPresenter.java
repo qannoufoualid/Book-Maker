@@ -212,7 +212,6 @@ public class PagesPresenter implements Initializable {
 		if (!isImageClicked){
 			editionActionsModel.setTitledImage(null);
 			pagesModel.imageClickedProperty().setValue(true);
-			
 		}
 			
 		if (titledImageTextChanged) {

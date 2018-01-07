@@ -19,6 +19,7 @@ import javafx.scene.layout.GridPane;
 
 import javax.inject.Inject;
 
+import com.ihm18.bookmaker.presentation.customcontrols.TitledImage;
 import com.ihm18.bookmaker.presentation.editionactionscomponent.EditionActionsModel;
 import com.ihm18.bookmaker.presentation.pagescomponent.PagesModel;
 
@@ -84,13 +85,24 @@ public class BrightnessPalettePresenter implements Initializable {
                 }
             });
 		
-		pagesModel.imageClickedProperty().addListener(new ChangeListener<Boolean>() {
+		editionActionsModel.titledImageProperty().addListener(new ChangeListener<TitledImage>() {
 
 			@Override
-			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-				brightnessSlider.setValue(1);
-				saturationSlider.setValue(1);
-				sepiaSlider.setValue(1);
+			public void changed(ObservableValue<? extends TitledImage> observable, TitledImage oldValue, TitledImage newValue) {
+				if(newValue == null){
+					brightnessSlider.setValue(1);
+					saturationSlider.setValue(0);
+					sepiaSlider.setValue(0);
+				}else{
+					ColorAdjust c = (ColorAdjust) editionActionsModel.getTitledImage().getImageView().getEffect();
+					if (c != null) {
+						brightnessSlider.setValue(c.getBrightness()+1);
+						saturationSlider.setValue(c.getSaturation());
+						SepiaTone sepiaTone = (SepiaTone) c.getInput();
+						if(sepiaTone!=null)
+							sepiaSlider.setValue(sepiaTone.getLevel());
+					}
+				}
 			}
 		});
 	}
@@ -99,6 +111,8 @@ public class BrightnessPalettePresenter implements Initializable {
 	 * Changer les effets de l'image.
 	 */
 	private void setImageEffect() {
+		
+		
 		ColorAdjust colorAdjust = new ColorAdjust();
         colorAdjust.setBrightness((1 - brightnessSlider.valueProperty().get()) * -1);
         colorAdjust.setSaturation(saturationSlider.valueProperty().get());

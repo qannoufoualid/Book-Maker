@@ -9,8 +9,8 @@
     <Label text="Luminosité" />
     <Slider fx:id="brightnessSlider" blockIncrement="0.1" majorTickUnit="0.25" max="2.0" maxWidth="1.7976931348623157E308" minorTickCount="0" showTickMarks="true" value="1.0" />
     <Label text="Saturation" />
-    <Slider fx:id="saturationSlider" blockIncrement="0.1" majorTickUnit="0.25" max="2.0" maxWidth="1.7976931348623157E308" minorTickCount="0" showTickMarks="true" value="1.0" />
+    <Slider fx:id="saturationSlider" blockIncrement="0.1" majorTickUnit="0.25" max="2.0" maxWidth="1.7976931348623157E308" minorTickCount="0" showTickMarks="true" value="0" />
     <Label text="Sepia" />
-    <Slider fx:id="sepiaSlider" blockIncrement="0.1" majorTickUnit="0.25" max="2.0" maxWidth="1.7976931348623157E308" minorTickCount="0" showTickMarks="true" value="1.0" />
+    <Slider fx:id="sepiaSlider" blockIncrement="0.1" majorTickUnit="0.25" max="2.0" maxWidth="1.7976931348623157E308" minorTickCount="0" showTickMarks="true" value="0" />
   </children>
 </VBox>
