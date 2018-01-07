@@ -10,6 +10,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -109,6 +110,10 @@ public class TitledImage extends AnchorPane {
 	 */
 	public TitledImage(Pane parent) {
 		this.parent = parent;
+		
+		
+		
+		
 		double initialParentWidth = parent.widthProperty().get();
 		double initialParentHeight = parent.heightProperty().get();
 
@@ -122,7 +127,7 @@ public class TitledImage extends AnchorPane {
 		} catch (IOException exception) {
 			throw new RuntimeException(exception);
 		}
-		
+		textField.setAlignment(Pos.CENTER);
 		// EventListener for MousePressed
 		imageView.onMousePressedProperty().set(new EventHandler<MouseEvent>() {
 

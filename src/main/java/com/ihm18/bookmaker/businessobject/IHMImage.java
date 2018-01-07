@@ -291,7 +291,7 @@ public class IHMImage {
 	@Override
 	public String toString() {
 		return "IHMImage [id=" + id + ", title=" + title + ", description=" + description + ", dateCreation="
-				+ dateCreation + ", file=" + file + ", page=" + page + ", x=" + x + ", y=" + y + ", width=" + width
+				+ dateCreation + ", file=" + file + ", x=" + x + ", y=" + y + ", width=" + width
 				+ ", height=" + height + ", borderStyle=" + borderStyle + ", borderSize=" + borderSize
 				+ ", borderColor=" + borderColor + ", brightness=" + brightness + ", sepia=" + sepia + ", saturation="
 				+ saturation + "]";

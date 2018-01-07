@@ -19,7 +19,7 @@
 
 <fx:root type="javafx.scene.layout.AnchorPane" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
   <children>
-    <ImageView fx:id="imageView" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+    <ImageView fx:id="imageView" AnchorPane.topAnchor="19" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" />
     <HBox alignment="TOP_LEFT">
       <children>
         <TextField fx:id="textField" prefHeight="29.0" prefWidth="201.0" styleClass="best" />
