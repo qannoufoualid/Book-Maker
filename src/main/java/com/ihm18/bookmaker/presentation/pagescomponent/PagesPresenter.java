@@ -10,6 +10,8 @@ import java.util.ResourceBundle;
 
 import javax.inject.Inject;
 
+import com.ihm18.bookmaker.presentation.bordercomponent.BorderModel;
+import javafx.scene.control.Button;
 import javafx.scene.input.*;
 import org.apache.commons.io.FileUtils;
 
@@ -73,6 +75,12 @@ public class PagesPresenter implements Initializable {
 	private SoundPlayer soundPlayer;
 
 	/**
+	 * une reference sur le borderModel
+	 */
+	@Inject
+	private BorderModel borderModel;
+
+	/**
 	 * fx:id=pagesContainer
 	 */
 	@FXML
@@ -113,6 +121,12 @@ public class PagesPresenter implements Initializable {
 	 */
 	@FXML
 	private BorderPane editPane;
+
+	/**
+	 * fx:id=rightArrow
+	 */
+	@FXML
+	private Button rightArrow;
 
 	/**
 	 * Liste des images view de la page à gauche.
@@ -218,6 +232,7 @@ public class PagesPresenter implements Initializable {
 		selectedIHMImage = null;
 		clickedImage = null;
 		titledImageTextChanged = false;
+		rightArrow.requestFocus();
 	}
 
 
@@ -360,16 +375,6 @@ public class PagesPresenter implements Initializable {
 		
 	}
 
-	/**
-	 * Permet d'ajouter une page.
-	 * @param event
-	 */
-	public void addPage(ActionEvent event) {
-		attachPage();
-		activePageNumber = (pagesNumber % 2 == 0) ? pagesNumber - 1 : pagesNumber;
-		saveImagesCoordinations();
-		updateBackgroundAndPages();
-	}
 
 	/**
 	 * Cette fonction permet d'actualiser les images d'une page.
@@ -451,17 +456,6 @@ public class PagesPresenter implements Initializable {
 	}
 
 	/**
-	 * Permet d'attacher une nouvelle page à l'album.
-	 */
-	private void attachPage() {
-
-		Page page = new Page();
-		page.setNumber(++pagesNumber);
-		page.setAlbum(album);
-		album.addPage(page);
-	}
-
-	/**
 	 * Permet de mettre à jours les arrieres plans des 2 pages.
 	 */
 	private void updateBackgroundAndPages() {
@@ -501,10 +495,46 @@ public class PagesPresenter implements Initializable {
 	}
 
 	/**
+	 * Gere l'appuie du bouton createPage
+	 * @param event
+	 */
+	public void addPagePressed(ActionEvent event) {
+		addPage();
+	}
+
+	/**
+	 * Action d'ajouter une page
+	 */
+	public void addPage(){
+		attachPage();
+		activePageNumber = (pagesNumber % 2 == 0) ? pagesNumber - 1 : pagesNumber;
+		saveImagesCoordinations();
+		updateBackgroundAndPages();
+	}
+
+	/**
+	 * Permet d'attacher une nouvelle page à l'album.
+	 */
+	private void attachPage() {
+
+		Page page = new Page();
+		page.setNumber(++pagesNumber);
+		page.setAlbum(album);
+		album.addPage(page);
+	}
+
+	/**
 	 * Permet de naviguer à gauche.
 	 * @param event
 	 */
-	public void turnLeft(ActionEvent event) {
+	public void turnLeftPressed(ActionEvent event) {
+		turnLeft();
+	}
+
+	/**
+	 * Permet de naviguer à gauche
+	 */
+	public void turnLeft(){
 		if (activePageNumber - 2 >= 1) {
 			saveImagesCoordinations();
 			activePageNumber = activePageNumber - 2;
@@ -517,9 +547,28 @@ public class PagesPresenter implements Initializable {
 	 * Permet de naviguer à droite.
 	 * @param event
 	 */
-	public void turnRight(ActionEvent event) {
+	public void turnRightPressed(ActionEvent event) {
+		turnRight();
+	}
+
+	/**
+	 * permet de naviguer au clavier
+	 */
+	public void navigateKeyboard(KeyEvent event){
+		if(event.getCode() == KeyCode.RIGHT){
+			turnRight();
+		}
+		if(event.getCode() == KeyCode.LEFT){
+			turnLeft();
+		}
+	}
+
+	/**
+	 * Permet de naviguer à droite.
+	 */
+	public void turnRight() {
 		if (pagesNumber==0 || ((activePageNumber%2==1)&&((activePageNumber + 1 == pagesNumber)||(activePageNumber == pagesNumber)))){
-			addPage(event);
+			addPage();
 		}
 
 		if (activePageNumber + 2 <= pagesNumber) {
@@ -528,8 +577,8 @@ public class PagesPresenter implements Initializable {
 			activePageNumber = activePageNumber + 2;
 			updateBackgroundAndPages();
 		}
-		
 	}
+
 	
 	private void saveImagesCoordinations() {
 		

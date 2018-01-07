@@ -77,13 +77,11 @@ public class BorderPresenter implements Initializable {
 		if(cadreBox.isSelected()){
 
 		    editionActionsModel.getTitledImage().setBorderStyle("-fx-border-style: solid; ");
-            editionActionsModel.getTitledImage().setBorderSize("-fx-border-width: 5px; ");
+            editionActionsModel.getTitledImage().setBorderSize("-fx-border-width: 10px; ");
             editionActionsModel.getTitledImage().setBorderColor("-fx-border-color: black; ");
             colorPicker.setDisable(false);
             selectStyle.setDisable(false);
             editionActionsModel.getTitledImage().drawBorder();
-
-
 		}
 		else{
 			colorPicker.setDisable(true);

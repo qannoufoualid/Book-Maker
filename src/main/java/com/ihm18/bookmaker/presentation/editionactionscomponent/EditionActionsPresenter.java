@@ -42,6 +42,15 @@ public class EditionActionsPresenter implements Initializable {
 	@FXML
 	private Button brightnessButton;
 
+	/**
+	 * Border view actif
+	 */
+	private BorderView bv = null;
+
+	/**
+	 * Palette view actif
+	 */
+	private BrightnessPaletteView pv = null;
 
 
     /**
@@ -49,7 +58,6 @@ public class EditionActionsPresenter implements Initializable {
      */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		
 		cadreButton.disableProperty().bind(pagesModel.imageClickedProperty());
 		brightnessButton.disableProperty().bind(pagesModel.imageClickedProperty());
 	}
@@ -61,8 +69,10 @@ public class EditionActionsPresenter implements Initializable {
 	public void displayBrightnessPalette(ActionEvent event){
 		pagesModel.getEditPane().bottomProperty().unbind();
 		pagesModel.borderViewProperty().set(null);
-		BrightnessPaletteView brightnessPaletteView = new BrightnessPaletteView();
-		pagesModel.paletteViewProperty().set(brightnessPaletteView.getView());
+		this.bv = null;
+		this.pv = new BrightnessPaletteView();
+		pagesModel.paletteViewProperty().set(this.pv.getView());
+		pagesModel.paletteViewProperty().get().disableProperty().bind(pagesModel.imageClickedProperty());
 		pagesModel.getEditPane().leftProperty().bind(pagesModel.paletteViewProperty());
 	}
 
@@ -73,17 +83,18 @@ public class EditionActionsPresenter implements Initializable {
 	public void displayBorder(ActionEvent event){
 		pagesModel.getEditPane().bottomProperty().unbind();
 		pagesModel.paletteViewProperty().set(null);
-		BorderView borderView = new BorderView();
-		pagesModel.borderViewProperty().set(borderView.getView());
+		this.pv = null;
+		this.bv = new BorderView();
+		pagesModel.borderViewProperty().set(this.bv.getView());
+		pagesModel.borderViewProperty().get().disableProperty().bind(pagesModel.imageClickedProperty());
 		pagesModel.getEditPane().leftProperty().bind(pagesModel.borderViewProperty());
 	}
 
-	/**
-	 * Ferme les sous menus
-	 */
-	public void displayMenu(){
-		pagesModel.getEditPane().bottomProperty().unbind();
-		pagesModel.borderViewProperty().set(null);
-		pagesModel.paletteViewProperty().set(null);
+	public BorderView getBorderView(){
+		return this.bv;
+	}
+
+	public BrightnessPaletteView getPaletteView(){
+		return this.pv;
 	}
 }

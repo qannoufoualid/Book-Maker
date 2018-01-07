@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.GridPane?>
 
-<BorderPane fx:id="pagesContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="801.0" prefWidth="1152.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.ihm18.bookmaker.presentation.pagescomponent.PagesPresenter">
+<BorderPane fx:id="pagesContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#navigateKeyboard" prefHeight="801.0" prefWidth="1152.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.ihm18.bookmaker.presentation.pagescomponent.PagesPresenter">
   <center>
     <GridPane prefHeight="921.0" prefWidth="1054.0" BorderPane.alignment="CENTER">
       <children>
@@ -46,11 +46,11 @@
           </left>
         </BorderPane>
         <BorderPane fx:id="editPane" GridPane.columnIndex="2" GridPane.rowIndex="0" />
-        <Button mnemonicParsing="false" onAction="#addPage" styleClass="btn-success" text="Créer page" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+        <Button mnemonicParsing="false" onAction="#addPagePressed" styleClass="btn-success" text="Créer page" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
         <HBox GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1">
           <children>
-            <Button mnemonicParsing="false" onAction="#turnLeft" styleClass="btn-primary" text="&lt;" />
-            <Button mnemonicParsing="false" onAction="#turnRight" styleClass="btn-primary" text="&gt;" />
+            <Button mnemonicParsing="false" onAction="#turnLeftPressed" styleClass="btn-primary" text="&lt;" />
+            <Button fx:id="rightArrow" mnemonicParsing="false" onAction="#turnRightPressed" styleClass="btn-primary" text="&gt;" />
           </children>
         </HBox>
       </children>
