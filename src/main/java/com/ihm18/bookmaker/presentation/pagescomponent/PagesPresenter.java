@@ -27,6 +27,8 @@ import com.ihm18.bookmaker.presentation.editionactionscomponent.EditionActionsVi
 import com.ihm18.bookmaker.presentation.utility.SoundPlayer;
 import com.ihm18.bookmaker.presentation.utility.Utility;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -184,6 +186,7 @@ public class PagesPresenter implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
+		
 		editPane.topProperty().set(new EditionActionsView().getView());
 		// pagesContainer.rightProperty().bind(pagesModel.paletteViewProperty());
 		pagesModel.setEditPane(editPane);
@@ -206,8 +209,12 @@ public class PagesPresenter implements Initializable {
 	 * @param event
 	 */
 	public void cliqueMouse(MouseEvent event) {
-		if (!isImageClicked)
+		if (!isImageClicked){
+			editionActionsModel.setTitledImage(null);
 			pagesModel.imageClickedProperty().setValue(true);
+			
+		}
+			
 		if (titledImageTextChanged) {
 			changeTitre();
 		}
@@ -534,6 +541,8 @@ public class PagesPresenter implements Initializable {
 	 * Action d'ajouter une page
 	 */
 	public void addPage() {
+		editionActionsModel.setTitledImage(null);
+		pagesModel.imageClickedProperty().setValue(true);
 		saveImagesState();
 		attachPage();
 		activePageNumber = (pagesNumber % 2 == 0) ? pagesNumber - 1 : pagesNumber;
@@ -565,6 +574,8 @@ public class PagesPresenter implements Initializable {
 	 * Permet de naviguer à gauche
 	 */
 	public void turnLeft() {
+		editionActionsModel.setTitledImage(null);
+		pagesModel.imageClickedProperty().setValue(true);
 		if (activePageNumber - 2 >= 1) {
 			saveImagesState();
 			activePageNumber = activePageNumber - 2;
@@ -598,6 +609,8 @@ public class PagesPresenter implements Initializable {
 	 * Permet de naviguer à droite.
 	 */
 	public void turnRight() {
+		editionActionsModel.setTitledImage(null);
+		pagesModel.imageClickedProperty().setValue(true);
 		if (pagesNumber == 0 || ((activePageNumber % 2 == 1)
 				&& ((activePageNumber + 1 == pagesNumber) || (activePageNumber == pagesNumber)))) {
 			addPage();

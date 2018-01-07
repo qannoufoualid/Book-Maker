@@ -20,6 +20,7 @@ import javafx.scene.layout.GridPane;
 import javax.inject.Inject;
 
 import com.ihm18.bookmaker.presentation.editionactionscomponent.EditionActionsModel;
+import com.ihm18.bookmaker.presentation.pagescomponent.PagesModel;
 
 /**
  * Le presentateur du composant responsable sur la luminosité + saturation + sepia
@@ -34,6 +35,12 @@ public class BrightnessPalettePresenter implements Initializable {
 	 */
 	@Inject
 	private EditionActionsModel editionActionsModel;
+	
+	/**
+	 * Le modéle du composant des pages.
+	 */
+	@Inject
+	private PagesModel pagesModel;
 	/**
 	 * fx:id=brightnessSlider
 	 */
@@ -76,6 +83,16 @@ public class BrightnessPalettePresenter implements Initializable {
                         setImageEffect();
                 }
             });
+		
+		pagesModel.imageClickedProperty().addListener(new ChangeListener<Boolean>() {
+
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+				brightnessSlider.setValue(1);
+				saturationSlider.setValue(1);
+				sepiaSlider.setValue(1);
+			}
+		});
 	}
 
 	/**
@@ -90,9 +107,8 @@ public class BrightnessPalettePresenter implements Initializable {
         st.setLevel(sepiaSlider.valueProperty().get());
 
         colorAdjust.setInput(st);
-
-        editionActionsModel.getTitledImage().getImageView().setEffect(colorAdjust);
-        
+        if(editionActionsModel.getTitledImage() != null)
+        	editionActionsModel.getTitledImage().getImageView().setEffect(colorAdjust);
 	    }
 
 }
