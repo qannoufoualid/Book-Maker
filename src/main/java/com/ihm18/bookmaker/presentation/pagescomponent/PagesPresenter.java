@@ -347,6 +347,7 @@ public class PagesPresenter implements Initializable {
 		image.setPage(page);
 
 		TitledImage titledImage = createTitledImage(image);
+		
 		if (isLeft) {
 			leftAnchorPane.getChildren().add(titledImage);
 			leftImageViews.add(titledImage);
@@ -388,12 +389,25 @@ public class PagesPresenter implements Initializable {
 			}
 		});
 		titledImage.textProperty().addListener((observable, oldValue, newValue) -> {
+			if(newValue.trim().equals("")){
+				titledImage.getTextField().setVisible(false);
+			}
 			titledImageTextChanged = true;
 			selectedIHMImage = image;
 			clickedImage = titledImage;
 			clickedImage.getTextField().getStyleClass().removeAll("bad", "med", "good", "best");
 			clickedImage.getTextField().getStyleClass().add("bad");
 		});
+		
+		pagesModel.imageClickedProperty().addListener((observable, oldValue, newValue) -> {
+			if(oldValue == true && newValue == false){
+				titledImage.getTextField().setVisible(true);
+			}else{
+				if(titledImage.getTextField().getText().equals(""))
+					titledImage.getTextField().setVisible(false);
+			}
+		});
+		
 		return titledImage;
 
 	}

@@ -128,6 +128,7 @@ public class TitledImage extends AnchorPane {
 			throw new RuntimeException(exception);
 		}
 		textField.setAlignment(Pos.CENTER);
+		
 		// EventListener for MousePressed
 		imageView.onMousePressedProperty().set(new EventHandler<MouseEvent>() {
 
