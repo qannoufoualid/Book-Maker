@@ -598,10 +598,10 @@ public class PagesPresenter implements Initializable {
 	 * Permet de naviguer à droite.
 	 */
 	public void turnRight() {
-//		if (pagesNumber == 0 || ((activePageNumber % 2 == 1)
-//				&& ((activePageNumber + 1 == pagesNumber) || (activePageNumber == pagesNumber)))) {
-//			addPage();
-//		}
+		if (pagesNumber == 0 || ((activePageNumber % 2 == 1)
+				&& ((activePageNumber + 1 == pagesNumber) || (activePageNumber == pagesNumber)))) {
+			addPage();
+		}
 
 		if (activePageNumber + 2 <= pagesNumber) {
 			saveImagesState();
