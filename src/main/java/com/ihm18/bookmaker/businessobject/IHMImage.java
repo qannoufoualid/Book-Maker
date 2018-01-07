@@ -1,7 +1,6 @@
 package com.ihm18.bookmaker.businessobject;
 
 import java.io.File;
-import java.nio.file.Path;
 import java.time.LocalDateTime;
 
 /**
@@ -47,7 +46,13 @@ public class IHMImage {
 	 */
 	private double y;
 	
+	/**
+	 * Largeur de l'image
+	 */
 	private double width;
+	/**
+	 * Hauteur de l'image
+	 */
 	private double height;
 
 	/**
@@ -65,6 +70,19 @@ public class IHMImage {
 	 */
 	private String borderColor;
 
+	/**
+	 * Luminosité
+	 */
+	private double brightness = Double.MIN_VALUE;
+	
+	/**
+	 * Sepia
+	 */
+	private double sepia = Double.MIN_VALUE;
+	/**
+	 * Saturation
+	 */
+	private double saturation = Double.MIN_VALUE;
 	
 	/**
 	 * getter de fichier de l'image
@@ -222,15 +240,6 @@ public class IHMImage {
 		this.height = height;
 	}
 
-	/**
-	 * pour afficher l'image dans la console.
-	 */
-	@Override
-	public String toString() {
-		return "IHMImage [id=" + id + ", title=" + title + ", description=" + description + ", dateCreation="
-				+ dateCreation + ", file=" + file + ", page=" + page + ", x=" + x + ", y=" + y + "]";
-	}
-
 	public String getBorderStyle() {
 		return borderStyle;
 	}
@@ -254,4 +263,41 @@ public class IHMImage {
 	public void setBorderColor(String borderColor) {
 		this.borderColor = borderColor;
 	}
+
+	public double getBrightness() {
+		return brightness;
+	}
+
+	public void setBrightness(double brightness) {
+		this.brightness = brightness;
+	}
+
+	public double getSepia() {
+		return sepia;
+	}
+
+	public void setSepia(double sepia) {
+		this.sepia = sepia;
+	}
+
+	public double getSaturation() {
+		return saturation;
+	}
+
+	public void setSaturation(double saturation) {
+		this.saturation = saturation;
+	}
+
+	@Override
+	public String toString() {
+		return "IHMImage [id=" + id + ", title=" + title + ", description=" + description + ", dateCreation="
+				+ dateCreation + ", file=" + file + ", page=" + page + ", x=" + x + ", y=" + y + ", width=" + width
+				+ ", height=" + height + ", borderStyle=" + borderStyle + ", borderSize=" + borderSize
+				+ ", borderColor=" + borderColor + ", brightness=" + brightness + ", sepia=" + sepia + ", saturation="
+				+ saturation + "]";
+	}
+	
+	
+	
+	
 }

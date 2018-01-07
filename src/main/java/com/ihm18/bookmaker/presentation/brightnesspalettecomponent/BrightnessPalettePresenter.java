@@ -92,6 +92,7 @@ public class BrightnessPalettePresenter implements Initializable {
         colorAdjust.setInput(st);
 
         editionActionsModel.getTitledImage().getImageView().setEffect(colorAdjust);
+        
 	    }
 
 

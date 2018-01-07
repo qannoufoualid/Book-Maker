@@ -33,6 +33,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.effect.ColorAdjust;
+import javafx.scene.effect.SepiaTone;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -41,6 +43,7 @@ import javafx.scene.layout.BorderPane;
 
 /**
  * Le presentateur du composant PagesComponent.
+ * 
  * @author oualidqannouf
  */
 public class PagesPresenter implements Initializable {
@@ -61,13 +64,13 @@ public class PagesPresenter implements Initializable {
 	 */
 	@Inject
 	private EditionActionsModel editionActionsModel;
-	
+
 	/**
 	 * une reference sur la class utility.
 	 */
 	@Inject
 	private Utility utility;
-	
+
 	/**
 	 * une reference sur le soundPlayer
 	 */
@@ -135,7 +138,7 @@ public class PagesPresenter implements Initializable {
 	/**
 	 * Liste des images view de la page à droite.
 	 */
-	private List<TitledImage>rightImageViews;
+	private List<TitledImage> rightImageViews;
 
 	/**
 	 * L'album selectionné.
@@ -153,7 +156,7 @@ public class PagesPresenter implements Initializable {
 	 * Si une image a été cliquée
 	 */
 	protected boolean isImageClicked = false;
-	
+
 	/**
 	 * Reference sur l'image cliquée
 	 */
@@ -163,16 +166,17 @@ public class PagesPresenter implements Initializable {
 	 * Reference sur l'entité IHMImage
 	 */
 	private IHMImage selectedIHMImage = null;
-	
+
 	/**
 	 * Si le titre d'une image a été changé
 	 */
 	private boolean titledImageTextChanged = false;
-	
+
 	/**
 	 * Executé au lancement du composant
 	 */
-	public void launch() {}
+	public void launch() {
+	}
 
 	/**
 	 * Executé aprés le lancement du composant.
@@ -181,7 +185,7 @@ public class PagesPresenter implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 
 		editPane.topProperty().set(new EditionActionsView().getView());
-		//pagesContainer.rightProperty().bind(pagesModel.paletteViewProperty());
+		// pagesContainer.rightProperty().bind(pagesModel.paletteViewProperty());
 		pagesModel.setEditPane(editPane);
 
 		leftImageViews = new ArrayList<>();
@@ -196,13 +200,15 @@ public class PagesPresenter implements Initializable {
 	}
 
 	/**
-	 * Permet de gérer le clic souris sur l'une ou l'autre des pages (validation des titres)
+	 * Permet de gérer le clic souris sur l'une ou l'autre des pages (validation
+	 * des titres)
+	 * 
 	 * @param event
 	 */
 	public void cliqueMouse(MouseEvent event) {
-		if(!isImageClicked)
+		if (!isImageClicked)
 			pagesModel.imageClickedProperty().setValue(true);
-		if(titledImageTextChanged){
+		if (titledImageTextChanged) {
 			changeTitre();
 		}
 		isImageClicked = false;
@@ -210,10 +216,11 @@ public class PagesPresenter implements Initializable {
 
 	/**
 	 * Permet de valider un titre avec la touche entrée
+	 * 
 	 * @param event
 	 */
-	public void enterVal(KeyEvent event){
-		if(event.getCode() == KeyCode.ENTER && titledImageTextChanged){
+	public void enterVal(KeyEvent event) {
+		if (event.getCode() == KeyCode.ENTER && titledImageTextChanged) {
 			changeTitre();
 		}
 	}
@@ -221,10 +228,10 @@ public class PagesPresenter implements Initializable {
 	/**
 	 * Valider changement de titre
 	 */
-	public void changeTitre(){
-		if(!clickedImage.getText().equals(selectedIHMImage.getTitle())){
+	public void changeTitre() {
+		if (!clickedImage.getText().equals(selectedIHMImage.getTitle())) {
 			selectedIHMImage.setTitle(clickedImage.getText());
-			clickedImage.getTextField().getStyleClass().removeAll("bad","med","good","best");
+			clickedImage.getTextField().getStyleClass().removeAll("bad", "med", "good", "best");
 			clickedImage.getTextField().getStyleClass().add("best");
 			utility.showInformationAlert(AlertType.INFORMATION, "Titre modifié avec succés");
 		}
@@ -233,10 +240,6 @@ public class PagesPresenter implements Initializable {
 		titledImageTextChanged = false;
 		rightArrow.requestFocus();
 	}
-
-
-
-
 
 	/**
 	 * Inititialiser les evenements du drag.
@@ -269,7 +272,7 @@ public class PagesPresenter implements Initializable {
 				if (isAccepted) {
 					File imageFile = db.getFiles().get(0);
 					acceptImageAtSide(true, imageFile);
-					saveImagesCoordinations();
+					saveImagesState();
 					updateBackgroundAndPages();
 				} else {
 					event.consume();
@@ -301,7 +304,7 @@ public class PagesPresenter implements Initializable {
 				if (isAccepted) {
 					File imageFile = db.getFiles().get(0);
 					acceptImageAtSide(false, imageFile);
-					saveImagesCoordinations();
+					saveImagesState();
 					updateBackgroundAndPages();
 				} else {
 					event.consume();
@@ -312,39 +315,42 @@ public class PagesPresenter implements Initializable {
 
 	/**
 	 * permet de créer une image.
-	 * @param isLeft si l'image doit etre créée sur la page gauche ou pas.
-	 * @param imageFile le fichier de l'image.
+	 * 
+	 * @param isLeft
+	 *            si l'image doit etre créée sur la page gauche ou pas.
+	 * @param imageFile
+	 *            le fichier de l'image.
 	 */
 	public void acceptImageAtSide(boolean isLeft, File imageFile) {
-		
+
 		IHMImage image = new IHMImage(imageFile.getName(), "", LocalDateTime.now());
 		image.setFile(imageFile);
 		Page page = album.getPages().get((isLeft) ? activePageNumber - 1 : activePageNumber);
 		page.getImages().add(image);
 		image.setPage(page);
-		
+
 		TitledImage titledImage = createTitledImage(image);
-		if(isLeft){
+		if (isLeft) {
 			leftAnchorPane.getChildren().add(titledImage);
 			leftImageViews.add(titledImage);
-		}
-		else{
+		} else {
 			rightAnchorPane.getChildren().add(titledImage);
 			rightImageViews.add(titledImage);
 		}
-			
-		saveImagesCoordinations();
+
+		saveImagesState();
 	}
 
 	/**
 	 * Permet de créer une image avec un titre.
+	 * 
 	 * @param image
 	 * @return
 	 */
 	private TitledImage createTitledImage(IHMImage image) {
 		TitledImage titledImage = new TitledImage(leftAnchorPane);
-		titledImage.setFitHeight(200);
 		titledImage.setFitWidth(200);
+		titledImage.getImageView().setPreserveRatio(true);
 		Image img;
 		try {
 			img = new Image(FileUtils.openInputStream(image.getFile()));
@@ -364,16 +370,15 @@ public class PagesPresenter implements Initializable {
 			}
 		});
 		titledImage.textProperty().addListener((observable, oldValue, newValue) -> {
-		    titledImageTextChanged = true;
-		    selectedIHMImage = image;
-		    clickedImage = titledImage;
-		    clickedImage.getTextField().getStyleClass().removeAll("bad","med","good","best");
+			titledImageTextChanged = true;
+			selectedIHMImage = image;
+			clickedImage = titledImage;
+			clickedImage.getTextField().getStyleClass().removeAll("bad", "med", "good", "best");
 			clickedImage.getTextField().getStyleClass().add("bad");
 		});
 		return titledImage;
-		
-	}
 
+	}
 
 	/**
 	 * Cette fonction permet d'actualiser les images d'une page.
@@ -387,7 +392,7 @@ public class PagesPresenter implements Initializable {
 
 		if (pageNumber % 2 != 0) {
 			clearPane(leftAnchorPane);
-			//clearImageViews(leftImageViews);
+			// clearImageViews(leftImageViews);
 			Page page = album.getPages().get(pageNumber - 1);
 			for (int i = 0; i < page.getImages().size(); i++) {
 				IHMImage ihmImage = page.getImages().get(i);
@@ -397,24 +402,16 @@ public class PagesPresenter implements Initializable {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-				
+
 				TitledImage titledImage = createTitledImage(ihmImage);
-				titledImage.setLayoutX(ihmImage.getX());
-				titledImage.setLayoutY(ihmImage.getY());
-				titledImage.setFitWidth(ihmImage.getWidth());
-				titledImage.setFitHeight(ihmImage.getHeight());
-				titledImage.setBorderColor(ihmImage.getBorderColor());
-				titledImage.setBorderSize(ihmImage.getBorderSize());
-				titledImage.setBorderStyle(ihmImage.getBorderStyle());
-				if(titledImage.getBorderStyle() != null)
-					titledImage.drawBorder();
+				initTitledImage(titledImage, ihmImage);
+
 				leftAnchorPane.getChildren().add(titledImage);
 
-				
 			}
 		} else {
 			clearPane(rightAnchorPane);
-			//clearImageViews(rightImageViews);
+			// clearImageViews(rightImageViews);
 			Page page = album.getPages().get(pageNumber - 1);
 			for (int i = 0; i < page.getImages().size(); i++) {
 				IHMImage ihmImage = page.getImages().get(i);
@@ -430,24 +427,60 @@ public class PagesPresenter implements Initializable {
 				titledImage.setBorderColor(ihmImage.getBorderColor());
 				titledImage.setBorderSize(ihmImage.getBorderSize());
 				titledImage.setBorderStyle(ihmImage.getBorderStyle());
-				if(titledImage.getBorderStyle() != null)
+				if (titledImage.getBorderStyle() != null)
 					titledImage.drawBorder();
 				rightAnchorPane.getChildren().add(titledImage);
-				
+
 			}
 		}
 
 	}
 
 	/**
+	 * Permet d'initialiser une titledImage
+	 * 
+	 * @param titledImage
+	 *            titledImage
+	 * @param ihmImage
+	 *            IHMimage
+	 */
+	private void initTitledImage(TitledImage titledImage, IHMImage ihmImage) {
+		titledImage.setLayoutX(ihmImage.getX());
+		titledImage.setLayoutY(ihmImage.getY());
+		titledImage.setFitWidth(ihmImage.getWidth());
+		titledImage.setFitHeight(ihmImage.getHeight());
+		titledImage.setBorderColor(ihmImage.getBorderColor());
+		titledImage.setBorderSize(ihmImage.getBorderSize());
+		titledImage.setBorderStyle(ihmImage.getBorderStyle());
+		if (titledImage.getBorderStyle() != null)
+			titledImage.drawBorder();
+
+		ColorAdjust colorAdjust = new ColorAdjust();
+		if(ihmImage.getBrightness() != Double.MIN_VALUE)
+			colorAdjust.setBrightness((1 - ihmImage.getBrightness()) * -1);
+		if(ihmImage.getSaturation() != Double.MIN_VALUE)
+			colorAdjust.setSaturation(ihmImage.getSaturation());
+
+		SepiaTone st = new SepiaTone();
+		if(ihmImage.getSepia() != Double.MIN_VALUE){
+			st.setLevel(ihmImage.getSepia());
+			colorAdjust.setInput(st);
+		}
+		titledImage.setEffect(colorAdjust);
+	}
+
+	/**
 	 * Permet de vider un paneau.
+	 * 
 	 * @param pane
 	 */
 	private void clearPane(AnchorPane pane) {
 		pane.getChildren().clear();
 	}
+
 	/**
 	 * Permet de vider un tableau de imageView.
+	 * 
 	 * @param pane
 	 */
 	private void clearImageViews(List<ImageView> list) {
@@ -482,7 +515,7 @@ public class PagesPresenter implements Initializable {
 	}
 
 	/**
-	 * Permet d'initialiser l'arriere-plan des deux pages. 
+	 * Permet d'initialiser l'arriere-plan des deux pages.
 	 */
 	private void resetBackground() {
 		clearPane(rightAnchorPane);
@@ -495,6 +528,7 @@ public class PagesPresenter implements Initializable {
 
 	/**
 	 * Gere l'appuie du bouton createPage
+	 * 
 	 * @param event
 	 */
 	public void addPagePressed(ActionEvent event) {
@@ -504,10 +538,10 @@ public class PagesPresenter implements Initializable {
 	/**
 	 * Action d'ajouter une page
 	 */
-	public void addPage(){
+	public void addPage() {
 		attachPage();
 		activePageNumber = (pagesNumber % 2 == 0) ? pagesNumber - 1 : pagesNumber;
-		saveImagesCoordinations();
+		saveImagesState();
 		updateBackgroundAndPages();
 	}
 
@@ -524,6 +558,7 @@ public class PagesPresenter implements Initializable {
 
 	/**
 	 * Permet de naviguer à gauche.
+	 * 
 	 * @param event
 	 */
 	public void turnLeftPressed(ActionEvent event) {
@@ -533,9 +568,9 @@ public class PagesPresenter implements Initializable {
 	/**
 	 * Permet de naviguer à gauche
 	 */
-	public void turnLeft(){
+	public void turnLeft() {
 		if (activePageNumber - 2 >= 1) {
-			saveImagesCoordinations();
+			saveImagesState();
 			activePageNumber = activePageNumber - 2;
 			soundPlayer.playSound("page-flip");
 			updateBackgroundAndPages();
@@ -544,6 +579,7 @@ public class PagesPresenter implements Initializable {
 
 	/**
 	 * Permet de naviguer à droite.
+	 * 
 	 * @param event
 	 */
 	public void turnRightPressed(ActionEvent event) {
@@ -553,11 +589,11 @@ public class PagesPresenter implements Initializable {
 	/**
 	 * permet de naviguer au clavier
 	 */
-	public void navigateKeyboard(KeyEvent event){
-		if(event.getCode() == KeyCode.RIGHT){
+	public void navigateKeyboard(KeyEvent event) {
+		if (event.getCode() == KeyCode.RIGHT) {
 			turnRight();
 		}
-		if(event.getCode() == KeyCode.LEFT){
+		if (event.getCode() == KeyCode.LEFT) {
 			turnLeft();
 		}
 	}
@@ -566,50 +602,67 @@ public class PagesPresenter implements Initializable {
 	 * Permet de naviguer à droite.
 	 */
 	public void turnRight() {
-		if (pagesNumber==0 || ((activePageNumber%2==1)&&((activePageNumber + 1 == pagesNumber)||(activePageNumber == pagesNumber)))){
+		if (pagesNumber == 0 || ((activePageNumber % 2 == 1)
+				&& ((activePageNumber + 1 == pagesNumber) || (activePageNumber == pagesNumber)))) {
 			addPage();
 		}
 
 		if (activePageNumber + 2 <= pagesNumber) {
-			saveImagesCoordinations();
+			saveImagesState();
 			soundPlayer.playSound("page-flip");
 			activePageNumber = activePageNumber + 2;
 			updateBackgroundAndPages();
 		}
 	}
 
-	
-	private void saveImagesCoordinations() {
-		
-		for(int i=0; activePageNumber-1 < album.getPages().size() && album.getPages().get(activePageNumber-1)!=null &&  i < album.getPages().get(activePageNumber-1).getImages().size(); i++){
+	/**
+	 * Permet de sauvgarder l'état des images.
+	 */
+	private void saveImagesState() {
+
+		for (int i = 0; activePageNumber - 1 < album.getPages().size()
+				&& album.getPages().get(activePageNumber - 1) != null
+				&& i < album.getPages().get(activePageNumber - 1).getImages().size(); i++) {
 			TitledImage imageView = (TitledImage) leftAnchorPane.getChildren().get(i);
-			Page page = album.getPages().get(activePageNumber-1);
-			double x = imageView.layoutXProperty().get();
-			double y = imageView.layoutYProperty().get();
+			Page page = album.getPages().get(activePageNumber - 1);
 			IHMImage image = page.getImages().get(i);
-			image.setX(x);
-			image.setY(y);
-			image.setWidth(imageView.getFitWidth());
-			image.setHeight(imageView.getFitHeight());
-			image.setBorderColor(imageView.getBorderColor());
-			image.setBorderSize(imageView.getBorderSize());
-			image.setBorderStyle(imageView.getBorderStyle());
+			saveImageViewToIHMImage(image, imageView);
 		}
 		leftImageViews.clear();
-		for(int i=0; activePageNumber < album.getPages().size() && album.getPages().get(activePageNumber)!=null &&  i < album.getPages().get(activePageNumber).getImages().size(); i++){
+		for (int i = 0; activePageNumber < album.getPages().size() && album.getPages().get(activePageNumber) != null
+				&& i < album.getPages().get(activePageNumber).getImages().size(); i++) {
 			TitledImage imageView = (TitledImage) rightAnchorPane.getChildren().get(i);
 			Page page = album.getPages().get(activePageNumber);
-			double x = imageView.layoutXProperty().get();
-			double y = imageView.layoutYProperty().get();
 			IHMImage image = page.getImages().get(i);
-			image.setX(x);
-			image.setY(y);
-			image.setWidth(imageView.getFitWidth());
-			image.setHeight(imageView.getFitHeight());
-			image.setBorderColor(imageView.getBorderColor());
-			image.setBorderSize(imageView.getBorderSize());
-			image.setBorderStyle(imageView.getBorderStyle());
+			saveImageViewToIHMImage(image, imageView);
 		}
 		rightImageViews.clear();
+	}
+
+	/**
+	 * Permet de sauvegarder l'état d'une imageView dans une IHMImage
+	 * @param image
+	 * @param imageView
+	 */
+	private void saveImageViewToIHMImage(IHMImage image, TitledImage imageView) {
+		double x = imageView.layoutXProperty().get();
+		double y = imageView.layoutYProperty().get();
+		image.setX(x);
+		image.setY(y);
+		image.setWidth(imageView.getFitWidth());
+		image.setHeight(imageView.getFitHeight());
+		image.setBorderColor(imageView.getBorderColor());
+		image.setBorderSize(imageView.getBorderSize());
+		image.setBorderStyle(imageView.getBorderStyle());
+
+		ColorAdjust c = (ColorAdjust) editionActionsModel.getTitledImage().getImageView().getEffect();
+
+		if (c != null) {
+			image.setBrightness(c.getBrightness()+1);
+			image.setSaturation(c.getSaturation());
+			SepiaTone sepiaTone = (SepiaTone) c.getInput();
+			image.setSepia(sepiaTone.getLevel());
+		}
+
 	}
 }
