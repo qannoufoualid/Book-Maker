@@ -2,3 +2,19 @@
 	-fx-border-color: black;
 	 -fx-alignment: left ;
 }
+
+/*.simple-border{
+	-fx-border-color: green;
+	-fx-border-style: solid;
+	-fx-border-width: 5px;
+}
+
+.dotted-border{
+	-fx-border-style: dotted;
+	-fx-border-width: 3px;
+}
+
+.double-border{
+	-fx-border-style: double;
+	-fx-border-width: 3px;
+}

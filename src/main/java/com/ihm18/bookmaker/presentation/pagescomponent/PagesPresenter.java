@@ -201,7 +201,7 @@ public class PagesPresenter implements Initializable {
 				isImageClicked = false;
 			}
 		});
-		
+
 	}
 
 	/**
@@ -380,7 +380,13 @@ public class PagesPresenter implements Initializable {
 				titledImage.setLayoutY(ihmImage.getY());
 				titledImage.setFitWidth(ihmImage.getWidth());
 				titledImage.setFitHeight(ihmImage.getHeight());
+				titledImage.setBorderColor(ihmImage.getBorderColor());
+				titledImage.setBorderSize(ihmImage.getBorderSize());
+				titledImage.setBorderStyle(ihmImage.getBorderStyle());
+				if(titledImage.getBorderStyle() != null)
+					titledImage.drawBorder();
 				leftAnchorPane.getChildren().add(titledImage);
+
 				
 			}
 		} else {
@@ -398,6 +404,11 @@ public class PagesPresenter implements Initializable {
 				TitledImage titledImage = createTitledImage(ihmImage);
 				titledImage.setLayoutX(ihmImage.getX());
 				titledImage.setLayoutY(ihmImage.getY());
+				titledImage.setBorderColor(ihmImage.getBorderColor());
+				titledImage.setBorderSize(ihmImage.getBorderSize());
+				titledImage.setBorderStyle(ihmImage.getBorderStyle());
+				if(titledImage.getBorderStyle() != null)
+					titledImage.drawBorder();
 				rightAnchorPane.getChildren().add(titledImage);
 				
 			}
@@ -513,6 +524,9 @@ public class PagesPresenter implements Initializable {
 			image.setY(y);
 			image.setWidth(imageView.getFitWidth());
 			image.setHeight(imageView.getFitHeight());
+			image.setBorderColor(imageView.getBorderColor());
+			image.setBorderSize(imageView.getBorderSize());
+			image.setBorderStyle(imageView.getBorderStyle());
 		}
 		leftImageViews.clear();
 		for(int i=0; activePageNumber < album.getPages().size() && album.getPages().get(activePageNumber)!=null &&  i < album.getPages().get(activePageNumber).getImages().size(); i++){
@@ -525,6 +539,9 @@ public class PagesPresenter implements Initializable {
 			image.setY(y);
 			image.setWidth(imageView.getFitWidth());
 			image.setHeight(imageView.getFitHeight());
+			image.setBorderColor(imageView.getBorderColor());
+			image.setBorderSize(imageView.getBorderSize());
+			image.setBorderStyle(imageView.getBorderStyle());
 		}
 		rightImageViews.clear();
 	}

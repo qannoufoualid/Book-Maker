@@ -49,6 +49,22 @@ public class IHMImage {
 	
 	private double width;
 	private double height;
+
+	/**
+	 * Style de la bordure
+	 */
+	private String borderStyle;
+
+	/**
+	 * Taille de la bordure
+	 */
+	private String borderSize;
+
+	/**
+	 * Couleur de la bordure
+	 */
+	private String borderColor;
+
 	
 	/**
 	 * getter de fichier de l'image
@@ -215,9 +231,27 @@ public class IHMImage {
 				+ dateCreation + ", file=" + file + ", page=" + page + ", x=" + x + ", y=" + y + "]";
 	}
 
+	public String getBorderStyle() {
+		return borderStyle;
+	}
 
-	
-	
-	
-	
+	public void setBorderStyle(String borderStyle) {
+		this.borderStyle = borderStyle;
+	}
+
+	public String getBorderSize() {
+		return borderSize;
+	}
+
+	public void setBorderSize(String borderSize) {
+		this.borderSize = borderSize;
+	}
+
+	public String getBorderColor() {
+		return borderColor;
+	}
+
+	public void setBorderColor(String borderColor) {
+		this.borderColor = borderColor;
+	}
 }

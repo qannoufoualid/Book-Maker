@@ -15,8 +15,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 
 /**
  * Control personnalisé contenant une imageView + champ de texte + un bouton
@@ -47,11 +47,11 @@ public class TitledImage extends AnchorPane {
 	 */
 	private Pane parent;
 	/**
-	 * quanité de x deplacée
+	 * quantité de x deplacée
 	 */
 	private double mouvedx = 0;
 	/**
-	 * quanité de y deplacée
+	 * quantité de y deplacée
 	 */
 	private double mouvedy = 0;
 
@@ -79,6 +79,21 @@ public class TitledImage extends AnchorPane {
 	 * hauteur initiale de l'imageView.
 	 */
 	private double initialImageViewHeight;
+
+	/**
+	 * Style de la bordure
+	 */
+	private String borderStyle;
+
+	/**
+	 * Taille de la bordure
+	 */
+	private String borderSize;
+
+	/**
+	 * Couleur de la bordure
+	 */
+	private String borderColor;
 	
 	
 	/**
@@ -313,9 +328,42 @@ public class TitledImage extends AnchorPane {
 	public void setTextField(TextField textField) {
 		this.textField = textField;
 	}
-	
-	
-	
-	
 
+
+	public void setBorderStyle(String borderStyle) {
+		this.borderStyle = borderStyle;
+	}
+
+	public void setBorderSize(String borderSize) {
+		this.borderSize = borderSize;
+	}
+
+	public void setBorderColor(String borderColor) {
+		this.borderColor = borderColor;
+	}
+
+	public String getBorderStyle() {
+		return borderStyle;
+	}
+
+	public String getBorderSize() {
+		return borderSize;
+	}
+
+	public String getBorderColor() {
+		return borderColor;
+	}
+
+	public void drawBorder(){
+		//this.parent.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+		this.getStyleClass().clear();
+		this.setStyle(this.borderStyle + this.borderSize + this.borderColor);
+	}
+
+	public void clearBorder(){
+		this.borderStyle = "";
+		this.borderSize = "";
+		this.borderColor = "";
+		drawBorder();
+	}
 }
