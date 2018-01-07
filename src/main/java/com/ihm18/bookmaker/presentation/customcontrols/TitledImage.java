@@ -133,6 +133,7 @@ public class TitledImage extends AnchorPane {
 
 			@Override
 			public void handle(MouseEvent event) {
+				
 				// record the current mouse X and Y position on Node
 				mousex = event.getSceneX();
 				mousey = event.getSceneY();
@@ -160,7 +161,6 @@ public class TitledImage extends AnchorPane {
 			@Override
 			public void handle(MouseEvent event) {
 
-				
 				textField.setPrefWidth(imageView.getFitWidth());
 				
 				// Get the exact moved X and Y
@@ -172,6 +172,9 @@ public class TitledImage extends AnchorPane {
 
 				if (!widenToRight && !widenToBottom) {
 
+					double initialParentWidth = parent.widthProperty().get();
+					double initialParentHeight = parent.heightProperty().get();
+					
 					// set the positon of Node after calculation
 					if (parent != null && (parent.getLayoutX() < mouvedx
 							&& parent.getLayoutX() + initialParentWidth - widthProperty().get() > mouvedx)) {

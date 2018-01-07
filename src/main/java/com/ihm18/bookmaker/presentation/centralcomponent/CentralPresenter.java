@@ -57,7 +57,6 @@ public class CentralPresenter implements Initializable {
     }
 
     public void launch() {
-    	System.out.println("CentralPresenter started");
     }
 
 

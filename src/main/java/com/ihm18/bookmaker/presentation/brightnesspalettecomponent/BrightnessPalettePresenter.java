@@ -24,19 +24,20 @@ import com.ihm18.bookmaker.presentation.editionactionscomponent.EditionActionsMo
 import com.ihm18.bookmaker.presentation.pagescomponent.PagesModel;
 
 /**
- * Le presentateur du composant responsable sur la luminosité + saturation + sepia
+ * Le presentateur du composant responsable sur la luminosité + saturation +
+ * sepia
+ * 
  * @author qannoufoualid
  *
  */
 public class BrightnessPalettePresenter implements Initializable {
-
 
 	/**
 	 * Le modéle du composant des actions des éditions des images.
 	 */
 	@Inject
 	private EditionActionsModel editionActionsModel;
-	
+
 	/**
 	 * Le modéle du composant des pages.
 	 */
@@ -57,7 +58,7 @@ public class BrightnessPalettePresenter implements Initializable {
 	 */
 	@FXML
 	private Slider sepiaSlider;
-	
+
 	public void launch() {
 	}
 
@@ -67,39 +68,37 @@ public class BrightnessPalettePresenter implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		brightnessSlider.valueProperty().addListener(new ChangeListener<Number>() {
-            public void changed(ObservableValue<? extends Number> ov,
-                    Number old_val, Number new_val) {
-                        setImageEffect();
-                }
-            });
+			public void changed(ObservableValue<? extends Number> ov, Number old_val, Number new_val) {
+				setImageEffect();
+			}
+		});
 		saturationSlider.valueProperty().addListener(new ChangeListener<Number>() {
-            public void changed(ObservableValue<? extends Number> ov,
-                    Number old_val, Number new_val) {
-                        setImageEffect();
-                }
-            });
+			public void changed(ObservableValue<? extends Number> ov, Number old_val, Number new_val) {
+				setImageEffect();
+			}
+		});
 		sepiaSlider.valueProperty().addListener(new ChangeListener<Number>() {
-            public void changed(ObservableValue<? extends Number> ov,
-                    Number old_val, Number new_val) {
-                        setImageEffect();
-                }
-            });
-		
+			public void changed(ObservableValue<? extends Number> ov, Number old_val, Number new_val) {
+				setImageEffect();
+			}
+		});
+
 		editionActionsModel.titledImageProperty().addListener(new ChangeListener<TitledImage>() {
 
 			@Override
-			public void changed(ObservableValue<? extends TitledImage> observable, TitledImage oldValue, TitledImage newValue) {
-				if(newValue == null){
+			public void changed(ObservableValue<? extends TitledImage> observable, TitledImage oldValue,
+					TitledImage newValue) {
+				if (newValue == null) {
 					brightnessSlider.setValue(1);
 					saturationSlider.setValue(0);
 					sepiaSlider.setValue(0);
-				}else{
+				} else {
 					ColorAdjust c = (ColorAdjust) editionActionsModel.getTitledImage().getImageView().getEffect();
 					if (c != null) {
-						brightnessSlider.setValue(c.getBrightness()+1);
+						brightnessSlider.setValue(c.getBrightness() + 1);
 						saturationSlider.setValue(c.getSaturation());
 						SepiaTone sepiaTone = (SepiaTone) c.getInput();
-						if(sepiaTone!=null)
+						if (sepiaTone != null)
 							sepiaSlider.setValue(sepiaTone.getLevel());
 					}
 				}
@@ -111,18 +110,17 @@ public class BrightnessPalettePresenter implements Initializable {
 	 * Changer les effets de l'image.
 	 */
 	private void setImageEffect() {
-		
-		
+
 		ColorAdjust colorAdjust = new ColorAdjust();
-        colorAdjust.setBrightness((1 - brightnessSlider.valueProperty().get()) * -1);
-        colorAdjust.setSaturation(saturationSlider.valueProperty().get());
+		colorAdjust.setBrightness((1 - brightnessSlider.valueProperty().get()) * -1);
+		colorAdjust.setSaturation(saturationSlider.valueProperty().get());
 
-        SepiaTone st = new SepiaTone();
-        st.setLevel(sepiaSlider.valueProperty().get());
+		SepiaTone st = new SepiaTone();
+		st.setLevel(sepiaSlider.valueProperty().get());
 
-        colorAdjust.setInput(st);
-        if(editionActionsModel.getTitledImage() != null)
-        	editionActionsModel.getTitledImage().getImageView().setEffect(colorAdjust);
-	    }
+		colorAdjust.setInput(st);
+		if (editionActionsModel.getTitledImage() != null)
+			editionActionsModel.getTitledImage().getImageView().setEffect(colorAdjust);
+	}
 
 }

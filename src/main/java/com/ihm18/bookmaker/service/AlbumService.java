@@ -69,7 +69,6 @@ public class AlbumService {
 		
 		long lastImageId = 0;
 		File[] listOfFiles = folder.listFiles();
-		System.out.println(listOfFiles);
 	
 		    for (int i = 0; i < listOfFiles.length; i++) {
 		      if (listOfFiles[i].isFile() && listOfFiles[i].getName().startsWith(albumId.toString())) {

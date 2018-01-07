@@ -45,7 +45,6 @@ public class HistoryPresenter implements Initializable {
 	public void getPreviousMainView(ActionEvent event){
 		historyModel.goBack();
 		centralModel.setMainView(historyModel.getActiveView(), historyModel.getActiveViewTitle());
-		System.out.println(historyModel.getActiveViewTitle());
 	}
 	
 

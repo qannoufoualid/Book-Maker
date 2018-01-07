@@ -71,7 +71,6 @@ public class HistoryModel {
 	public void goBack(){
 		activeViewIndex--;
 		if(activeViewIndex<=0){
-			System.out.println("here");
 			previousViewNotExistsProperty().setValue(true);
 		}
 	}

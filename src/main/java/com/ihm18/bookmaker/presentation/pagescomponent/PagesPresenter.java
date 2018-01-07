@@ -67,6 +67,10 @@ public class PagesPresenter implements Initializable {
 	@Inject
 	private EditionActionsModel editionActionsModel;
 
+	
+	@Inject
+	private CentralModel centralModel;
+	
 	/**
 	 * une reference sur la class utility.
 	 */
@@ -185,7 +189,14 @@ public class PagesPresenter implements Initializable {
 	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		
+		centralModel.mainViewProperty().addListener(new ChangeListener<Node>() {
 
+			@Override
+			public void changed(ObservableValue<? extends Node> observable, Node oldValue, Node newValue) {
+				saveImagesState();
+			}
+		});
 		
 		editPane.topProperty().set(new EditionActionsView().getView());
 		// pagesContainer.rightProperty().bind(pagesModel.paletteViewProperty());
@@ -196,10 +207,10 @@ public class PagesPresenter implements Initializable {
 		album = albumDetailModel.getAlbum();
 		pagesNumber = album.getPages().size();
 		activePageNumber = (pagesNumber > 0) ? activePageNumber = 1 : 0;
+		
 		updateBackgroundAndPages();
-
 		initDragEvents();
-
+		
 	}
 
 	/**
@@ -209,11 +220,11 @@ public class PagesPresenter implements Initializable {
 	 * @param event
 	 */
 	public void cliqueMouse(MouseEvent event) {
-		if (!isImageClicked){
+		if (!isImageClicked) {
 			editionActionsModel.setTitledImage(null);
 			pagesModel.imageClickedProperty().setValue(true);
 		}
-			
+
 		if (titledImageTextChanged) {
 			changeTitre();
 		}
@@ -360,7 +371,7 @@ public class PagesPresenter implements Initializable {
 			img = new Image(FileUtils.openInputStream(image.getFile()));
 			titledImage.setImage(img);
 			titledImage.setText(image.getTitle());
-			double height = img.getHeight() * 200/img.getWidth();
+			double height = img.getHeight() * 200 / img.getWidth();
 			titledImage.setFitWidth(200);
 			titledImage.setFitHeight(height);
 		} catch (IOException e) {
@@ -457,13 +468,13 @@ public class PagesPresenter implements Initializable {
 			titledImage.drawBorder();
 
 		ColorAdjust colorAdjust = new ColorAdjust();
-		if(ihmImage.getBrightness() != Double.MIN_VALUE)
+		if (ihmImage.getBrightness() != Double.MIN_VALUE)
 			colorAdjust.setBrightness((1 - ihmImage.getBrightness()) * -1);
-		if(ihmImage.getSaturation() != Double.MIN_VALUE)
+		if (ihmImage.getSaturation() != Double.MIN_VALUE)
 			colorAdjust.setSaturation(ihmImage.getSaturation());
 
 		SepiaTone st = new SepiaTone();
-		if(ihmImage.getSepia() != Double.MIN_VALUE){
+		if (ihmImage.getSepia() != Double.MIN_VALUE) {
 			st.setLevel(ihmImage.getSepia());
 			colorAdjust.setInput(st);
 		}
@@ -545,7 +556,7 @@ public class PagesPresenter implements Initializable {
 		saveImagesState();
 		attachPage();
 		activePageNumber = (pagesNumber % 2 == 0) ? pagesNumber - 1 : pagesNumber;
-		
+
 		updateBackgroundAndPages();
 	}
 
@@ -595,12 +606,15 @@ public class PagesPresenter implements Initializable {
 	/**
 	 * permet de naviguer au clavier
 	 */
-	public void navigateKeyboard(KeyEvent event) {
+	public void keyPressed(KeyEvent event) {
 		if (event.getCode() == KeyCode.RIGHT) {
 			turnRight();
 		}
 		if (event.getCode() == KeyCode.LEFT) {
 			turnLeft();
+		}
+		if (event.getCode() == KeyCode.DELETE) {
+			removeImage();
 		}
 	}
 
@@ -628,7 +642,7 @@ public class PagesPresenter implements Initializable {
 	 */
 	private void saveImagesState() {
 
-		if(activePageNumber > 0){
+		if (activePageNumber > 0) {
 			for (int i = 0; activePageNumber - 1 < album.getPages().size()
 					&& album.getPages().get(activePageNumber - 1) != null
 					&& i < album.getPages().get(activePageNumber - 1).getImages().size(); i++) {
@@ -638,7 +652,6 @@ public class PagesPresenter implements Initializable {
 				saveImageViewToIHMImage(image, imageView);
 			}
 			Page pageo = album.getPages().get(activePageNumber - 1);
-			System.out.println(pageo);
 			leftImageViews.clear();
 			for (int i = 0; activePageNumber < album.getPages().size() && album.getPages().get(activePageNumber) != null
 					&& i < album.getPages().get(activePageNumber).getImages().size(); i++) {
@@ -649,11 +662,12 @@ public class PagesPresenter implements Initializable {
 			}
 			rightImageViews.clear();
 		}
-		
+
 	}
 
 	/**
 	 * Permet de sauvegarder l'état d'une imageView dans une IHMImage
+	 * 
 	 * @param image
 	 * @param imageView
 	 */
@@ -671,12 +685,35 @@ public class PagesPresenter implements Initializable {
 		ColorAdjust c = (ColorAdjust) imageView.getImageView().getEffect();
 
 		if (c != null) {
-			image.setBrightness(c.getBrightness()+1);
+			image.setBrightness(c.getBrightness() + 1);
 			image.setSaturation(c.getSaturation());
 			SepiaTone sepiaTone = (SepiaTone) c.getInput();
-			if(sepiaTone!=null)
+			if (sepiaTone != null)
 				image.setSepia(sepiaTone.getLevel());
 		}
 
 	}
+
+	/**
+	 * Permet de supprimer une image.
+	 */
+	public void removeImage() {
+
+		if (activePageNumber > 0) {
+			Page activePage = album.getPages().get(activePageNumber - 1);
+
+			if (activePage.getImages().contains(selectedIHMImage)) {
+				activePage.getImages().remove(selectedIHMImage);
+				leftAnchorPane.getChildren().remove(clickedImage);
+			} else {
+				Page activePageNext = album.getPages().get(activePageNumber);
+				if (activePageNext.getImages().contains(selectedIHMImage)) {
+					activePageNext.getImages().remove(selectedIHMImage);
+					rightAnchorPane.getChildren().remove(clickedImage);
+				}
+			}
+		}
+
+	}
+
 }
