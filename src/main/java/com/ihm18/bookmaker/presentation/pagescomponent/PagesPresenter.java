@@ -486,7 +486,10 @@ public class PagesPresenter implements Initializable {
 		titledImage.setBorderColor(ihmImage.getBorderColor());
 		titledImage.setBorderSize(ihmImage.getBorderSize());
 		titledImage.setBorderStyle(ihmImage.getBorderStyle());
-		if (titledImage.getBorderStyle() != null)
+		titledImage.setBorderColorObject(ihmImage.getBorderColorObject());
+		titledImage.setBorder(ihmImage.isBordered());
+
+		if (titledImage.isBordered())
 			titledImage.drawBorder();
 
 		ColorAdjust colorAdjust = new ColorAdjust();
@@ -703,6 +706,8 @@ public class PagesPresenter implements Initializable {
 		image.setBorderColor(imageView.getBorderColor());
 		image.setBorderSize(imageView.getBorderSize());
 		image.setBorderStyle(imageView.getBorderStyle());
+		image.setBorderColorObject(imageView.getBorderColorObject());
+		image.setBorder(imageView.isBordered());
 
 		ColorAdjust c = (ColorAdjust) imageView.getImageView().getEffect();
 

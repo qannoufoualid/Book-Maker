@@ -18,7 +18,7 @@
     </CheckBox>
     <Separator prefWidth="200.0" />
     <Label text="Style" />
-    <ChoiceBox fx:id="selectStyle" disable="true">
+    <ChoiceBox fx:id="selectStyle" disable="true" value="Trait">
       <items>
         <FXCollections fx:factory="observableArrayList">
           <String fx:value="Trait" />

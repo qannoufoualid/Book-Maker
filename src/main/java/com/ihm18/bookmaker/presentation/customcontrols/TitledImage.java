@@ -43,6 +43,24 @@ public class TitledImage extends AnchorPane {
 	 */
 	@FXML
 	private TextField textField;
+
+	/**
+	 * image Pane
+	 */
+	private AnchorPane imagePane;
+
+	/**
+	 * Le hbox
+	 */
+	@FXML
+	private HBox textBox;
+
+	/**
+	 * Le pane de l'image
+	 */
+	@FXML
+	//private BorderPane imagePane;
+
 	/**
 	 * Le panneau pére du composant.
 	 */
@@ -95,6 +113,16 @@ public class TitledImage extends AnchorPane {
 	 * Couleur de la bordure
 	 */
 	private String borderColor;
+
+	/**
+	 * Valeur de la couleur de la bordure à récupérer
+	 */
+	private Color borderColorObject;
+
+	/**
+	 * Booleen pour savoir si une image a une bordure
+	 */
+	private Boolean border;
 	
 	
 	/**
@@ -111,8 +139,7 @@ public class TitledImage extends AnchorPane {
 	public TitledImage(Pane parent) {
 		this.parent = parent;
 		
-		double initialParentWidth = parent.widthProperty().get();
-		double initialParentHeight = parent.heightProperty().get();
+		this.border = false;
 
 		FXMLLoader fxmlLoader = new FXMLLoader(
 				getClass().getResource("/com/ihm18/bookmaker/presentation/customcontrols/titledimage.fxml"));
@@ -360,15 +387,50 @@ public class TitledImage extends AnchorPane {
 		return borderColor;
 	}
 
-	public void drawBorder(){
-		this.getStyleClass().clear();
-		this.setStyle(this.borderStyle + this.borderSize + this.borderColor);
+	/**
+	 * setter de la bordure
+	 * @param b
+	 */
+	public void setBorder(Boolean b){
+		this.border = b;
 	}
 
+	/**
+	 * getter de la présence d'une bordure
+	 */
+	public Boolean isBordered(){
+		return this.border;
+	}
+
+	/**
+	 * Methode pour dessiner une bordure
+	 */
+	public void drawBorder(){
+		this.getStyleClass().clear();
+		if(this.border == true)
+			this.setStyle("-fx-border-style:" + this.borderStyle + ";-fx-border-width:" + this.borderSize + ";-fx-border-color: " + this.borderColor + ";");
+		else
+			this.setStyle("-fx-border-style:none;-fx-border-size:0px;-fx-borderColor:black;");
+
+	}
+
+	/**
+	 * Methode pour vider la bordure
+	 */
 	public void clearBorder(){
-		this.borderStyle = "";
-		this.borderSize = "";
-		this.borderColor = "";
+		this.border = false;
 		drawBorder();
+	}
+
+	/**
+	 * Setter de l'attribut BorderColorObject qui conserve la valeur de la couleur selectionnée
+	 * @param c
+	 */
+	public void setBorderColorObject(Color c){
+		this.borderColorObject = c;
+	}
+
+	public Color getBorderColorObject(){
+		return this.borderColorObject;
 	}
 }
