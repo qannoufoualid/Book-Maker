@@ -45,11 +45,6 @@ public class TitledImage extends AnchorPane {
 	private TextField textField;
 
 	/**
-	 * image Pane
-	 */
-	private AnchorPane imagePane;
-
-	/**
 	 * Le hbox
 	 */
 	@FXML
