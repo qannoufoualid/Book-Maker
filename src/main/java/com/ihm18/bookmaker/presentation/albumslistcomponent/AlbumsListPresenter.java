@@ -97,10 +97,11 @@ public class AlbumsListPresenter implements Initializable {
 		if(selectedAlbum != null)
 		{
 			albumDetailModel.setAlbum(selectedAlbum);
+			AlbumDetailView albumDetailView = new AlbumDetailView();
+			centralModel.setMainView(albumDetailView.getView(), AlbumDetailView.TITLE);
 		}
 		
-		AlbumDetailView albumDetailView = new AlbumDetailView();
-		centralModel.setMainView(albumDetailView.getView(), AlbumDetailView.TITLE);
+		
 		
 	}
 
