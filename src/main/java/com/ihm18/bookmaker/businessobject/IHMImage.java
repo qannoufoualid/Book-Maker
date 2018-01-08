@@ -1,5 +1,7 @@
 package com.ihm18.bookmaker.businessobject;
 
+import javafx.scene.paint.Color;
+
 import java.io.File;
 import java.time.LocalDateTime;
 
@@ -69,6 +71,16 @@ public class IHMImage {
 	 * Couleur de la bordure
 	 */
 	private String borderColor;
+
+	/**
+	 * Object couleur pour le colorpicker
+	 */
+	private Color borderColorObject;
+
+	/**
+	 * Attribut border pour savoir si l'image a une bordure
+	 */
+	private Boolean border;
 
 	/**
 	 * Luminosité
@@ -263,6 +275,14 @@ public class IHMImage {
 	public void setBorderColor(String borderColor) {
 		this.borderColor = borderColor;
 	}
+
+	public Color getBorderColorObject() { return borderColorObject; }
+
+	public void setBorderColorObject(Color c) { this.borderColorObject = c; }
+
+	public Boolean isBordered() { return border; }
+
+	public void setBorder(Boolean border) { this.border = border; }
 
 	public double getBrightness() {
 		return brightness;

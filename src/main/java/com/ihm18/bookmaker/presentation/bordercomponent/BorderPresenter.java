@@ -1,6 +1,7 @@
 package com.ihm18.bookmaker.presentation.bordercomponent;
 
 
+import com.ihm18.bookmaker.presentation.customcontrols.TitledImage;
 import com.ihm18.bookmaker.presentation.editionactionscomponent.EditionActionsModel;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -68,6 +69,50 @@ public class BorderPresenter implements Initializable {
 			}
 		});
 
+		editionActionsModel.titledImageProperty().addListener(new ChangeListener<TitledImage>() {
+
+			@Override
+			public void changed(ObservableValue<? extends TitledImage> observable, TitledImage oldValue, TitledImage newValue) {
+				if(newValue == null){
+					cadreBox.setSelected(false);
+					colorPicker.setValue(Color.BLACK);
+					selectStyle.setValue("Trait");
+
+				}else{
+					if(!editionActionsModel.getTitledImage().isBordered()) {
+						cadreBox.setSelected(false);
+						colorPicker.setValue(Color.BLACK);
+						selectStyle.setValue("Trait");
+						colorPicker.setDisable(true);
+						selectStyle.setDisable(true);
+					}else {
+						cadreBox.setSelected(true);
+						recupBorder();
+						colorPicker.setDisable(false);
+						selectStyle.setDisable(false);
+					}
+				}
+			}
+		});
+
+	}
+
+	/**
+	 * fonction pour récupérer les bordure d'une image
+	 */
+	public void recupBorder(){
+		if(editionActionsModel.getTitledImage().getBorderStyle().equals("solid")){
+			selectStyle.setValue("Trait");
+		}else{
+			if(editionActionsModel.getTitledImage().getBorderStyle().equals("dashed")){
+				selectStyle.setValue("Tiret");
+			}else{
+				if(editionActionsModel.getTitledImage().getBorderStyle().equals("dotted")){
+					selectStyle.setValue("Pointillé");
+				}
+			}
+		}
+		colorPicker.setValue(editionActionsModel.getTitledImage().getBorderColorObject());
 	}
 
 	/**
@@ -75,13 +120,18 @@ public class BorderPresenter implements Initializable {
 	 */
 	public void createBorder(ActionEvent event) {
 		if(cadreBox.isSelected()){
-
-		    editionActionsModel.getTitledImage().setBorderStyle("-fx-border-style: solid; ");
-            editionActionsModel.getTitledImage().setBorderSize("-fx-border-width: 10px; ");
-            editionActionsModel.getTitledImage().setBorderColor("-fx-border-color: black; ");
-            colorPicker.setDisable(false);
-            selectStyle.setDisable(false);
-            editionActionsModel.getTitledImage().drawBorder();
+			if(editionActionsModel.getTitledImage().getBorderSize()==null) {
+				editionActionsModel.getTitledImage().setBorderStyle("solid");
+				editionActionsModel.getTitledImage().setBorderColor("black; ");
+				editionActionsModel.getTitledImage().setBorderColorObject(Color.BLACK);
+			}else{
+				recupBorder();
+			}
+			editionActionsModel.getTitledImage().setBorderSize("10px");
+			colorPicker.setDisable(false);
+			selectStyle.setDisable(false);
+			editionActionsModel.getTitledImage().setBorder(true);
+			editionActionsModel.getTitledImage().drawBorder();
 		}
 		else{
 			colorPicker.setDisable(true);
@@ -97,13 +147,13 @@ public class BorderPresenter implements Initializable {
 		if(cadreBox.isSelected()){
 			switch (n.intValue()){
 				case 0:
-					editionActionsModel.getTitledImage().setBorderStyle("-fx-border-style: solid; ");
+					editionActionsModel.getTitledImage().setBorderStyle("solid");
 					break;
 				case 1:
-					editionActionsModel.getTitledImage().setBorderStyle("-fx-border-style: dashed; ");
+					editionActionsModel.getTitledImage().setBorderStyle("dashed");
 					break;
 				case 2:
-					editionActionsModel.getTitledImage().setBorderStyle("-fx-border-style: dotted; ");
+					editionActionsModel.getTitledImage().setBorderStyle("dotted");
 					break;
 				default:
 					break;
@@ -121,11 +171,13 @@ public class BorderPresenter implements Initializable {
 					(int)( colorPicker.getValue().getRed() * 255 ),
 					(int)( colorPicker.getValue().getGreen() * 255 ),
 					(int)( colorPicker.getValue().getBlue() * 255 ) );
-            editionActionsModel.getTitledImage().setBorderColor("-fx-border-color: " + color + "; ");
+            editionActionsModel.getTitledImage().setBorderColor(color);
+            editionActionsModel.getTitledImage().setBorderColorObject(colorPicker.getValue());
             editionActionsModel.getTitledImage().drawBorder();
         }
 
 
 	}
+
 
 }
