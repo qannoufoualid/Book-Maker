@@ -8,7 +8,9 @@ import java.util.ResourceBundle;
 
 import javax.inject.Inject;
 
+import com.airhacks.afterburner.injection.Injector;
 import com.ihm18.bookmaker.businessobject.Album;
+import com.ihm18.bookmaker.presentation.albumformcomponent.AlbumFormView;
 import com.ihm18.bookmaker.presentation.albumslistcomponent.AlbumsListView;
 import com.ihm18.bookmaker.presentation.historycomponent.HistoryModel;
 import com.ihm18.bookmaker.presentation.historycomponent.HistoryView;
@@ -65,6 +67,23 @@ public class CentralPresenter implements Initializable {
     public void launch() {
     }
 
+    /**
+     * Methode listener pour créer un nouvel album depuis le menu haut
+     * @param event
+     */
+    public void nouvelAlbum(ActionEvent event){
+        AlbumFormView albumFormView = new AlbumFormView();
+        centralModel.setMainView(albumFormView.getView(), AlbumFormView.TITLE);
+    }
+
+    /**
+     * Methode pour quitter l'application avec le menu haut
+     * @param event
+     */
+    public void quitter(ActionEvent event){
+        Injector.forgetAll();
+        System.exit(0);
+    }
 
     /**
      * Permet d'afficher l'aide.
