@@ -17,11 +17,10 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.HBox?>
 
-<fx:root type="javafx.scene.layout.AnchorPane" styleClass="box" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+<fx:root type="javafx.scene.layout.AnchorPane" snapToPixel="true" styleClass="box" visible="true" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
   <children>
-    <AnchorPane fx:id="imagePane" layoutX="1.0" layoutY="29.0" styleClass="box" />
-    <ImageView fx:id="imageView" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="19.0" />
-    <HBox alignment="TOP_LEFT">
+    <ImageView fx:id="imageView" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+    <HBox alignment="TOP_CENTER" fillHeight="true" opacity="1.0" visible="true">
       <children>
         <TextField fx:id="textField" prefHeight="29.0" prefWidth="201.0" styleClass="best" />
       </children>

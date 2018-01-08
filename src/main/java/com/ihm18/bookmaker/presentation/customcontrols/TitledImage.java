@@ -56,12 +56,6 @@ public class TitledImage extends AnchorPane {
 	private HBox textBox;
 
 	/**
-	 * Le pane de l'image
-	 */
-	@FXML
-	//private BorderPane imagePane;
-
-	/**
 	 * Le panneau pére du composant.
 	 */
 	private Pane parent;
@@ -123,6 +117,11 @@ public class TitledImage extends AnchorPane {
 	 * Booleen pour savoir si une image a une bordure
 	 */
 	private Boolean border;
+
+	/**
+	 * Anchor Pane pour dessiner la bordure
+	 */
+	private AnchorPane imagePanel;
 	
 	
 	/**
@@ -138,8 +137,6 @@ public class TitledImage extends AnchorPane {
 	 */
 	public TitledImage(Pane parent) {
 		this.parent = parent;
-		
-		this.border = false;
 
 		FXMLLoader fxmlLoader = new FXMLLoader(
 				getClass().getResource("/com/ihm18/bookmaker/presentation/customcontrols/titledimage.fxml"));
@@ -260,6 +257,10 @@ public class TitledImage extends AnchorPane {
 				TitledImage.this.getParent().getScene().setCursor(Cursor.DEFAULT);
 			}
 		});
+
+		//gestion de la bordure potentielle après modification de l'image : creation de l'anchor pane autour de l'image
+		this.border = false;
+		drawBorder();
 	}
 
 	/**
@@ -406,12 +407,25 @@ public class TitledImage extends AnchorPane {
 	 * Methode pour dessiner une bordure
 	 */
 	public void drawBorder(){
-		this.getStyleClass().clear();
-		if(this.border == true)
-			this.setStyle("-fx-border-style:" + this.borderStyle + ";-fx-border-width:" + this.borderSize + ";-fx-border-color: " + this.borderColor + ";");
-		else
-			this.setStyle("-fx-border-style:none;-fx-border-size:0px;-fx-borderColor:black;");
 
+		if(imagePanel != null) {
+			imagePanel.getChildren().remove(this.imageView);
+			this.getChildren().remove(imagePanel);
+			imagePanel = null;
+
+		}
+			imagePanel = new AnchorPane();
+			imagePanel.getStyleClass().add("box");
+			imagePanel.setLayoutX(1.0);
+			imagePanel.setLayoutY(29.0);
+
+		if(this.border == true)
+
+			imagePanel.setStyle("-fx-border-style:" + this.borderStyle + ";-fx-border-width:" + this.borderSize + ";-fx-border-color: " + this.borderColor + ";");
+		else
+			imagePanel.setStyle("-fx-border-style:none;-fx-border-size:0px;-fx-borderColor:black;");
+		imagePanel.getChildren().add(this.imageView);
+		this.getChildren().add(imagePanel);
 	}
 
 	/**
