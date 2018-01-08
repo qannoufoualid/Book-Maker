@@ -100,4 +100,9 @@ public class CentralPresenter implements Initializable {
         dialog.show();
     }
     
+    public void displayWelcomeView(ActionEvent event){
+    	WelcomeView welcomeView = new WelcomeView();
+        centralModel.setMainView(welcomeView.getView(), WelcomeView.TITLE);
+    }
+    
 }

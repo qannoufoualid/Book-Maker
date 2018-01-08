@@ -29,6 +29,7 @@
         <Menu mnemonicParsing="false" text="Projet">
           <items>
             <MenuItem mnemonicParsing="false" onAction="#nouvelAlbum" text="Nouvel album" />
+            <MenuItem mnemonicParsing="false" onAction="#displayWelcomeView" text="Accueil" />
             <MenuItem mnemonicParsing="false" onAction="#quitter" text="Quitter" />
           </items>
         </Menu>
