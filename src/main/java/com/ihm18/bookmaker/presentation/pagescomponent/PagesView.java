@@ -9,7 +9,7 @@ import com.airhacks.afterburner.views.FXMLView;
  */
 public class PagesView extends FXMLView {
 
-	public static final String TITLE = "Liste des images de l'album {{albumName}}";
+	public static final String TITLE = "{{albumName}}";
 	
 	
 }
