@@ -403,6 +403,7 @@ public class TitledImage extends AnchorPane {
 	 */
 	public void drawBorder(){
 
+		this.setStyle("-fx-border-color:transparent");
 		if(imagePanel != null) {
 			imagePanel.getChildren().remove(this.imageView);
 			this.getChildren().remove(imagePanel);
@@ -414,11 +415,13 @@ public class TitledImage extends AnchorPane {
 			imagePanel.setLayoutX(1.0);
 			imagePanel.setLayoutY(29.0);
 
-		if(this.border == true)
-
+		if(this.border == true) {
 			imagePanel.setStyle("-fx-border-style:" + this.borderStyle + ";-fx-border-width:" + this.borderSize + ";-fx-border-color: " + this.borderColor + ";");
-		else
-			imagePanel.setStyle("-fx-border-style:none;-fx-border-size:0px;-fx-borderColor:black;");
+		}
+		else {
+			imagePanel.setStyle("-fx-border-style:none;-fx-border-size:0px;-fx-borderColor:transparent;");
+		}
+
 		imagePanel.getChildren().add(this.imageView);
 		this.getChildren().add(imagePanel);
 	}
