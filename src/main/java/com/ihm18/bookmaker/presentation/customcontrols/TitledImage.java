@@ -403,7 +403,6 @@ public class TitledImage extends AnchorPane {
 	 */
 	public void drawBorder(){
 
-		this.setStyle("-fx-border-color:transparent");
 		if(imagePanel != null) {
 			imagePanel.getChildren().remove(this.imageView);
 			this.getChildren().remove(imagePanel);
@@ -411,7 +410,6 @@ public class TitledImage extends AnchorPane {
 
 		}
 			imagePanel = new AnchorPane();
-			imagePanel.getStyleClass().add("box");
 			imagePanel.setLayoutX(1.0);
 			imagePanel.setLayoutY(29.0);
 
@@ -419,7 +417,7 @@ public class TitledImage extends AnchorPane {
 			imagePanel.setStyle("-fx-border-style:" + this.borderStyle + ";-fx-border-width:" + this.borderSize + ";-fx-border-color: " + this.borderColor + ";");
 		}
 		else {
-			imagePanel.setStyle("-fx-border-style:none;-fx-border-size:0px;-fx-borderColor:transparent;");
+			imagePanel.setStyle("-fx-borderColor:transparent;");
 		}
 
 		imagePanel.getChildren().add(this.imageView);
