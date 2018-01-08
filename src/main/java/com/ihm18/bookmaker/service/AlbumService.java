@@ -29,8 +29,7 @@ public class AlbumService {
 	 * Permet d'initialiser la liste des albums. pour le moment c'est un mock.
 	 */
 	public void init(){
-		albumDao.getAlbums().add(new Album("walid album", "bla bla"));
-		albumDao.getAlbums().add(new Album("zac album", "bla bla"));
+		
 	}
 	
 	/**
