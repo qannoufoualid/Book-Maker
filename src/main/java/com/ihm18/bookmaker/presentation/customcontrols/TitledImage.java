@@ -117,8 +117,7 @@ public class TitledImage extends AnchorPane {
 	 * Anchor Pane pour dessiner la bordure
 	 */
 	private AnchorPane imagePanel;
-	
-	
+
 	/**
 	 * Constructeur sans des paramétres.
 	 */
@@ -128,6 +127,7 @@ public class TitledImage extends AnchorPane {
 
 	/**
 	 * Créer un object TitledImage avec reference sur son pére.
+	 * 
 	 * @param parent
 	 */
 	public TitledImage(Pane parent) {
@@ -144,13 +144,13 @@ public class TitledImage extends AnchorPane {
 			throw new RuntimeException(exception);
 		}
 		textField.setAlignment(Pos.CENTER);
-		
+
 		// EventListener for MousePressed
 		imageView.onMousePressedProperty().set(new EventHandler<MouseEvent>() {
 
 			@Override
 			public void handle(MouseEvent event) {
-				
+
 				// record the current mouse X and Y position on Node
 				mousex = event.getSceneX();
 				mousey = event.getSceneY();
@@ -179,7 +179,7 @@ public class TitledImage extends AnchorPane {
 			public void handle(MouseEvent event) {
 
 				textField.setPrefWidth(imageView.getFitWidth());
-				
+
 				// Get the exact moved X and Y
 				mouvedx += event.getSceneX() - mousex;
 				mouvedy += event.getSceneY() - mousey;
@@ -191,10 +191,11 @@ public class TitledImage extends AnchorPane {
 
 					double initialParentWidth = parent.widthProperty().get();
 					double initialParentHeight = parent.heightProperty().get();
-					
+
 					// set the positon of Node after calculation
 					if (parent != null && (parent.getLayoutX() < mouvedx
 							&& parent.getLayoutX() + initialParentWidth - widthProperty().get() > mouvedx)) {
+
 						setLayoutX(mouvedx);
 					}
 					if (parent != null && (parent.getLayoutY() < mouvedy
@@ -210,10 +211,12 @@ public class TitledImage extends AnchorPane {
 					double newWidth = initialImageViewWidth + dx;
 					double newHeight = initialImageViewHeight + dy;
 
-					if (widenToRight && newWidth <= parent.getWidth())
+					if (newWidth > 0 && widenToRight && getLayoutX() + newWidth + 10 <= parent.getWidth()) {
 						imageView.setFitWidth(newWidth);
-					if (widenToBottom && newHeight <= parent.getHeight())
+					}
+					if (newHeight > 0 && widenToBottom && (getLayoutY() + newHeight + 10) <= 730) {
 						imageView.setFitHeight(newHeight);
+					}
 				}
 			}
 		});
@@ -238,7 +241,12 @@ public class TitledImage extends AnchorPane {
 				double relativeMouseX = event.getX();
 				double relativeMouseY = event.getY();
 				if (getFitWidth() > relativeMouseX && getFitWidth() - DIFF_RESIZE_CONSTANT < relativeMouseX) {
-					TitledImage.this.getParent().getScene().setCursor(Cursor.E_RESIZE);
+					if (getFitHeight() > relativeMouseY && getFitHeight() - DIFF_RESIZE_CONSTANT < relativeMouseY) {
+						TitledImage.this.getParent().getScene().setCursor(Cursor.SE_RESIZE);
+					} else {
+						TitledImage.this.getParent().getScene().setCursor(Cursor.E_RESIZE);
+					}
+
 				} else if (getFitHeight() > relativeMouseY && getFitHeight() - DIFF_RESIZE_CONSTANT < relativeMouseY) {
 					TitledImage.this.getParent().getScene().setCursor(Cursor.S_RESIZE);
 				}
@@ -253,13 +261,15 @@ public class TitledImage extends AnchorPane {
 			}
 		});
 
-		//gestion de la bordure potentielle après modification de l'image : creation de l'anchor pane autour de l'image
+		// gestion de la bordure potentielle après modification de l'image :
+		// creation de l'anchor pane autour de l'image
 		this.border = false;
 		drawBorder();
 	}
 
 	/**
 	 * récuperer la proprieté text du champ de text.
+	 * 
 	 * @return
 	 */
 	public String getText() {
@@ -268,6 +278,7 @@ public class TitledImage extends AnchorPane {
 
 	/**
 	 * Spécifier la proprieté text du champ de text.
+	 * 
 	 * @param value
 	 */
 	public void setText(String value) {
@@ -276,6 +287,7 @@ public class TitledImage extends AnchorPane {
 
 	/**
 	 * Spécifier la proprieté text du champ de text.
+	 * 
 	 * @param value
 	 */
 	public StringProperty textProperty() {
@@ -284,13 +296,16 @@ public class TitledImage extends AnchorPane {
 
 	/**
 	 * Récupére la proprieté image de l'imageView
+	 * 
 	 * @return
 	 */
 	public ObjectProperty<Image> imageProperty() {
 		return imageView.imageProperty();
 	}
+
 	/**
 	 * Spécifier la proprieté image de l'imageView.
+	 * 
 	 * @param value
 	 */
 	public void setImage(Image image) {
@@ -301,6 +316,7 @@ public class TitledImage extends AnchorPane {
 
 	/**
 	 * Récupére l'image de l'imageView
+	 * 
 	 * @return
 	 */
 	public Image getImage() {
@@ -308,7 +324,8 @@ public class TitledImage extends AnchorPane {
 	}
 
 	/**
-	 *  récuperer la fitHeightProperty.
+	 * récuperer la fitHeightProperty.
+	 * 
 	 * @return
 	 */
 	public DoubleProperty fitHeightProperty() {
@@ -325,7 +342,8 @@ public class TitledImage extends AnchorPane {
 	}
 
 	/**
-	 *  récuperer la fitWidthProperty.
+	 * récuperer la fitWidthProperty.
+	 * 
 	 * @return
 	 */
 	public DoubleProperty fitWidthProperty() {
@@ -344,6 +362,7 @@ public class TitledImage extends AnchorPane {
 
 	/**
 	 * getter de l'imageView
+	 * 
 	 * @return
 	 */
 	public ImageView getImageView() {
@@ -357,7 +376,6 @@ public class TitledImage extends AnchorPane {
 	public void setTextField(TextField textField) {
 		this.textField = textField;
 	}
-
 
 	public void setBorderStyle(String borderStyle) {
 		this.borderStyle = borderStyle;
@@ -385,38 +403,39 @@ public class TitledImage extends AnchorPane {
 
 	/**
 	 * setter de la bordure
+	 * 
 	 * @param b
 	 */
-	public void setBorder(Boolean b){
+	public void setBorder(Boolean b) {
 		this.border = b;
 	}
 
 	/**
 	 * getter de la présence d'une bordure
 	 */
-	public Boolean isBordered(){
+	public Boolean isBordered() {
 		return this.border;
 	}
 
 	/**
 	 * Methode pour dessiner une bordure
 	 */
-	public void drawBorder(){
+	public void drawBorder() {
 
-		if(imagePanel != null) {
+		if (imagePanel != null) {
 			imagePanel.getChildren().remove(this.imageView);
 			this.getChildren().remove(imagePanel);
 			imagePanel = null;
 
 		}
-			imagePanel = new AnchorPane();
-			imagePanel.setLayoutX(1.0);
-			imagePanel.setLayoutY(29.0);
+		imagePanel = new AnchorPane();
+		imagePanel.setLayoutX(1.0);
+		imagePanel.setLayoutY(29.0);
 
-		if(this.border == true) {
-			imagePanel.setStyle("-fx-border-style:" + this.borderStyle + ";-fx-border-width:" + this.borderSize + ";-fx-border-color: " + this.borderColor + ";");
-		}
-		else {
+		if (this.border == true) {
+			imagePanel.setStyle("-fx-border-style:" + this.borderStyle + ";-fx-border-width:" + this.borderSize
+					+ ";-fx-border-color: " + this.borderColor + ";");
+		} else {
 			imagePanel.setStyle("-fx-borderColor:transparent;");
 		}
 
@@ -427,20 +446,22 @@ public class TitledImage extends AnchorPane {
 	/**
 	 * Methode pour vider la bordure
 	 */
-	public void clearBorder(){
+	public void clearBorder() {
 		this.border = false;
 		drawBorder();
 	}
 
 	/**
-	 * Setter de l'attribut BorderColorObject qui conserve la valeur de la couleur selectionnée
+	 * Setter de l'attribut BorderColorObject qui conserve la valeur de la
+	 * couleur selectionnée
+	 * 
 	 * @param c
 	 */
-	public void setBorderColorObject(Color c){
+	public void setBorderColorObject(Color c) {
 		this.borderColorObject = c;
 	}
 
-	public Color getBorderColorObject(){
+	public Color getBorderColorObject() {
 		return this.borderColorObject;
 	}
 }
