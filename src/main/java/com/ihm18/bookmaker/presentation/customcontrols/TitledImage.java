@@ -111,9 +111,6 @@ public class TitledImage extends AnchorPane {
 	public TitledImage(Pane parent) {
 		this.parent = parent;
 		
-		
-		
-		
 		double initialParentWidth = parent.widthProperty().get();
 		double initialParentHeight = parent.heightProperty().get();
 

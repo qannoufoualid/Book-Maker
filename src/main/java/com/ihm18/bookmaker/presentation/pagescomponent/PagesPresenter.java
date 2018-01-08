@@ -190,6 +190,7 @@ public class PagesPresenter implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
+		
 		centralModel.mainViewProperty().addListener(new ChangeListener<Node>() {
 
 			@Override
@@ -221,6 +222,9 @@ public class PagesPresenter implements Initializable {
 	 */
 	public void cliqueMouse(MouseEvent event) {
 		if (!isImageClicked) {
+			
+			disableAllImages();
+			
 			editionActionsModel.setTitledImage(null);
 			pagesModel.imageClickedProperty().setValue(true);
 		}
@@ -229,6 +233,18 @@ public class PagesPresenter implements Initializable {
 			changeTitre();
 		}
 		isImageClicked = false;
+	}
+
+	private void disableAllImages() {
+		List<Node> leftTitledImages = leftAnchorPane.getChildren();
+		for(Node titledImage : leftTitledImages){
+			titledImage.getStyleClass().remove("active-image");
+		}
+		List<Node> rightTitledImages = rightAnchorPane.getChildren();
+		for(Node titledImage : rightTitledImages){
+			titledImage.getStyleClass().remove("active-image");
+		}
+		
 	}
 
 	/**
@@ -382,6 +398,8 @@ public class PagesPresenter implements Initializable {
 			@Override
 			public void handle(MouseEvent event) {
 				clickedImage = titledImage;
+				disableAllImages();
+				clickedImage.getStyleClass().add("active-image");
 				isImageClicked = true;
 				selectedIHMImage = image;
 				editionActionsModel.setTitledImage(titledImage);
