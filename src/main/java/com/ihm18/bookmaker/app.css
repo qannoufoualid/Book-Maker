@@ -14,6 +14,15 @@
 	-fx-border-color: black;
 }
 
+.backgrounded{
+	-fx-background-image: url("../../../images/bg-book.jpg");
+	 -fx-background-size: cover;
+}
+
+.transparent{
+	-fx-background-color: rgba(0, 100, 100, 0.5); -fx-background-radius: 10;
+}
+
 .bad{
 	-fx-background-color: red,linear-gradient(to bottom, derive(red,60%) 5%,derive(red,90%) 40%);
 }

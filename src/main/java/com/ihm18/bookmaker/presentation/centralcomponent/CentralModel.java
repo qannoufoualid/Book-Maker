@@ -63,7 +63,7 @@ public class CentralModel {
      */
     public final void setMainView(Node mainView, String mainViewTitle) {
         this.mainView.set(mainView);
-        this.mainViewTitle.set("> "+mainViewTitle);
+        this.mainViewTitle.set(mainViewTitle);
         historyModel.add(mainView, mainViewTitle);
     }
     

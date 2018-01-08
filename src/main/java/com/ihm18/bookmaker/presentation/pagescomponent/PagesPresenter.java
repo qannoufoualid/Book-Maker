@@ -10,16 +10,13 @@ import java.util.ResourceBundle;
 
 import javax.inject.Inject;
 
-import com.ihm18.bookmaker.presentation.bordercomponent.BorderModel;
-import javafx.scene.control.Button;
-import javafx.scene.input.*;
 import org.apache.commons.io.FileUtils;
 
 import com.ihm18.bookmaker.businessobject.Album;
 import com.ihm18.bookmaker.businessobject.IHMImage;
 import com.ihm18.bookmaker.businessobject.Page;
 import com.ihm18.bookmaker.presentation.albumdetailcomponent.AlbumDetailModel;
-import com.ihm18.bookmaker.presentation.brightnesspalettecomponent.BrightnessModel;
+import com.ihm18.bookmaker.presentation.bordercomponent.BorderModel;
 import com.ihm18.bookmaker.presentation.centralcomponent.CentralModel;
 import com.ihm18.bookmaker.presentation.customcontrols.TitledImage;
 import com.ihm18.bookmaker.presentation.editionactionscomponent.EditionActionsModel;
@@ -35,11 +32,18 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.effect.SepiaTone;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 

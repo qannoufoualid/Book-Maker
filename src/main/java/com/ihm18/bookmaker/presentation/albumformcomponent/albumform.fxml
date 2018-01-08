@@ -7,10 +7,10 @@
 
 <AnchorPane prefHeight="845.0" prefWidth="1077.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ihm18.bookmaker.presentation.albumformcomponent.AlbumFormPresenter">
    <children>
-      <Label layoutX="34.0" layoutY="90.0" text="Nom :" />
-      <Label layoutX="34.0" layoutY="132.0" text="Description :" />
+      <Label layoutX="34.0" layoutY="90.0" text="Nom :" textFill="#e1e1e1" />
+      <Label layoutX="34.0" layoutY="132.0" text="Description :" textFill="#e1e1e1" />
       <TextField fx:id="albumNameTextField" layoutX="146.0" layoutY="85.0" prefHeight="28.0" prefWidth="388.0" />
       <TextArea fx:id="albumDescriptionTextField" layoutX="146.0" layoutY="132.0" prefHeight="200.0" prefWidth="388.0" />
-      <Button styleClass="btn-success" layoutX="291.0" layoutY="372.0" mnemonicParsing="false" onAction="#createAlbum" prefHeight="59.0" prefWidth="98.0" text="Créer" />
+      <Button layoutX="291.0" layoutY="372.0" mnemonicParsing="false" onAction="#createAlbum" prefHeight="59.0" prefWidth="98.0" styleClass="btn-success" text="Créer" />
    </children>
 </AnchorPane>

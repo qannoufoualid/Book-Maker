@@ -6,9 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<BorderPane maxWidth="1200" prefHeight="700.0" minHeight="950"
-	prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-	fx:controller="com.ihm18.bookmaker.presentation.centralcomponent.CentralPresenter">
+<BorderPane maxWidth="1200" minHeight="950" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ihm18.bookmaker.presentation.centralcomponent.CentralPresenter">
 	<top>
 		<MenuBar BorderPane.alignment="TOP_CENTER">
 			<menus>
@@ -39,25 +37,19 @@
 		</MenuBar>
 	</top>
 	<center>
-		<SplitPane dividerPositions="0.251503006012024" prefHeight="160.0"
-			prefWidth="200.0" BorderPane.alignment="CENTER">
+		<SplitPane dividerPositions="0.251503006012024" prefHeight="160.0" prefWidth="200.0" BorderPane.alignment="CENTER">
 			<items>
-				<AnchorPane fx:id="leftContainer" minHeight="0.0"
-					minWidth="0.0" prefHeight="668.0" prefWidth="269.0"
-					SplitPane.resizableWithParent="false">
+				<AnchorPane fx:id="leftContainer" minHeight="0.0" minWidth="0.0" prefHeight="668.0" prefWidth="269.0" SplitPane.resizableWithParent="false">
 
 				</AnchorPane>
-				<BorderPane fx:id="mainContainer" minHeight="600"
-					minWidth="500" prefHeight="668.0" prefWidth="897.0">
+				<BorderPane fx:id="mainContainer" minHeight="600" minWidth="500" prefHeight="668.0" prefWidth="897.0" styleClass="backgrounded">
 					<center>
 
 					</center>
 					<top>
-						<AnchorPane styleClass="transaprent-panel">
+						<AnchorPane styleClass="head-panel">
 							<children>
-								<Label fx:id="mainViewTitleLabel" styleClass="btn btn-warning"
-									alignment="TOP_LEFT" prefHeight="36.0" prefWidth="740.0"
-									BorderPane.alignment="TOP_LEFT">
+								<Label fx:id="mainViewTitleLabel" alignment="TOP_LEFT" layoutX="28.0" layoutY="5.0" prefHeight="27.0" prefWidth="461.0" text="bgbgf" textFill="#c9c9c9" BorderPane.alignment="TOP_LEFT">
 									
 								</Label>
 							</children>

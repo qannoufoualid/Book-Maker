@@ -41,7 +41,6 @@ public class App extends Application {
          */
         Injector.setConfigurationSource(customProperties::get);
 
-        System.setProperty("happyEnding", " Enjoy the flight!");
         CentralView appView = new CentralView();
         Scene scene = new Scene(appView.getView());
         stage.setTitle("Book Maker");

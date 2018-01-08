@@ -10,12 +10,12 @@
    <children>
       <Button layoutX="81.0" layoutY="380.0" mnemonicParsing="false" onAction="#displayAlbumForm" prefHeight="148.0" prefWidth="296.0" styleClass="btn-info" text="Créer un nouvel album" />
       <Button layoutX="81.0" layoutY="552.0" mnemonicParsing="false" onAction="#exitApplication" prefHeight="148.0" prefWidth="296.0" styleClass="btn-danger" text="Quitter" />
-      <ImageView fitHeight="158.0" fitWidth="267.0" layoutX="38.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="158.0" fitWidth="267.0" layoutX="546.0" layoutY="374.0" pickOnBounds="true" preserveRatio="true" rotate="-12.5">
          <image>
             <Image url="images/logo.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="26.0" fitWidth="612.0" layoutX="65.0" layoutY="202.0" pickOnBounds="true">
+      <ImageView fitHeight="26.0" fitWidth="612.0" layoutX="573.0" layoutY="538.0" pickOnBounds="true" rotate="-13.0">
          <image>
             <Image url="images/logo-subtitle.png" />
          </image>
