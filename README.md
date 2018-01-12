@@ -14,4 +14,4 @@ il nous était demandé de concevoir une application desktop de création d’al
 •	Parcourir l’album page par page.
 Ces contraintes laissent une marge de manoeuvre conséquente au niveau de la réalisation de l’interface et des choix liés au logiciel final.
 
-![Alt text](images/Accueil.png?raw=true "Page d'accueil")
+![Alt text](images/Accueil.PNG?raw=true "Page d'accueil")
