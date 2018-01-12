@@ -12,4 +12,4 @@ il nous était demandé de concevoir une application desktop de création d’al
 Ces contraintes laissent une marge de manoeuvre conséquente au niveau de la réalisation de l’interface et des choix liés au logiciel final.
 
 
-image:images/accueil.png
+image:images/Accueil.png
