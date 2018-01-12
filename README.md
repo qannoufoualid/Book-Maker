@@ -21,6 +21,3 @@ Ces contraintes laissent une marge de manoeuvre conséquente au niveau de la ré
 
 ### Création d'un album
 ![Alt text](images/Créationalbum.PNG?raw=true "Création d'un album")
-
-### Affichage d'album
-![Alt text](images/Album.PNG?raw=true "Album")
