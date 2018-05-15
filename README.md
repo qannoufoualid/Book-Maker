@@ -14,6 +14,11 @@ Il nous a été demandé de concevoir une application desktop de création d’a
 •	Parcourir l’album page par page.  
 Ces contraintes laissent une marge de manoeuvre conséquente au niveau de la réalisation de l’interface et des choix liés au logiciel final.  
 
+## Technos
+• JavaFx  
+• Afterburner.fx  
+• BootstrapFX  
+
 ## Captures d'écran
 
 ### Page d'acceuil
